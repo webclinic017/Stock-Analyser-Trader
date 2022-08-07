@@ -17,6 +17,8 @@ import javax.swing.*;
 import java.io.File;
 import java.util.Arrays;
 
+// TODO: FIND A WAY TO SEPARATE THE DATA INTO TRAINING AND TESTING - INCLUDE IN CRITERIONS AND EMAIL COMMUNICATIONS...
+
 public class Main {
 
     public static void main(String[] args) throws Exception {
