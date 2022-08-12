@@ -154,10 +154,14 @@ public class Main {
 //        System.out.println(crypto.price());
 //        System.out.println(crypto.quote());
 
+        // TODO: ADD THE PRICE HISTORY AND CURRENT OPEN POSITIONS IN THE HOMESCREEN...
         System.out.println(AlpacaAPIHandler.portfolioHistory());
         // TODO: Extract the equity part of it and graph that... with losses as red and profits as green and with a start equity line
 
 //        System.out.println(AlpacaAPIHandler.createWatchlist("main", "TSLA,AAPL,MSFT"));
 //        System.out.println(AlpacaAPIHandler.watchlist("main"));
+
+        // TODO: GET ALL THE AVAILABLE STOCKS FROM ALPACA, THEN SEPARATE THEM INTO CATEGORIES USING FINNHUB API, THEN SIMULATE THEM... AFTER THAT FIND A MEAN TO FIT ALL THE STOCKS FROM THAT CATEGORY... PERHAPS USE PYTHON TO DO AND USE SOME DATA SCIENCE STUFF...
+
     }
 }
