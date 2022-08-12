@@ -1,5 +1,6 @@
 package com.company;
 
+import com.analyzer.Analyze;
 import com.analyzer.backtesting.SMACrossoverTester;
 import com.analyzer.tools.Correlation;
 import com.api.AlpacaAPI;
@@ -162,6 +163,14 @@ public class Main {
 //        System.out.println(AlpacaAPIHandler.watchlist("main"));
 
         // TODO: GET ALL THE AVAILABLE STOCKS FROM ALPACA, THEN SEPARATE THEM INTO CATEGORIES USING FINNHUB API, THEN SIMULATE THEM... AFTER THAT FIND A MEAN TO FIT ALL THE STOCKS FROM THAT CATEGORY... PERHAPS USE PYTHON TO DO AND USE SOME DATA SCIENCE STUFF...
+
+//        System.out.println(AlpacaAPIHandler.getStockList());
+        System.out.println(Asset.sector("TSLA"));
+
+//        System.out.println(FinnhubAPIHandler.constituents("NDX"));
+
+        Analyze Analyzer = new Analyze();
+        Analyzer.model(Asset.constituents("NDX"));
 
     }
 }

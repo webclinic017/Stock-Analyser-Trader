@@ -1,6 +1,7 @@
 package com.asset;
 
 import com.api.AlpacaAPI;
+import com.api.FinnhubAPI;
 import com.api.RequestHandler;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -9,10 +10,6 @@ import com.trader.Execute;
 
 import javax.swing.*;
 import java.io.File;
-import java.io.InputStream;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 // TODO: Probably use polygon.io to get the data instead of finnhub, it seems to be really show sometimes... or just create a hashmap to store the classes, this might be a better solution, so load things while use it loggin in etc
@@ -40,6 +37,7 @@ public class Asset {
     public Float[][] historical_data;
 
     AlpacaAPI AlpacaAPIHandler = new AlpacaAPI();
+    static FinnhubAPI FinnhubAPIHandler = new FinnhubAPI();
     HistoricalData HistoricalDataGetter = new HistoricalData();
     RequestHandler RequestHandler = new RequestHandler();
 
@@ -119,6 +117,20 @@ public class Asset {
             return "null"; // not found
         }
     }
+
+    public static String sector(String ticker){
+        try {
+            return FinnhubAPIHandler.company_profile(ticker).get(0).getAsJsonObject().get("finnhubIndustry").getAsString();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Error occured";
+        }
+    }
+
+    public static String[] constituents(String ticker) throws Exception {
+        return FinnhubAPIHandler.constituents(ticker);
+    }
+
 
     // gets and updates the historical data, can also be accessed directly by the shared variable
     // TODO : make a cache of the files for efficiency...
