@@ -5,6 +5,7 @@ import com.api.RequestHandler;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.trader.Execute;
 
 import javax.swing.*;
 import java.io.File;
@@ -154,14 +155,18 @@ public class Asset {
     }
 
 
-    public String buy(int number){
-        // TODO: Add this method to AlpacaAPI
-        return "Done";
+    public boolean buy(int amount){
+        Execute executer = new Execute();
+
+        // TODO: Add some validator
+        return executer.order(this, amount, "buy"); // returns the status
     }
 
-    public String sell(int number){
-        // TODO: Add this method to AlpacaAPI
-        return "Done";
+    public boolean sell(int amount){
+        Execute executer = new Execute();
+
+        // TODO: Add some validator
+        return executer.order(this, amount, "sell"); // returns the status
     }
 
     public void getPositions() throws Exception {

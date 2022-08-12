@@ -3,7 +3,12 @@ package com.api;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
 import java.net.URI;
+import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -72,16 +77,43 @@ public class RequestHandler {
 
 
 
+    // TODO: WATCH THIS VIDEO!!! - https://www.youtube.com/watch?v=7H0sqS-ZJw0
+    public String post(String uri, String header_name_1, String header_value_1, String header_name_2, String header_value_2, String post_data) {
 
-    public void post(String uri, String data) throws Exception {
-        HttpClient client = HttpClient.newBuilder().build();
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(uri))
-                .POST(HttpRequest.BodyPublishers.ofString(data))
-                .build();
+        try {
 
-        HttpResponse<?> response = client.send(request, HttpResponse.BodyHandlers.discarding());
-        System.out.println(response.statusCode());
+            URL url = new URL(uri);
+            HttpURLConnection httpURLConnection=(HttpURLConnection)url.openConnection();
+            httpURLConnection.setRequestMethod("POST");
+            //adding header
+            httpURLConnection.setRequestProperty(header_name_1,header_value_1);
+            httpURLConnection.setRequestProperty(header_name_2, header_value_2);
+            httpURLConnection.setDoOutput(true);
+
+            //Adding Post Data
+            OutputStream outputStream=httpURLConnection.getOutputStream();
+            outputStream.write(post_data.getBytes());
+            outputStream.flush();
+            outputStream.close();
+
+            String line="";
+            InputStreamReader inputStreamReader=new InputStreamReader(httpURLConnection.getInputStream());
+            BufferedReader bufferedReader=new BufferedReader(inputStreamReader);
+            StringBuilder response=new StringBuilder();
+            while ((line=bufferedReader.readLine())!=null){
+                response.append(line);
+            }
+            bufferedReader.close();
+
+            return response.toString();
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+
     }
+
 
 }

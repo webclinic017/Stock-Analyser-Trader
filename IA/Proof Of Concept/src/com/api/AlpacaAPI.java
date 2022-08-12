@@ -1,6 +1,7 @@
 package com.api;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 public class AlpacaAPI {
     private String base_url = "https://paper-api.alpaca.markets";
@@ -15,6 +16,10 @@ public class AlpacaAPI {
     // This is useful as I don't have to repeat it in every method, like specifying the stock.com.api keys etc...
     public JsonArray make_request(String request_url) throws Exception {
         return ReqHandler.get(request_url, "APCA-API-KEY-ID", api_key_id, "APCA-API-SECRET-KEY", api_secret_key);
+    }
+
+    public String make_post_request(String request_url, String data) throws Exception {
+        return ReqHandler.post(request_url, "APCA-API-KEY-ID", api_key_id, "APCA-API-SECRET-KEY", api_secret_key, data);
     }
 
     public JsonArray clock() throws Exception {
@@ -42,6 +47,11 @@ public class AlpacaAPI {
         return make_request(request_url);
     }
 
+    public JsonArray portfolioHistory() throws Exception {
+        String request_url = base_url+"/v2/account/portfolio/history";
+        return make_request(request_url);
+    }
+
     public JsonArray getStockList() throws Exception {
         String request_url = base_url+"/v2/assets?asset_class=us_equity";
         return make_request(request_url);
@@ -63,9 +73,17 @@ public class AlpacaAPI {
         return make_request(request_url);
     }
 
-    public JsonArray watchlists(String id) throws Exception {
-        String request_url = base_url+"/v2/watchlists"+id;
+    public JsonArray watchlist(String id) throws Exception {
+        String request_url = base_url+"/v2/watchlists/"+id;
         return make_request(request_url);
+    }
+
+    public String createWatchlist(String id, String tickers) throws Exception {
+        String request_url = base_url+"/v2/watchlists/" + id + "?symbols="+tickers;
+        JsonObject object = new JsonObject();
+        object.addProperty("symbols",tickers);
+        System.out.println(String.valueOf(object));
+        return make_post_request(request_url, String.valueOf(object));
     }
 
     public JsonArray portfolio_history() throws Exception {

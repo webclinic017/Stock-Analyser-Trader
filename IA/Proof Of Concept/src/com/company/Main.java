@@ -1,5 +1,6 @@
 package com.company;
 
+import com.analyzer.backtesting.SMACrossoverTester;
 import com.analyzer.tools.Correlation;
 import com.api.AlpacaAPI;
 import com.api.FinnhubAPI;
@@ -75,9 +76,9 @@ public class Main {
 //        SMACrossover smaCrossover = new SMACrossover();
 //        System.out.println(smaCrossover.check(stock, 50, 180)); // returns true or false, over or under.
 
-        GUICaller GUICaller = new GUICaller();
+//        GUICaller GUICaller = new GUICaller();
 //        GUICaller.Login();
-        GUICaller.startup();
+//        GUICaller.startup();
 //        GUICaller.HomeScreen();
 //        GUICaller.AssetInfo(stock);
 //        GUICaller.SimulationResults(stock);
@@ -153,6 +154,10 @@ public class Main {
 //        System.out.println(crypto.price());
 //        System.out.println(crypto.quote());
 
+        System.out.println(AlpacaAPIHandler.portfolioHistory());
+        // TODO: Extract the equity part of it and graph that... with losses as red and profits as green and with a start equity line
 
+//        System.out.println(AlpacaAPIHandler.createWatchlist("main", "TSLA,AAPL,MSFT"));
+//        System.out.println(AlpacaAPIHandler.watchlist("main"));
     }
 }

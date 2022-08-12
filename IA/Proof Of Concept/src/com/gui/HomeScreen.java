@@ -284,6 +284,10 @@ public class HomeScreen extends JPanel {
     // Add a text field that auto updates as you type, like below the JTextField, instead of the autocomplete thing I was planning about...
     public String searchTickerOrName(String input){
 
+        // TODO: Make use of this function getStockList() and getCryptoList() in AlpacaAPI
+        // TODO: mention in criterion with the client interaction that I tried compiling this list but found out later on that alpaca had it's own and since we are using it to execute trades, we only wnat what's available in it
+        // TODO: We could perhaps do simulation for all of the available tickers in AlpacaAPI and find a mean for the MODEL that way...
+
         String[][] stock_l = Utils.convertToMultiDArrayFromCSV("data/default/stocks.csv", 2);
         String[][] crypto = Utils.convertToMultiDArrayFromCSV("data/default/crypto.csv", 2);
         String[][] forex = Utils.convertToMultiDArrayFromCSV("data/default/forex.csv", 2);

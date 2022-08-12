@@ -9,18 +9,10 @@ public class Execute {
     public Execute(){
     }
 
-    public boolean buy(Asset asset, int amount){
-        try {
-            // TODO: Execute the trade...
-            return true;
-        } catch (Exception e){
-            e.printStackTrace();
-            return false;
-        }
-    }
+    public boolean order(Asset asset, int amount, String side){ // side, either buy or sell
+        // TODO: Generate client_order_id and save it in the logs, so can it associated later on why the trade was executed?
+        String data = "symbol="+asset+"&qty="+amount+"&side="+side+"&type=market"; // TODO: work in progress
 
-
-    public boolean sell(Asset asset, int amount){
         try {
             // TODO: Execute the trade...
             return true;
