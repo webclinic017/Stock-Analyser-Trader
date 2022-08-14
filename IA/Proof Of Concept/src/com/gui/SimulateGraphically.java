@@ -56,6 +56,19 @@ public class SimulateGraphically extends JPanel {
         type.setBounds(100, 75, 150, 50);
         add(type);
 
+        JLabel buy = new JLabel("Buy");
+        buy.setIcon(new ImageIcon(new ImageIcon("data/default/profit.png").getImage().getScaledInstance(8, 8, Image.SCALE_DEFAULT))); // scaling the image properly so that there is no stretch
+        buy.setBounds(450, 550, 150, 15);
+        add(buy);
+
+        JLabel shortsell = new JLabel("Sell & Short");
+        shortsell.setIcon(new ImageIcon(new ImageIcon("data/default/loss.png").getImage().getScaledInstance(8, 8, Image.SCALE_DEFAULT))); // scaling the image properly so that there is no stretch
+        shortsell.setBounds(450, 570, 150, 15);
+        add(shortsell);
+
+
+
+
 
 
         // TODO: Show an animation of this as it's happening... and a new thread will do the normal .simulate() call...
@@ -222,6 +235,12 @@ public class SimulateGraphically extends JPanel {
                         g.drawPolygon(new int[] {day_counter-5, day_counter, day_counter+5}, new int[] {(int) (max_y_point-current_sma1-5), (int) (max_y_point-current_sma1+5), (int) (max_y_point-current_sma1-5)}, 3);
                         g.setColor(Color.red);
                         g.fillPolygon(new int[] {day_counter-5, day_counter, day_counter+5}, new int[] {(int) (max_y_point-current_sma1-5), (int) (max_y_point-current_sma1+5), (int) (max_y_point-current_sma1-5)}, 3);
+
+                        JLabel label = new JLabel("Short");
+                        label.setFont(new Font("Verdana", Font.BOLD, 20));
+                        label.setBounds(100, 50, 150, 50);
+                        add(label);
+
 
                     }
                 }

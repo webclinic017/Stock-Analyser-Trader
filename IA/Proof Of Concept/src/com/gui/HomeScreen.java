@@ -125,7 +125,7 @@ public class HomeScreen extends JPanel {
             watchlistlabel[i].addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent e) {
                     try {
-                        GUICaller.AssetInfo(Asset.create(watchlist[finalI]));
+                        GUICaller.AssetInfo(asset);
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }

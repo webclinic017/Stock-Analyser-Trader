@@ -4,11 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="Added new ideas to interface with python to execute trades and get some data">
+    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="Added new datasource for intraday historical data for aggressive trading">
+      <change afterPath="$PROJECT_DIR$/src/com/api/AlphaVantageAPI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/gui/Preferences.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/default/stocks.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/default/stocks.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulation-result.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/simulation-result.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/api/YahooFinanceApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/api/YahooFinanceApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/asset/Asset.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/asset/Asset.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/asset/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/asset/Stock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/api/AlpacaAPI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api/AlpacaAPI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/api/RequestHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api/RequestHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gui/HomeScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/HomeScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gui/SimulateGraphically.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/SimulateGraphically.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api/YahooFinanceApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api/YahooFinanceApi.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/company/Main.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -98,13 +106,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1648929083891</updated>
-    </task>
-    <task id="LOCAL-00004" summary="StockChooser GUI works">
-      <created>1651177516687</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1651177516687</updated>
     </task>
     <task id="LOCAL-00005" summary="Pre-processed data, converted historical prices to floats">
       <created>1651244594351</created>
@@ -442,7 +443,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660483972697</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="Added new datasource for intraday historical data for aggressive trading">
+      <created>1660494291663</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1660494291663</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -461,7 +469,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Integrated simulation in AssetInfo +improvements to graph" />
     <MESSAGE value="Added news to the GUI, Retired FinnhubAPI, Improved Asset (parent class), made Forex class work &amp; fixed bugs" />
     <MESSAGE value="Removed debugging code" />
     <MESSAGE value="Added market hours status in home page" />
@@ -486,7 +493,8 @@
     <MESSAGE value="Added few ideas" />
     <MESSAGE value="Analyzer class able to generate model based on categories, in progress" />
     <MESSAGE value="Added new ideas to interface with python to execute trades and get some data" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added new ideas to interface with python to execute trades and get some data" />
+    <MESSAGE value="Added new datasource for intraday historical data for aggressive trading" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added new datasource for intraday historical data for aggressive trading" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

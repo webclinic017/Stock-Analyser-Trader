@@ -23,7 +23,9 @@ public class Asset {
     // TODO: might save the icon the a local directory, then get it from there, if not then call this url, will allow to add icons manually... or ship the product with famous ones already
     public ImageIcon icon = new ImageIcon("data/default/default.jpg"); // if icon not found... will only happen for crypto
 
-    public String country, industry, weburl, marketcap, ipo;
+    public String country, industry, sector, weburl, marketcap, ipo;
+    public float PERatio, EPS, analystTarget, PriceToSalesRatio, yearLow, yearHigh;
+
     public String about = null;
     public JsonObject info;
     File local_icon;
@@ -117,12 +119,12 @@ public class Asset {
         }
     }
 
-    public static String sector(String ticker){
+    public static String industry(String ticker){
         try {
             return FinnhubAPIHandler.company_profile(ticker).get(0).getAsJsonObject().get("finnhubIndustry").getAsString();
         } catch (Exception e) {
-            e.printStackTrace();
-            return "Error occured";
+            System.out.println("Industry not Found");
+            return null;
         }
     }
 

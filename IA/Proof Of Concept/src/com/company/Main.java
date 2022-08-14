@@ -1,24 +1,12 @@
 package com.company;
 
 import com.analyzer.Analyze;
-import com.analyzer.backtesting.SMACrossoverTester;
-import com.analyzer.tools.Correlation;
 import com.api.AlpacaAPI;
+import com.api.AlphaVantageAPI;
 import com.api.FinnhubAPI;
-import com.api.RequestHandler;
-import com.asset.NewsData;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.gui.GUICaller;
 import com.asset.Asset;
-import com.gui.HomeScreen;
-import com.user.Watchlist;
 import com.utils.FileHandler;
-import com.utils.Utils;
-
-import javax.swing.*;
-import java.io.File;
-import java.util.Arrays;
 
 // TODO: FIND A WAY TO SEPARATE THE DATA INTO TRAINING AND TESTING - INCLUDE IN CRITERIONS AND EMAIL COMMUNICATIONS...
 
@@ -78,9 +66,9 @@ public class Main {
 //        SMACrossover smaCrossover = new SMACrossover();
 //        System.out.println(smaCrossover.check(stock, 50, 180)); // returns true or false, over or under.
 
-//        GUICaller GUICaller = new GUICaller();
+        GUICaller GUICaller = new GUICaller();
 //        GUICaller.Login();
-//        GUICaller.startup();
+        GUICaller.startup();
 //        GUICaller.HomeScreen();
 //        GUICaller.AssetInfo(stock);
 //        GUICaller.SimulationResults(stock);
@@ -166,7 +154,7 @@ public class Main {
         // TODO: GET ALL THE AVAILABLE STOCKS FROM ALPACA, THEN SEPARATE THEM INTO CATEGORIES USING FINNHUB API, THEN SIMULATE THEM... AFTER THAT FIND A MEAN TO FIT ALL THE STOCKS FROM THAT CATEGORY... PERHAPS USE PYTHON TO DO AND USE SOME DATA SCIENCE STUFF...
 
 //        System.out.println(AlpacaAPIHandler.getStockList());
-        System.out.println(Asset.sector("TSLA"));
+        System.out.println(Asset.industry("TSLA"));
 
 //        System.out.println(FinnhubAPIHandler.constituents("NDX"));
 
@@ -180,5 +168,8 @@ public class Main {
         // TODO: This has intraday option, show client interaction, possibly after the client tested and said he had to wait days for a hit so he wanted me to train intraday stocks so i needed intraday market data for free
         // TODO: https://www.alphavantage.co/documentation/#intraday-extended
         // TODO: Figure out adjusted close difference and either add to one data set or remove from another
+
+        AlphaVantageAPI AlphaVantageAPIHandler = new AlphaVantageAPI();
+//        AlphaVantageAPIHandler.get_historical("TSLA", "60min");
     }
 }
