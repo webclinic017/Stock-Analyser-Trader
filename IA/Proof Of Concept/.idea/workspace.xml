@@ -4,15 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="Analyzer class able to generate model based on categories, in progress">
-      <change afterPath="$PROJECT_DIR$/src/com/api/notes.txt" afterDir="false" />
+    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="Added new ideas to interface with python to execute trades and get some data">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/api/AlpacaAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/api/AlpacaAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/api/RequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/api/RequestHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/asset/Asset.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/asset/Asset.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/trader/Execute.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/analyzer/Analyze.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/analyzer/Analyze.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api/AlpacaAPI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api/AlpacaAPI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api/RequestHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api/RequestHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/company/Main.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,13 +98,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1648929083891</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Restructured the Classes into packages">
-      <created>1649192269990</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1649192269990</updated>
     </task>
     <task id="LOCAL-00004" summary="StockChooser GUI works">
       <created>1651177516687</created>
@@ -445,7 +435,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660345200737</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="Added new ideas to interface with python to execute trades and get some data">
+      <created>1660483972697</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1660483972697</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -464,7 +461,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Rename" />
     <MESSAGE value="Integrated simulation in AssetInfo +improvements to graph" />
     <MESSAGE value="Added news to the GUI, Retired FinnhubAPI, Improved Asset (parent class), made Forex class work &amp; fixed bugs" />
     <MESSAGE value="Removed debugging code" />
@@ -489,7 +485,8 @@
     <MESSAGE value="Improvements and added functionalities." />
     <MESSAGE value="Added few ideas" />
     <MESSAGE value="Analyzer class able to generate model based on categories, in progress" />
-    <option name="LAST_COMMIT_MESSAGE" value="Analyzer class able to generate model based on categories, in progress" />
+    <MESSAGE value="Added new ideas to interface with python to execute trades and get some data" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added new ideas to interface with python to execute trades and get some data" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

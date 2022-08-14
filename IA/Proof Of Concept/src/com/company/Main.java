@@ -174,5 +174,11 @@ public class Main {
 //        Analyzer.model(Asset.constituents("NDX"));
 
 //        System.out.println(AlpacaAPIHandler.executeOrder(stock, 1, "buy"));
+
+        // TODO: Alpha Vantage API key: 8DQF8MN8W4O10K8I
+        // TODO: DEFINITELY IMPLEMENT THIS (BUT PERHAPS STICK WITH 1D SIMULATION OR EVEN WHEN CREATING AN ACCOUNT, HAVE AN TYPE LIKE AGGRESSIVE, PASSIVE ETC)
+        // TODO: This has intraday option, show client interaction, possibly after the client tested and said he had to wait days for a hit so he wanted me to train intraday stocks so i needed intraday market data for free
+        // TODO: https://www.alphavantage.co/documentation/#intraday-extended
+        // TODO: Figure out adjusted close difference and either add to one data set or remove from another
     }
 }
