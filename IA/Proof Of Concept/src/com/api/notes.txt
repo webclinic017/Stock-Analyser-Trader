@@ -1,0 +1,22 @@
+It's just nuts to implement in java and alot of things could go wrong
+
+so interface with python...
+
+send the data to python on what trades i want to execute
+
+python will execute the trades with it's purpose built package, an excuse that
+it's safe to do it that way as it want meant to be used like that...
+
+I say open up a flask server which accepts things like this...
+
+And also change the svg to png thing to this local server too...
+
+make sure when first run, that python flask server is started...
+
+
+we can use that to then stream prices too and say that it would be efficient
+to use python cause i then don't have to request new prices each time...
+
+let's say the python will write the new prices as it gets it to a file which both
+application can look at... or an api endpoint from where java will request the
+latest prices

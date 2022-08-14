@@ -1,5 +1,6 @@
 package com.api;
 
+import com.asset.Asset;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
@@ -35,6 +36,23 @@ public class AlpacaAPI {
     public JsonArray orders() throws Exception {
         String request_url = base_url+"/v2/orders";
         return make_request(request_url);
+    }
+
+
+    // TODO: Make sure that you enter your order information through a JSON message body. (The API does not accept orders through query params.)
+    public boolean executeOrder(Asset asset, int amount, String side){ // side, either buy or sell
+        // TODO: Generate client_order_id and save it in the logs, so can it associated later on why the trade was executed?
+        String data = "symbol="+asset+"&qty="+amount+"&side="+side+"&type=market&time_in_force=day"; // TODO: work in progress
+
+        try {
+            // TODO: Execute the trade... via python
+//            make_post_request("url", data);
+
+            return true;
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public JsonArray positions() throws Exception {

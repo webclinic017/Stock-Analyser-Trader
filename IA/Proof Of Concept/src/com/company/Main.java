@@ -5,6 +5,7 @@ import com.analyzer.backtesting.SMACrossoverTester;
 import com.analyzer.tools.Correlation;
 import com.api.AlpacaAPI;
 import com.api.FinnhubAPI;
+import com.api.RequestHandler;
 import com.asset.NewsData;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -170,7 +171,8 @@ public class Main {
 //        System.out.println(FinnhubAPIHandler.constituents("NDX"));
 
         Analyze Analyzer = new Analyze();
-        Analyzer.model(Asset.constituents("NDX"));
+//        Analyzer.model(Asset.constituents("NDX"));
 
+//        System.out.println(AlpacaAPIHandler.executeOrder(stock, 1, "buy"));
     }
 }

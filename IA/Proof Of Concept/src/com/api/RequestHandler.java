@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.net.http.HttpClient;
@@ -78,40 +79,32 @@ public class RequestHandler {
 
 
     // TODO: WATCH THIS VIDEO!!! - https://www.youtube.com/watch?v=7H0sqS-ZJw0
-    public String post(String uri, String header_name_1, String header_value_1, String header_name_2, String header_value_2, String post_data) {
+    public String post(String uri, String header_name_1, String header_value_1, String header_name_2, String header_value_2, String post_data) throws Exception {
 
-        try {
+        URL url = new URL(uri);
+        HttpURLConnection httpURLConnection=(HttpURLConnection)url.openConnection();
+        httpURLConnection.setRequestMethod("POST");
+        //adding header
+        httpURLConnection.setRequestProperty(header_name_1,header_value_1);
+        httpURLConnection.setRequestProperty(header_name_2, header_value_2);
+        httpURLConnection.setDoOutput(true);
 
-            URL url = new URL(uri);
-            HttpURLConnection httpURLConnection=(HttpURLConnection)url.openConnection();
-            httpURLConnection.setRequestMethod("POST");
-            //adding header
-            httpURLConnection.setRequestProperty(header_name_1,header_value_1);
-            httpURLConnection.setRequestProperty(header_name_2, header_value_2);
-            httpURLConnection.setDoOutput(true);
+        //Adding Post Data
+        OutputStream outputStream=httpURLConnection.getOutputStream();
+        outputStream.write(post_data.getBytes());
+        outputStream.flush();
+        outputStream.close();
 
-            //Adding Post Data
-            OutputStream outputStream=httpURLConnection.getOutputStream();
-            outputStream.write(post_data.getBytes());
-            outputStream.flush();
-            outputStream.close();
-
-            String line="";
-            InputStreamReader inputStreamReader=new InputStreamReader(httpURLConnection.getInputStream());
-            BufferedReader bufferedReader=new BufferedReader(inputStreamReader);
-            StringBuilder response=new StringBuilder();
-            while ((line=bufferedReader.readLine())!=null){
-                response.append(line);
-            }
-            bufferedReader.close();
-
-            return response.toString();
-
+        String line="";
+        InputStreamReader inputStreamReader=new InputStreamReader(httpURLConnection.getInputStream());
+        BufferedReader bufferedReader=new BufferedReader(inputStreamReader);
+        StringBuilder response=new StringBuilder();
+        while ((line=bufferedReader.readLine())!=null){
+            response.append(line);
         }
-        catch (Exception e){
-            e.printStackTrace();
-            return null;
-        }
+        bufferedReader.close();
+
+        return response.toString();
 
     }
 
