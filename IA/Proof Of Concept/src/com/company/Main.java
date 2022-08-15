@@ -5,6 +5,9 @@ import com.api.AlpacaAPI;
 import com.api.AlphaVantageAPI;
 import com.api.FinnhubAPI;
 import com.api.RequestHandler;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.gui.GUICaller;
 import com.asset.Asset;
 import com.utils.FileHandler;
@@ -147,7 +150,6 @@ public class Main {
 //        System.out.println(crypto.price());
 //        System.out.println(crypto.quote());
 
-        // TODO: ADD THE PRICE HISTORY AND CURRENT OPEN POSITIONS IN THE HOMESCREEN...
         System.out.println(AlpacaAPIHandler.portfolioHistory());
         // TODO: Extract the equity part of it and graph that... with losses as red and profits as green and with a start equity line
 
@@ -177,5 +179,6 @@ public class Main {
 
         // TODO: Enlarge the graph in the SimulationGUI
         // TODO: Speed up the the .simulate() by using proper string manipulation
+
     }
 }

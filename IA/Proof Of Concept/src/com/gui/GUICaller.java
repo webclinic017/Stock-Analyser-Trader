@@ -31,7 +31,7 @@ public class GUICaller {
         System.out.println("SEQUENCE: Home Screen");
         JFrame frame = new JFrame("Home Screen");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        HomeScreen myGUI = new HomeScreen(700, 450);
+        HomeScreen myGUI = new HomeScreen(850, 450);
         frame.add(myGUI);
         frame.pack();
         //frame.setVisible(true); // setVisible is set to false so that this function can be called from login so it loads the GUI but not display it until the login is complete

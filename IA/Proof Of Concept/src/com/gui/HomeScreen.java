@@ -1,5 +1,6 @@
 package com.gui;
 
+import com.api.AlpacaAPI;
 import com.asset.Asset;
 import com.asset.Calendar;
 import com.asset.NewsData;
@@ -16,6 +17,7 @@ import java.awt.image.BufferedImage;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -25,8 +27,8 @@ public class HomeScreen extends JPanel {
 
     JButton button;
     JTextField textfield;
-    JLabel label;
-    JLabel label1;
+
+    AlpacaAPI AlpacaAPIHandler = new AlpacaAPI();
 
     public HomeScreen(int width, int height) throws Exception {
         System.out.println("SEQUENCE: GUI constructor");
@@ -275,10 +277,53 @@ public class HomeScreen extends JPanel {
                 add(newsicon[i]);
             }
 
-
         }
 
 
+        // Open positions
+
+        JLabel openpositions = new JLabel("Positions");
+        openpositions.setFont(new Font("Verdana", Font.BOLD, 20));
+        openpositions.setBounds(680, 50, 150, 50);
+        add(openpositions);
+
+        JsonArray pos = AlpacaAPIHandler.positions();
+        for(int x=0; x<pos.size(); x++){
+            JsonObject data = pos.get(x).getAsJsonObject();
+            System.out.println(data.get("symbol"));
+            System.out.println(data.get("side"));
+            System.out.println(data.get("market_value"));
+            System.out.println(data.get("qty"));
+            System.out.println(data.get("unrealized_pl"));
+            System.out.println();
+        }
+
+        for (int j = 0; j < 5; j++) {
+            try {
+                JsonObject data = pos.get(j).getAsJsonObject();
+                Asset asset = Asset.create(data.get("symbol").getAsString());
+
+                String lossOrGain = data.get("unrealized_pl").getAsString();
+                if (lossOrGain.contains("-")) {
+                    lossOrGain = "<h5 style='color:red'> -$" + lossOrGain.split("-")[1] + "</h5>"; // putting the minus sign before the dollar sign
+                } else {
+                    lossOrGain = "<h5 style='color:green'> +$" + lossOrGain + "<h5>";
+                }
+
+                // https://stackoverflow.com/a/153785
+                DecimalFormat df = new DecimalFormat("#.##");
+
+                JLabel positionLabel = new JLabel("<html> $" + df.format(data.get("market_value").getAsFloat()) + lossOrGain + "</html>");
+                positionLabel.setFont(new Font("Verdana", Font.BOLD, 12));
+                positionLabel.setIcon(new ImageIcon(asset.icon.getImage().getScaledInstance(36, 36, Image.SCALE_DEFAULT))); // scaling the image properly so that there is no stretch
+                positionLabel.setBounds(680, (j * 61) + 100, 140, 50);
+                positionLabel.setHorizontalAlignment(SwingConstants.LEFT);
+                add(positionLabel);
+            } catch (Exception e){
+                System.out.println("Error");
+            }
+
+        }
     }
 
     // Add a text field that auto updates as you type, like below the JTextField, instead of the autocomplete thing I was planning about...

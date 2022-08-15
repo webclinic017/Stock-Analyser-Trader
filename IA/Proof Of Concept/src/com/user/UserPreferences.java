@@ -1,6 +1,6 @@
 package com.user;
 
-public class Preferences {
+public class UserPreferences {
 
     private boolean automatic_trading_allowed;
     private float maximum_percentage_per_trade;
@@ -9,7 +9,7 @@ public class Preferences {
     // gui preferences
     private boolean show_trending;
 
-    public Preferences() {
+    public UserPreferences() {
     }
 
 }
