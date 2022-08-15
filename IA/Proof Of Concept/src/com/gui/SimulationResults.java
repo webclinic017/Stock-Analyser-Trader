@@ -20,6 +20,8 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Properties;
 
@@ -153,33 +155,32 @@ public class SimulationResults extends JPanel {
         // start_date and end_date selector
 
         JLabel start_time_l = new JLabel("Start time");
-//        start_time.setFont(new Font("Verdana", Font.BOLD, 20));
+        start_time_l.setFont(new Font("Verdana", Font.PLAIN, 12));
         start_time_l.setBounds(100, 165, 150, 50);
         add(start_time_l);
 
-        JLabel end_time_l = new JLabel("End Time");
-//        end_time.setFont(new Font("Verdana", Font.BOLD, 20));
-        end_time_l.setBounds(280, 165, 150, 50);
-        add(end_time_l);
-
-
-
-        UtilDateModel model = new UtilDateModel();
-//model.setDate(20,04,2014);
-// Need this...
-        Properties p = new Properties();
-        p.put("text.today", "Today");
-        p.put("text.month", "Month");
-        p.put("text.year", "Year");
-        JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
-// Don't know about the formatter, but there it is...
-        JDatePickerImpl start_time = new JDatePickerImpl(datePanel, new DateLabelFormatter());
-        start_time.setBounds(100, 200, 120, 350);
+        JTextField start_time = new JTextField("01/08/2020");
+        start_time.setBounds(100, 200, 100, 20);
         add(start_time);
 
-        JDatePickerImpl end_time = new JDatePickerImpl(datePanel, new DateLabelFormatter());
-        end_time.setBounds(280, 200, 120, 350);
+        JLabel end_time_l = new JLabel("End Time");
+        end_time_l.setFont(new Font("Verdana", Font.PLAIN, 12));
+        end_time_l.setBounds(210, 165, 150, 50);
+        add(end_time_l);
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        LocalDateTime now = LocalDateTime.now();
+
+        JTextField end_time = new JTextField(dtf.format(now));
+        end_time.setBounds(210, 200, 100, 20);
         add(end_time);
+
+        JButton reset = new JButton("Reset");
+        reset.setIcon(new ImageIcon(new ImageIcon("data/default/redo.png").getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
+        reset.setBounds(320, 197, 90, 25);
+        add(reset);
+
+
 
     }
 
@@ -204,28 +205,3 @@ public class SimulationResults extends JPanel {
 
 }
 
-
-// Code Required for the JDatePicker to work
-// https://stackoverflow.com/a/26794863
-
-class DateLabelFormatter extends JFormattedTextField.AbstractFormatter {
-
-    private String datePattern = "yyyy-MM-dd";
-    private SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
-
-    @Override
-    public Object stringToValue(String text) throws ParseException {
-        return dateFormatter.parseObject(text);
-    }
-
-    @Override
-    public String valueToString(Object value) throws ParseException {
-        if (value != null) {
-            Calendar cal = (Calendar) value;
-            return dateFormatter.format(cal.getTime());
-        }
-
-        return "";
-    }
-
-}

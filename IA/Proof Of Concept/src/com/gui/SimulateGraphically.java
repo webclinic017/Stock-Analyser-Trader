@@ -58,12 +58,12 @@ public class SimulateGraphically extends JPanel {
 
         JLabel buy = new JLabel("Buy");
         buy.setIcon(new ImageIcon(new ImageIcon("data/default/profit.png").getImage().getScaledInstance(8, 8, Image.SCALE_DEFAULT))); // scaling the image properly so that there is no stretch
-        buy.setBounds(450, 550, 150, 15);
+        buy.setBounds(475, 550, 150, 15);
         add(buy);
 
         JLabel shortsell = new JLabel("Sell & Short");
         shortsell.setIcon(new ImageIcon(new ImageIcon("data/default/loss.png").getImage().getScaledInstance(8, 8, Image.SCALE_DEFAULT))); // scaling the image properly so that there is no stretch
-        shortsell.setBounds(450, 570, 150, 15);
+        shortsell.setBounds(475, 570, 150, 15);
         add(shortsell);
 
 

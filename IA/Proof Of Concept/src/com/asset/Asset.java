@@ -36,6 +36,7 @@ public class Asset {
     public String[] news_data;
 
     public Float[][] historical_data;
+    public boolean intraDayAvailable = false;
 
     AlpacaAPI AlpacaAPIHandler = new AlpacaAPI();
     static FinnhubAPI FinnhubAPIHandler = new FinnhubAPI();
@@ -148,6 +149,13 @@ public class Asset {
         }
         return row_prices;
     }
+
+    public Float[][] getIntraDay(String timeframe) throws Exception {
+        this.historical_data = HistoricalDataGetter.get(ticker, ticker, true, timeframe);
+        intraDayAvailable = true; // setting the flag true means other functions can not return this data instead of the 1d data
+        return historical_data;
+    }
+
 
     public JsonArray getNewsData() throws Exception {
         NewsData newsData = new NewsData();

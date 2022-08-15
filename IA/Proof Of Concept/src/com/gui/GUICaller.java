@@ -39,7 +39,7 @@ public class GUICaller {
     }
 
     public static void AssetInfo(Asset asset) throws Exception {
-        System.out.println("SEQUENCE: Stock Info");
+        System.out.println("SEQUENCE: Stock Info " + asset.ticker);
         JFrame frame = new JFrame("Stock");
         AssetInfo myGUI = new AssetInfo(600, 630, asset);
         frame.add(myGUI);

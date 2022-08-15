@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// TODO: Preference selector after logging in
 public class Preferences extends JPanel implements ActionListener{
     // canvas for other GUI widgets
     JFrame frame;

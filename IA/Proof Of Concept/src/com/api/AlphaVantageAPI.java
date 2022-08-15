@@ -6,6 +6,8 @@ import com.google.gson.JsonObject;
 import com.utils.FileHandler;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 // TODO: Retired api, not in use cause slow and inconsistent
 public class AlphaVantageAPI {
@@ -26,7 +28,7 @@ public class AlphaVantageAPI {
         return make_request(request_url);
     }
 
-    public String get_historical(String ticker, String timeframe) throws Exception {
+    public String getIntraDay(String ticker, String timeframe) throws Exception {
 //        String request_url = String.format("", ticker, start, end, duration); // url, ticker, start time, end time, time interval eg: 1d, 1M
 
         String base_url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY_EXTENDED&apikey=8DQF8MN8W4O10K8I&symbol=" + ticker + "&interval="+timeframe;
@@ -35,25 +37,51 @@ public class AlphaVantageAPI {
         FileHandler.writeToFile("data/stock/" + ticker + "/" + ticker + "-intraday.csv", "", false);
 
         for (int i=1; i<=2; i++) {
-            for (int j=1; j<=12; j++) {
+            for (int j=1; j<=2; j++) {
                 String request_url = base_url + "&slice=year" + i + "month" + j;
-                // TODO: THE REPLACING PART DOESN'T WORK!
-                String data = ReqHandler.getString(request_url).replace("\ntime,open,high,low,close,volume\n","");
 
-                while (data.contains("Our standard API call frequency is 5 calls per minute")){
-                    System.out.println("Sleeping cause hit limit...");
-                    Thread.sleep(3000);
-                    data = ReqHandler.getString(request_url).replace("\ntime,open,high,low,close,volume\n","");
+                String data = ReqHandler.getString(request_url);
+                while (true){
+                    if (data.contains("Our standard API call frequency is 5 calls per minute")) {
+                        System.out.println("Sleeping cause hit API limit...");
+                        Thread.sleep(3000);
+                        data = ReqHandler.getString(request_url);
+                    }
+                    else {
+                        break;
+                    }
                 }
 
+                data = data.replaceAll("time,open,high,low,close,volume", "").replaceAll("(?m)^[ \t]*\r?\n", "");
                 FileHandler.writeToFile("data/stock/" + ticker + "/" + ticker + "-intraday.csv", data, true);
             }
         }
 
+        ArrayList<String> data = FileHandler.readFromFile("data/stock/" + ticker + "/" + ticker + "-intraday.csv");
+        StringBuilder finalString = new StringBuilder();
 
+        for (int i = 0; i<data.size(); i++){
+            // Need to add an Adjusted Close field on the dataset as how YahooFinance API has in it's dataset
+            String[] newString = data.get(i).split(",");
 
-        return null;
-//        return ReqHandler.getString(request_url);
+            StringBuilder changedString = new StringBuilder(); // more efficient
+            for(int j=0; j< newString.length; j++){
+                if (j==4){ // adding an extra on to duplicate the Close to Adj Close
+                    changedString.append(newString[j]).append(",");
+                }
+                changedString.append(newString[j]);
+                if (j != newString.length-1){
+                    changedString.append(",");
+                }
+            }
+
+            finalString.append(changedString).append("\n");
+        }
+
+        // TODO: MAIN PRIORITY, MAKE SURE NEW LINE CHARACTERS ARE REMOVED... THE REMOVE THE CHANGE OF NULL TO STRING IN HISTORICALDATA.JAVA
+
+        FileHandler.writeToFile("data/stock/" + ticker + "/" + ticker + "-intraday.csv", String.valueOf(finalString), false);
+        return "data/stock/" + ticker + "/" + ticker + "-intraday.csv"; // returns the file location...
     }
 
 }

@@ -45,7 +45,7 @@ public class Stock extends Asset {
         // TODO: this does add a lot of delay, so might want to save this info to a file so don't have to do the request next time too...
         // TODO: not using it until done so...
         try {
-            JsonObject other_data = AlphaVantageAPIHandler.company_profile(ticker).get(0).getAsJsonObject();
+            JsonObject other_data = FinnhubAPIHandler.company_profile(ticker).get(0).getAsJsonObject();
 
             this.name = other_data.get("name").getAsString();
             this.country = other_data.get("country").getAsString();
@@ -58,7 +58,7 @@ public class Stock extends Asset {
         }
 
         try {
-            JsonObject other_data = FinnhubAPIHandler.company_profile(ticker).get(0).getAsJsonObject();
+            JsonObject other_data = AlphaVantageAPIHandler.company_profile(ticker).get(0).getAsJsonObject();
             System.out.println(other_data);
 
             this.sector = other_data.get("sector").getAsString();
@@ -73,17 +73,12 @@ public class Stock extends Asset {
 
 
         } catch (Exception e) {
-            System.out.println("Stock info not found in Finnhub...");
+            System.out.println("Stock info not found in AlphaVantage...");
         }
 
 
 
     }
 
-    @Override
-    public Float[][] getHistorical_data() throws Exception {
-        this.historical_data = HistoricalDataGetter.get(ticker, YFticker);
-        return historical_data;
-    }
 
 }

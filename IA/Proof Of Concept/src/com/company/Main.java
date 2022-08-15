@@ -4,9 +4,12 @@ import com.analyzer.Analyze;
 import com.api.AlpacaAPI;
 import com.api.AlphaVantageAPI;
 import com.api.FinnhubAPI;
+import com.api.RequestHandler;
 import com.gui.GUICaller;
 import com.asset.Asset;
 import com.utils.FileHandler;
+
+import java.util.Arrays;
 
 // TODO: FIND A WAY TO SEPARATE THE DATA INTO TRAINING AND TESTING - INCLUDE IN CRITERIONS AND EMAIL COMMUNICATIONS...
 
@@ -169,7 +172,9 @@ public class Main {
         // TODO: https://www.alphavantage.co/documentation/#intraday-extended
         // TODO: Figure out adjusted close difference and either add to one data set or remove from another
 
-        AlphaVantageAPI AlphaVantageAPIHandler = new AlphaVantageAPI();
-//        AlphaVantageAPIHandler.get_historical("TSLA", "60min");
+//        System.out.println(Arrays.deepToString(stock.getIntraDay("60min")));
+//        System.out.println(Arrays.deepToString(stock.getHistorical_data()));
+
+        // TODO: make reset button work in simulation gui
     }
 }

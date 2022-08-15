@@ -46,7 +46,7 @@ public class Crypto extends Asset {
 
     @Override
     public Float[][] getHistorical_data() throws Exception {
-        this.historical_data = HistoricalDataGetter.get(ticker, YFticker);
+        this.historical_data = HistoricalDataGetter.get(ticker, YFticker, false, "1d");
         return historical_data;
     }
 

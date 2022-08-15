@@ -123,6 +123,7 @@ public class AssetInfo extends JPanel {
     // TODO: find the highest and lowest point, plot the percentage increase
     // TODO: just find the higest point and divide everything by it...
     public void paintComponent(Graphics g){ // paints the stock chart
+
         ArrayList<Float> all_historical_data = asset.getHistorical_data(5);
         ArrayList<Float> historical_data = Utils.stripArrayList(all_historical_data, 550, false);
 
