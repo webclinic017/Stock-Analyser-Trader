@@ -19,7 +19,7 @@ public class SMACrossoverTester {
     public SMACrossoverTester(Asset asset) throws Exception {
         this.asset = asset;
         this.ticker = asset.ticker;
-        this.historicalData = asset.getHistorical_data();
+        this.historicalData = asset.historical_data;
     }
 
     // Simulating the data to figure out the gain made... if had bought at the closing price

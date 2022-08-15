@@ -15,7 +15,7 @@ import java.util.ArrayList;
 // TODO: Add Inheritance to this class for crypto and forex, so that their symbols are dealt on their own class, and override methods to get info about them and it's different instead of bunch of ifs and try catch in the main stock class, this means you add inheritance and polymorphism and also will make it a lot cleaner and easier to deal with
 // PROBLEM: How to know if it's what? When you read from watchlist, in the for loop which one do you call? Or have a method or a class do that for you?
 public class Asset {
-    public String ticker;
+    public String ticker, YFticker;
     public String name;
     public String exchange;
     public String type;
@@ -141,6 +141,11 @@ public class Asset {
         return historical_data;
     }
 
+    public Float[][] getHistorical_data(long start, long end) throws Exception {
+        this.historical_data = HistoricalDataGetter.get(ticker, YFticker, false, "1d", new long[]{start,end});
+        return historical_data;
+    }
+
     public ArrayList<Float> getHistorical_data(int row) {
         ArrayList<Float> row_prices = new ArrayList<>();
 
@@ -151,7 +156,7 @@ public class Asset {
     }
 
     public Float[][] getIntraDay(String timeframe) throws Exception {
-        this.historical_data = HistoricalDataGetter.get(ticker, ticker, true, timeframe);
+        this.historical_data = HistoricalDataGetter.get(ticker, ticker, true, timeframe, null);
         intraDayAvailable = true; // setting the flag true means other functions can not return this data instead of the 1d data
         return historical_data;
     }

@@ -4,7 +4,7 @@ import java.util.Date;
 
 // TODO: try out features from https://yahoofinanceapi.com/
 public class YahooFinanceApi {
-    private String historical_data_url = "https://query1.finance.yahoo.com/v7/finance/download/%s?period1=%s&period2=%d&interval=%s&events=history&includeAdjustedClose=true";
+    private String historical_data_url = "https://query1.finance.yahoo.com/v7/finance/download/%s?period1=%d&period2=%d&interval=1d&events=history&includeAdjustedClose=true";
     RequestHandler ReqHandler = new RequestHandler();
     Date now = new Date();
 
@@ -18,12 +18,12 @@ public class YahooFinanceApi {
         // "-5364662325" - since the start
         // "1620777600" - 1y
         // "1589241600" - 2y
-        String request_url = String.format(historical_data_url, ticker, "1589241600", unixNow, "1d"); // url, ticker, start time, end time, time interval eg: 1d, 1M
+        String request_url = String.format(historical_data_url, ticker, 1589241600, unixNow); // url, ticker, start time, end time, time interval eg: 1d, 1M
         return ReqHandler.getString(request_url);
     }
 
-    public String get_historical(String ticker, int start, int end, String duration) throws Exception {
-        String request_url = String.format(historical_data_url, ticker, start, end, duration); // url, ticker, start time, end time, time interval eg: 1d, 1M
+    public String get_historical(String ticker, long start, long end) throws Exception {
+        String request_url = String.format(historical_data_url, ticker, start, end); // url, ticker, start time, end time, time interval eg: 1d, 1M
         return ReqHandler.getString(request_url);
     }
 

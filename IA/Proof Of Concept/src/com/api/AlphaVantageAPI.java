@@ -1,13 +1,8 @@
 package com.api;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.utils.FileHandler;
-
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 // TODO: Retired api, not in use cause slow and inconsistent
 public class AlphaVantageAPI {
@@ -37,7 +32,7 @@ public class AlphaVantageAPI {
         FileHandler.writeToFile("data/stock/" + ticker + "/" + ticker + "-intraday.csv", "", false);
 
         for (int i=1; i<=2; i++) {
-            for (int j=1; j<=2; j++) {
+            for (int j=1; j<=12; j++) {
                 String request_url = base_url + "&slice=year" + i + "month" + j;
 
                 String data = ReqHandler.getString(request_url);

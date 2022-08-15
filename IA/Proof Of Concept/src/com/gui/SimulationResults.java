@@ -4,26 +4,20 @@ import com.analyzer.backtesting.SMACrossoverTester;
 import com.asset.Asset;
 import com.utils.FileHandler;
 import com.utils.Utils;
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Properties;
+import java.util.Date;
 
 
 public class SimulationResults extends JPanel {
@@ -65,63 +59,6 @@ public class SimulationResults extends JPanel {
         add(name);
 
 
-        SMACrossoverTester smaCrossoverTester = new SMACrossoverTester(asset);
-        int[] data = smaCrossoverTester.simulate(); // does the simulation and saves it to a file...
-        int bestsma1 = data[0];
-        int bestsma2 = data[1];
-
-        // file handler, read in the simulation results saved to a csv and show it in a table
-        // converting into 2D parsed csv file
-        String[][] simulation_results = Utils.convertToMultiDArrayFromCSV("data/stock/" + asset.ticker + "/simulation-sma.csv", 4);
-
-        // Showing the best result
-        JButton top = new JButton();
-        top.setText("<html>" + bestsma1 + ", " + bestsma2 + ", " + paddGain(String.valueOf(data[2])) + ", " + data[3] + "</html>");
-        top.setBounds(100,250, 310, 30);
-        top.setHorizontalAlignment(SwingConstants.LEFT);
-        top.setContentAreaFilled(false);
-        top.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    GUICaller.Simulate(asset, bestsma1, bestsma2);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-        });
-        add(top);
-
-
-
-
-
-        // Showing top 5 results...
-        JButton[] results = new JButton[5];
-
-        // top 5
-        for (int i = 0; i<5; i++){
-
-            results[i] = new JButton();
-            String text = "<html>" + simulation_results[i][0] + ", " + simulation_results[i][1] + ", " + paddGain(simulation_results[i][2]) + ", " + simulation_results[i][3] + "</html>";
-            results[i].setText(text);
-//            results[i].setFont(new Font("Verdana", Font.BOLD,12));
-            results[i].setBounds(100,(i*35)+285, 310, 30);
-            results[i].setHorizontalAlignment(SwingConstants.LEFT);
-            results[i].setContentAreaFilled(false);
-            int current = i;
-            results[i].addActionListener(new ActionListener(){
-                public void actionPerformed(ActionEvent e) {
-                    try {
-                        GUICaller.Simulate(asset, Integer.parseInt(simulation_results[current][0]), Integer.parseInt(simulation_results[current][1]));
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-                }
-            });
-
-            add(results[i]);
-        }
-
 
         // export option for further processing in external pieces of software if preferred by the user
 
@@ -156,31 +93,83 @@ public class SimulationResults extends JPanel {
 
         JLabel start_time_l = new JLabel("Start time");
         start_time_l.setFont(new Font("Verdana", Font.PLAIN, 12));
-        start_time_l.setBounds(100, 165, 150, 50);
+        start_time_l.setBounds(100, 150, 150, 50);
         add(start_time_l);
 
         JTextField start_time = new JTextField("01/08/2020");
-        start_time.setBounds(100, 200, 100, 20);
+        start_time.setBounds(100, 185, 100, 20);
         add(start_time);
 
         JLabel end_time_l = new JLabel("End Time");
         end_time_l.setFont(new Font("Verdana", Font.PLAIN, 12));
-        end_time_l.setBounds(210, 165, 150, 50);
+        end_time_l.setBounds(210, 150, 150, 50);
         add(end_time_l);
 
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDateTime now = LocalDateTime.now();
 
         JTextField end_time = new JTextField(dtf.format(now));
-        end_time.setBounds(210, 200, 100, 20);
+        end_time.setBounds(210, 185, 100, 20);
         add(end_time);
 
         JButton reset = new JButton("Reset");
         reset.setIcon(new ImageIcon(new ImageIcon("data/default/redo.png").getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
-        reset.setBounds(320, 197, 90, 25);
+        reset.setBounds(320, 182, 90, 25);
         add(reset);
+        reset.setContentAreaFilled(false);
+        reset.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Date date = new Date(start_time.getText());
+                    long start = date.getTime() / 1000;
+
+                    date = new Date(end_time.getText());
+                    long end = date.getTime() / 1000;
+
+                    asset.getHistorical_data(start, end);
+                    displayResults();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
 
 
+        // only show intraday option if it's a stock
+
+        if (asset.type.equals("us_equity")) {
+            String[] options = {"60min", "30min", "15min", "5min", "1min"};
+
+            JLabel intradayLabel = new JLabel("Intraday");
+            intradayLabel.setFont(new Font("Verdana", Font.BOLD, 12));
+            intradayLabel.setBounds(100, 215, 70, 25);
+            add(intradayLabel);
+
+            // https://docs.oracle.com/javase/tutorial/uiswing/components/combobox.html
+            JComboBox<String> timeframe = new JComboBox<>(options);
+            timeframe.setBounds(170, 215, 60, 25);
+            add(timeframe);
+
+
+            JButton start = new JButton("Start");
+            start.setIcon(new ImageIcon(new ImageIcon("data/default/redo.png").getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
+            start.setBounds(240, 215, 90, 25);
+            add(start);
+            start.setContentAreaFilled(false);
+            start.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        System.out.println("Getting data");
+                        asset.getIntraDay(options[timeframe.getSelectedIndex()]);
+                        System.out.println("Loading");
+                        displayResults();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+
+                }
+            });
+        }
 
     }
 
@@ -200,6 +189,65 @@ public class SimulationResults extends JPanel {
             gain = "<img src='" + new File("data/default/loss.png").toURI() + "' width='9' height='9'> " + rounded + " %";
         }
         return gain;
+    }
+
+    private void displayResults() throws Exception {
+
+        SMACrossoverTester smaCrossoverTester = new SMACrossoverTester(asset);
+        int[] data = smaCrossoverTester.simulate(); // does the simulation and saves it to a file...
+        int bestsma1 = data[0];
+        int bestsma2 = data[1];
+
+        // file handler, read in the simulation results saved to a csv and show it in a table
+        // converting into 2D parsed csv file
+        String[][] simulation_results = Utils.convertToMultiDArrayFromCSV("data/stock/" + asset.ticker + "/simulation-sma.csv", 4);
+
+        // Showing the best result
+        JButton top = new JButton();
+        top.setText("<html>" + bestsma1 + ", " + bestsma2 + ", " + paddGain(String.valueOf(data[2])) + ", " + data[3] + "</html>");
+        top.setBounds(100,250, 310, 30);
+        top.setHorizontalAlignment(SwingConstants.LEFT);
+        top.setContentAreaFilled(false);
+        top.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    GUICaller.Simulate(asset, bestsma1, bestsma2);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+        add(top);
+
+
+
+        // Showing top 5 results...
+        JButton[] results = new JButton[5];
+
+        // top 5
+        for (int i = 0; i<5; i++){
+
+            results[i] = new JButton();
+            String text = "<html>" + simulation_results[i][0] + ", " + simulation_results[i][1] + ", " + paddGain(simulation_results[i][2]) + ", " + simulation_results[i][3] + "</html>";
+            results[i].setText(text);
+//            results[i].setFont(new Font("Verdana", Font.BOLD,12));
+            results[i].setBounds(100,(i*35)+285, 310, 30);
+            results[i].setHorizontalAlignment(SwingConstants.LEFT);
+            results[i].setContentAreaFilled(false);
+            int current = i;
+            results[i].addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        GUICaller.Simulate(asset, Integer.parseInt(simulation_results[current][0]), Integer.parseInt(simulation_results[current][1]));
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            });
+
+            add(results[i]);
+        }
+        repaint();
     }
 
 

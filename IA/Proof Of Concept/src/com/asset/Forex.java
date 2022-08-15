@@ -9,8 +9,6 @@ import java.nio.file.Paths;
 
 public class Forex extends Asset {
 
-    private String YFticker;
-
     // TODO: I don't think I wanna inherit this as the similarity are very limited and causes errors for normal api calls
     // TODO: https://tradermade.com/forex#pricing
 
@@ -43,7 +41,7 @@ public class Forex extends Asset {
     @Override
     public Float[][] getHistorical_data() throws Exception {
         HistoricalData HistoricalDataGetter = new HistoricalData();
-        this.historical_data = HistoricalDataGetter.get(ticker, YFticker, false, "1d");
+        this.historical_data = HistoricalDataGetter.get(ticker, YFticker, false, "1d", null);
         return historical_data;
     }
 }

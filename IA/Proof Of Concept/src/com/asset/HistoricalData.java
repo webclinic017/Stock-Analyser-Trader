@@ -15,11 +15,10 @@ public class HistoricalData {
     public HistoricalData(){
     }
 
-    /**
-     * @param timeframe Set to 1d if not using intraDay, if intraday: 1min, 5min, 15min, 30min, 60min
-     * @param intraDay Only valid option for stocks
-     */
-    public Float[][] get(String ticker, String YFticker, boolean intraDay, String timeframe) throws Exception {
+    // timeframe Set to 1d if not using intraDay, if intraday: 1min, 5min, 15min, 30min, 60min
+    // intraDay Only valid option for stocks
+
+    public Float[][] get(String ticker, String YFticker, boolean intraDay, String timeframe, long[] startEnd) throws Exception {
 
         String filename = "";
 
@@ -28,7 +27,14 @@ public class HistoricalData {
 
         } else { // if not intraday, download from YahooFinance
             filename = "data/stock/" + ticker + "/" + ticker + ".csv";
-            String historical_data = YFHandler.get_historical(YFticker); // gets the data
+
+            String historical_data;
+            if (startEnd != null){ // if start end provided, load that
+                historical_data = YFHandler.get_historical(YFticker, startEnd[0], startEnd[1]);
+            } else {
+                historical_data = YFHandler.get_historical(YFticker);
+            }
+
             historical_data = historical_data.replace("Date,Open,High,Low,Close,Adj Close,Volume\n", ""); // cleaning up
 
             fileHandler.writeToFile(filename, historical_data, false); // storing it to make it easy to process, also to save having to ask everytime
@@ -90,12 +96,12 @@ public class HistoricalData {
     }
 
     public Float[][] get(String ticker) throws Exception {
-        return get(ticker, ticker, false, "1d"); // calling the function and passing the same parameters as if YFticker is not given, assumes it's the same
+        return get(ticker, ticker, false, "1d", null); // calling the function and passing the same parameters as if YFticker is not given, assumes it's the same
     }
 
     public Float[][] getIntraDay(Asset stock) throws Exception {
         if (stock.type.equals("us_equity")){
-            get(stock.ticker, stock.ticker, true, "1d");
+            get(stock.ticker, stock.ticker, true, "1d", null);
         }
         return null;
     }

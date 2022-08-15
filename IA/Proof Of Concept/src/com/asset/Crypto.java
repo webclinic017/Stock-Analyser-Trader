@@ -12,7 +12,6 @@ import java.nio.file.Paths;
 
 public class Crypto extends Asset {
 
-    private String YFticker;
     private String Baseticker;
     CoinMarketCapAPI CoinMarketCapAPIHandler = new CoinMarketCapAPI();
 
@@ -46,7 +45,7 @@ public class Crypto extends Asset {
 
     @Override
     public Float[][] getHistorical_data() throws Exception {
-        this.historical_data = HistoricalDataGetter.get(ticker, YFticker, false, "1d");
+        this.historical_data = HistoricalDataGetter.get(ticker, YFticker, false, "1d", null);
         return historical_data;
     }
 
