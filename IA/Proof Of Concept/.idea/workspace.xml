@@ -4,17 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="Successfully integrated AlphaVantageAPI into the workflow to get historical intraday data">
+    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="Made Intraday simulation seamless via GUI">
+      <change afterPath="$PROJECT_DIR$/data/default/line.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/simulation-result.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/simulation-result.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/analyzer/backtesting/SMACrossoverTester.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/analyzer/backtesting/SMACrossoverTester.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/api/AlphaVantageAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/api/AlphaVantageAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/api/YahooFinanceApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/api/YahooFinanceApi.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/asset/Asset.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/asset/Asset.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/asset/Crypto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/asset/Crypto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/asset/Forex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/asset/Forex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/asset/HistoricalData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/asset/HistoricalData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/asset/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/asset/Stock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gui/AssetInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/AssetInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gui/GUICaller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/GUICaller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gui/SimulateGraphically.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/SimulateGraphically.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/gui/SimulationResults.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/SimulationResults.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/analyzer/backtesting/SMACrossoverTester.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/analyzer/backtesting/SMACrossoverTester.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api/YahooFinanceApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api/YahooFinanceApi.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/company/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/gui/GUICaller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/gui/GUICaller.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,13 +107,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1648929083891</updated>
-    </task>
-    <task id="LOCAL-00007" summary="SMA Crossover Works">
-      <created>1651414422861</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1651414422861</updated>
     </task>
     <task id="LOCAL-00008" summary="Login GUI Added">
       <created>1651741740915</created>
@@ -447,7 +444,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660556104073</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="Made Intraday simulation seamless via GUI">
+      <created>1660563451721</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1660563451721</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -466,7 +470,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Added market hours status in home page" />
     <MESSAGE value="Added icons to market status" />
     <MESSAGE value="Solved a major bug, preventing program from crashing if null data points in HistoricalData" />
     <MESSAGE value="GUI improvements, Padding and auto Capitalisation for ticker field" />
@@ -491,7 +494,8 @@
     <MESSAGE value="Added new datasource for intraday historical data for aggressive trading" />
     <MESSAGE value="Added more info for stocks, Added Intraday historical data for stocks Improved GUI" />
     <MESSAGE value="Successfully integrated AlphaVantageAPI into the workflow to get historical intraday data" />
-    <option name="LAST_COMMIT_MESSAGE" value="Successfully integrated AlphaVantageAPI into the workflow to get historical intraday data" />
+    <MESSAGE value="Made Intraday simulation seamless via GUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Made Intraday simulation seamless via GUI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

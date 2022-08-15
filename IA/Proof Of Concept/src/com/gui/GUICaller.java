@@ -63,7 +63,7 @@ public class GUICaller {
     public static void SimulationResults(Asset asset) throws Exception {
         System.out.println("SEQUENCE: SimulationResults");
         JFrame frame = new JFrame("Simulation Results");
-        SimulationResults myGUI = new SimulationResults(600, 630, asset);
+        SimulationResults myGUI = new SimulationResults(440, 520, asset);
         frame.add(myGUI);
         frame.pack();
         frame.setVisible(true);
@@ -83,7 +83,7 @@ public class GUICaller {
         System.out.println("SEQUENCE: Login");
         JFrame frame = new JFrame("Login");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Login myGUI = new Login(350, 150, frame, this); // passing the frame so that it can close itself...
+        Login myGUI = new Login(350, 140, frame, this); // passing the frame so that it can close itself...
         frame.add(myGUI);
         frame.pack();
         frame.setVisible(true);

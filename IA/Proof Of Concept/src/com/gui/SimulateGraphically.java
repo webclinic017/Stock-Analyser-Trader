@@ -68,9 +68,6 @@ public class SimulateGraphically extends JPanel {
 
 
 
-
-
-
         // TODO: Show an animation of this as it's happening... and a new thread will do the normal .simulate() call...
         // TODO: will keep the user busy while the real whole simulation runs...
 //        int[][] sma_to_show = {{20,50}, {50,180}};
@@ -153,6 +150,11 @@ public class SimulateGraphically extends JPanel {
     // TODO: do the test() function but in one for loop?
     // TODO: there is no need copy paste the test() code, you just find the sma1 and sma2 and loop through the price array, then on each loop count, check it sma crossover or not, if happens, draw the vertical line, take the trade, then update the money value every day after based on the price of the stock, then chart the stock price, the smas and below chart the value of the money as the days pass...
     public void paintComponent(Graphics g) {
+
+        // TODO: consumes CPU for no reason
+        super.paintComponent(g);
+        repaint();
+
 //        super.paintComponent(g);
 //        g.setColor(Color.BLACK);
 //        g.fillRect(0, 0, getWidth(), getHeight());
@@ -225,6 +227,10 @@ public class SimulateGraphically extends JPanel {
                         g.setColor(Color.green);
                         g.fillPolygon(new int[] {day_counter-5, day_counter, day_counter+5}, new int[] {(int) (max_y_point-current_sma1+5), (int) (max_y_point-current_sma1-5), (int) (max_y_point-current_sma1+5)}, 3);
 
+//                        JLabel label = new JLabel("Buy");
+//                        label.setFont(new Font("Verdana", Font.PLAIN, 8));
+//                        label.setBounds(day_counter-8, (int) (max_y_point-current_sma1-5), 150, 50);
+//                        add(label);
 
                     } else { // if current was false, it's a short
                         System.out.println("SHORT");
@@ -236,15 +242,13 @@ public class SimulateGraphically extends JPanel {
                         g.setColor(Color.red);
                         g.fillPolygon(new int[] {day_counter-5, day_counter, day_counter+5}, new int[] {(int) (max_y_point-current_sma1-5), (int) (max_y_point-current_sma1+5), (int) (max_y_point-current_sma1-5)}, 3);
 
-                        JLabel label = new JLabel("Short");
-                        label.setFont(new Font("Verdana", Font.BOLD, 20));
-                        label.setBounds(100, 50, 150, 50);
-                        add(label);
-
+//                        JLabel label = new JLabel("Short");
+//                        label.setFont(new Font("Verdana", Font.PLAIN, 8));
+//                        label.setBounds(day_counter-8, (int) (max_y_point-current_sma1-5), 150, 50);
+//                        add(label);
 
                     }
                 }
-
 
                 previous_sma_crossover_buy_state = sma_crossover_buy_state;
                 day_counter++;
@@ -253,7 +257,4 @@ public class SimulateGraphically extends JPanel {
         }
 
     }
-
-
-
 }

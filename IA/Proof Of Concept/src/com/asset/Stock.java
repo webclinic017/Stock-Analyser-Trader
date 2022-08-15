@@ -15,9 +15,6 @@ public class Stock extends Asset {
     FinnhubAPI FinnhubAPIHandler = new FinnhubAPI();
     AlphaVantageAPI AlphaVantageAPIHandler = new AlphaVantageAPI();
 
-    private String YFticker;
-
-
     public Stock(String ticker) throws Exception {
         super(ticker);
         this.YFticker = ticker.replace(".", "-"); // convention ticker for YF...
@@ -46,7 +43,7 @@ public class Stock extends Asset {
         // TODO: not using it until done so...
         try {
             JsonObject other_data = FinnhubAPIHandler.company_profile(ticker).get(0).getAsJsonObject();
-
+            System.out.println(other_data);
             this.name = other_data.get("name").getAsString();
             this.country = other_data.get("country").getAsString();
             this.industry = other_data.get("finnhubIndustry").getAsString();
@@ -61,8 +58,9 @@ public class Stock extends Asset {
             JsonObject other_data = AlphaVantageAPIHandler.company_profile(ticker).get(0).getAsJsonObject();
             System.out.println(other_data);
 
-            this.sector = other_data.get("sector").getAsString();
-            this.exchange = other_data.get("exchange").getAsString();
+            this.about = other_data.get("Description").getAsString();
+            this.sector = other_data.get("Sector").getAsString();
+            this.exchange = other_data.get("Exchange").getAsString();
             this.marketcap = other_data.get("MarketCapitalization").getAsString();
             this.PERatio = other_data.get("PERatio").getAsFloat();
             this.EPS = other_data.get("EPS").getAsFloat();

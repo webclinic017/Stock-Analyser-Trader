@@ -17,16 +17,14 @@ import java.util.ArrayList;
 public class Asset {
     public String ticker, YFticker;
     public String name;
-    public String exchange;
     public String type;
 
     // TODO: might save the icon the a local directory, then get it from there, if not then call this url, will allow to add icons manually... or ship the product with famous ones already
     public ImageIcon icon = new ImageIcon("data/default/default.jpg"); // if icon not found... will only happen for crypto
 
-    public String country, industry, sector, weburl, marketcap, ipo;
+    public String exchange, about, country, industry, sector, weburl, marketcap, ipo;
     public float PERatio, EPS, analystTarget, PriceToSalesRatio, yearLow, yearHigh;
 
-    public String about = null;
     public JsonObject info;
     File local_icon;
 

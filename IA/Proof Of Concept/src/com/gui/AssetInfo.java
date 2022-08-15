@@ -50,58 +50,53 @@ public class AssetInfo extends JPanel {
         add(icon);
 
         name = new JLabel(asset.name);
-        name.setFont(new Font("Verdana", Font.BOLD, 15));
+        name.setFont(new Font("Verdana", Font.BOLD, 17));
         name.setHorizontalAlignment(SwingConstants.LEFT);
         name.setBounds(170, 35, 500, 40);
         add(name);
 
-        JLabel country_exchange = new JLabel("Exchange : " + asset.exchange);
-        country_exchange.setHorizontalAlignment(SwingConstants.LEFT);
-        country_exchange.setBounds(170, 70, 100000, 15);
-        add(country_exchange);
+        String aboutStock = "Exchange: " + asset.exchange + ", " + asset.country + "<br>" +
+                "Industry: " + asset.industry + "<br>" +
+                "Sector: " + asset.sector + "<br>" +
+                "IPO: " + asset.ipo + "<br>";
+
+        String technicalAbout = "EPS: " + asset.EPS + "<br>" +
+                "PERatio: " + asset.PERatio + "<br>" +
+                "52 Week Low: " + asset.yearLow + "<br>52 Week High: " + asset.yearHigh;
+
+        JLabel aboutStockLabel = new JLabel("<html>"+aboutStock+"</html>");
+        aboutStockLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        aboutStockLabel.setBounds(170, 60, 500, 100);
+        add(aboutStockLabel);
+
+        JLabel technicalAboutLabel = new JLabel("<html>Financials<hr>"+technicalAbout+"</html>");
+        technicalAboutLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        technicalAboutLabel.setBounds(350, 60, 500, 100);
+        add(technicalAboutLabel);
+
 
         // TODO: worth mentioning in Criterion C?
         if ((asset.type.equals("us_equity") && Calendar.isMarketOpen()) || asset.type.equals("crypto")){
-            JLabel price = new JLabel("Price : " + asset.price());
+            JLabel price = new JLabel("Price: $" + asset.price());
+            price.setFont(new Font("Verdana", Font.BOLD,13));
             price.setHorizontalAlignment(SwingConstants.LEFT);
-            price.setBounds(170, 85, 100000, 15);
+            price.setBounds(170, 160, 200, 15);
             add(price);
         }
 
-        // TODO: bug in the graphics
+        // TODO: I say use the python, more complexity...
 //        if (asset.about != null){
-//            JLabel about = new JLabel();
-//            about.setText("<html><h5>" + asset.about + "</h5></html>");
+//            JLabel about = new JLabel("<html>" + asset.about + "</html>");
 //            about.setBounds(170, 120, 300, 70);
 //            add(about);
 //        }
-
-
-        // Using external api for charts...
-//        // TODO: Implement my own in python and open an api endpoint...
-//        // Options : [1m,3m,5m,15m,30m,45m,1h,2h,3h,4h,1d,1w]
-//        String url = "https://api.chart-img.com/v1/tradingview/advanced-chart?interval=1d&height=550&width=800&theme=light&format=png&key=00e94094-4d2c-4658-b32e-776be716517b&symbol="+asset.ticker;
-//
-//        File directory = new File("data/temp/");
-//        if (! directory.exists()){
-//            directory.mkdirs();
-//        }
-//
-//        try (InputStream in = new URL(url).openStream()) {
-//            Files.copy(in, Paths.get("data/temp/chart.png"), StandardCopyOption.REPLACE_EXISTING);
-//        }
-//
-//        chart = new JLabel(new ImageIcon(new ImageIcon("data/temp/chart.png").getImage().getScaledInstance(560, 385, Image.SCALE_SMOOTH)));  // scaling the image properly so that there is no stretch
-//        chart.setBounds(20,200, 560, 385);
-//        add(chart);
-
 
 
 
         // TODO: Organise the action listener, make the class implement Action Listener
         simulate = new JButton("Simulate"); // TODO: or call it Backtesting/Backtracking?
         simulate.setFont(new Font("Verdana", Font.BOLD,12));
-        simulate.setBounds(170,120, 95, 25);
+        simulate.setBounds(170,200, 95, 25);
 
         simulate.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae){

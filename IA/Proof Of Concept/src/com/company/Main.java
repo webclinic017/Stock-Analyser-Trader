@@ -58,7 +58,7 @@ public class Main {
 //        float average = Math.average(numbs);
 //        System.out.println(average);
 
-        Asset stock = Asset.create("TSLA");
+        Asset stock = Asset.create("AAPL");
 //        System.out.println(stock.info);
 //        System.out.println(stock.getNewsData());
 
@@ -175,6 +175,7 @@ public class Main {
 //        System.out.println(Arrays.deepToString(stock.getIntraDay("60min")));
 //        System.out.println(Arrays.deepToString(stock.getHistorical_data()));
 
-        // TODO: make reset button work in simulation gui
+        // TODO: Enlarge the graph in the SimulationGUI
+        // TODO: Speed up the the .simulate() by using proper string manipulation
     }
 }

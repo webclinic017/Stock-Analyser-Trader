@@ -9,8 +9,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -39,23 +37,23 @@ public class SimulationResults extends JPanel {
 
         JLabel label = new JLabel("Backtesting");
         label.setFont(new Font("Verdana", Font.BOLD, 20));
-        label.setBounds(100, 50, 150, 50);
+        label.setBounds(70, 40, 150, 50);
         add(label);
 
         JLabel type = new JLabel("SMA Crossover");
         type.setFont(new Font("Verdana", Font.BOLD, 12));
-        type.setBounds(100, 75, 150, 50);
+        type.setBounds(70, 65, 150, 50);
         add(type);
 
 
         JLabel icon = new JLabel(asset.icon);
-        icon.setIcon(new ImageIcon(asset.icon.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
-        icon.setBounds(100,120, 32, 32);
+        icon.setIcon(new ImageIcon(asset.icon.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
+        icon.setBounds(70,110, 40, 40);
         add(icon);
 
         JLabel name = new JLabel(asset.name);
         name.setFont(new Font("Verdana", Font.BOLD, 15));
-        name.setBounds(150, 110, 350, 50);
+        name.setBounds(120, 105, 350, 50);
         add(name);
 
 
@@ -65,7 +63,7 @@ public class SimulationResults extends JPanel {
         JButton export = new JButton("Export");
 //            results[i].setFont(new Font("Verdana", Font.BOLD,12));
         export.setIcon(new ImageIcon(new ImageIcon("data/default/export.png").getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
-        export.setBounds(300, 70, 100, 30);
+        export.setBounds(270, 60, 100, 30);
         export.setHorizontalAlignment(SwingConstants.LEFT);
         export.setContentAreaFilled(false);
         export.addActionListener(new ActionListener(){
@@ -93,28 +91,28 @@ public class SimulationResults extends JPanel {
 
         JLabel start_time_l = new JLabel("Start time");
         start_time_l.setFont(new Font("Verdana", Font.PLAIN, 12));
-        start_time_l.setBounds(100, 150, 150, 50);
+        start_time_l.setBounds(70, 145, 150, 50);
         add(start_time_l);
 
         JTextField start_time = new JTextField("01/08/2020");
-        start_time.setBounds(100, 185, 100, 20);
+        start_time.setBounds(70, 180, 95, 20);
         add(start_time);
 
         JLabel end_time_l = new JLabel("End Time");
         end_time_l.setFont(new Font("Verdana", Font.PLAIN, 12));
-        end_time_l.setBounds(210, 150, 150, 50);
+        end_time_l.setBounds(180, 145, 150, 50);
         add(end_time_l);
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDateTime now = LocalDateTime.now();
 
         JTextField end_time = new JTextField(dtf.format(now));
-        end_time.setBounds(210, 185, 100, 20);
+        end_time.setBounds(175, 180, 95, 20);
         add(end_time);
 
         JButton reset = new JButton("Reset");
         reset.setIcon(new ImageIcon(new ImageIcon("data/default/redo.png").getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
-        reset.setBounds(320, 182, 90, 25);
+        reset.setBounds(280, 177, 90, 25);
         add(reset);
         reset.setContentAreaFilled(false);
         reset.addActionListener(new ActionListener(){
@@ -138,22 +136,33 @@ public class SimulationResults extends JPanel {
         // only show intraday option if it's a stock
 
         if (asset.type.equals("us_equity")) {
+
+            JLabel line = new JLabel();
+            line.setIcon(new ImageIcon(new ImageIcon("data/default/line.png").getImage().getScaledInstance(301, 5, Image.SCALE_DEFAULT))); // scaling the image properly so that there is no stretch
+            line.setBounds(70, 205, 301, 5);
+            add(line);
+
             String[] options = {"60min", "30min", "15min", "5min", "1min"};
 
-            JLabel intradayLabel = new JLabel("Intraday");
+            JLabel intradayLabel = new JLabel("<html>Intraday<br>(2 years)</html>");
             intradayLabel.setFont(new Font("Verdana", Font.BOLD, 12));
-            intradayLabel.setBounds(100, 215, 70, 25);
+            intradayLabel.setBounds(70, 215, 70, 30);
             add(intradayLabel);
+
+            JLabel historyTime = new JLabel("Timeframe: ");
+            historyTime.setFont(new Font("Ubuntu", Font.BOLD, 11));
+            historyTime.setBounds(145, 215, 75, 30);
+            add(historyTime);
 
             // https://docs.oracle.com/javase/tutorial/uiswing/components/combobox.html
             JComboBox<String> timeframe = new JComboBox<>(options);
-            timeframe.setBounds(170, 215, 60, 25);
+            timeframe.setBounds(210, 218, 60, 25);
             add(timeframe);
 
 
+
             JButton start = new JButton("Start");
-            start.setIcon(new ImageIcon(new ImageIcon("data/default/redo.png").getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
-            start.setBounds(240, 215, 90, 25);
+            start.setBounds(280, 218, 90, 25);
             add(start);
             start.setContentAreaFilled(false);
             start.addActionListener(new ActionListener(){
@@ -205,7 +214,7 @@ public class SimulationResults extends JPanel {
         // Showing the best result
         JButton top = new JButton();
         top.setText("<html>" + bestsma1 + ", " + bestsma2 + ", " + paddGain(String.valueOf(data[2])) + ", " + data[3] + "</html>");
-        top.setBounds(100,250, 310, 30);
+        top.setBounds(70,260, 300, 30);
         top.setHorizontalAlignment(SwingConstants.LEFT);
         top.setContentAreaFilled(false);
         top.addActionListener(new ActionListener(){
@@ -231,7 +240,7 @@ public class SimulationResults extends JPanel {
             String text = "<html>" + simulation_results[i][0] + ", " + simulation_results[i][1] + ", " + paddGain(simulation_results[i][2]) + ", " + simulation_results[i][3] + "</html>";
             results[i].setText(text);
 //            results[i].setFont(new Font("Verdana", Font.BOLD,12));
-            results[i].setBounds(100,(i*35)+285, 310, 30);
+            results[i].setBounds(70,(i*35)+295, 300, 30);
             results[i].setHorizontalAlignment(SwingConstants.LEFT);
             results[i].setContentAreaFilled(false);
             int current = i;
@@ -249,7 +258,4 @@ public class SimulationResults extends JPanel {
         }
         repaint();
     }
-
-
 }
-
