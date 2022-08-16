@@ -39,7 +39,6 @@ public class Asset {
     AlpacaAPI AlpacaAPIHandler = new AlpacaAPI();
     static FinnhubAPI FinnhubAPIHandler = new FinnhubAPI();
     HistoricalData HistoricalDataGetter = new HistoricalData();
-    RequestHandler RequestHandler = new RequestHandler();
 
 
     // instantiate the stock with getting useful data automatically
@@ -125,10 +124,6 @@ public class Asset {
             System.out.println("Industry not Found");
             return null;
         }
-    }
-
-    public static String[] constituents(String ticker) throws Exception {
-        return FinnhubAPIHandler.constituents(ticker);
     }
 
 

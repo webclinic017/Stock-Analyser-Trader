@@ -71,13 +71,18 @@ public class HomeScreen extends JPanel {
         textfield.setMargin(new Insets(2,13,3,2)); // padding the text
         textfield.setBounds(60,100, 150, 30);
 
+
+        button = new JButton(""); // search icon
+        button.setIcon(new ImageIcon(new ImageIcon("data/default/search.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
+        button.setContentAreaFilled(false);
+        button.setBounds(230,99, 50, 30);
+
+
         JLabel recommendation = new JLabel("Recommendation: ");
         recommendation.setBounds(60,30, 250, 30);
         add(recommendation);
 
 
-
-        // TODO: currently only auto capitalizes, might add suggestions etc...
         textfield.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
                 char keyChar = e.getKeyChar();
@@ -93,11 +98,6 @@ public class HomeScreen extends JPanel {
             }
         });
 
-
-
-
-        button = new JButton("\uD83D\uDD0D"); // search icon
-        button.setBounds(230,99, 50, 30);
 
         // Showing watchlist on the side screen
         Watchlist Watchlists = new Watchlist("default");
@@ -303,15 +303,17 @@ public class HomeScreen extends JPanel {
                 JsonObject data = pos.get(j).getAsJsonObject();
                 Asset asset = Asset.create(data.get("symbol").getAsString());
 
-                String lossOrGain = data.get("unrealized_pl").getAsString();
+
+                // https://stackoverflow.com/a/153785
+                DecimalFormat df = new DecimalFormat("#.##");
+
+                String lossOrGain = df.format(data.get("unrealized_pl").getAsFloat());
                 if (lossOrGain.contains("-")) {
                     lossOrGain = "<h5 style='color:red'> -$" + lossOrGain.split("-")[1] + "</h5>"; // putting the minus sign before the dollar sign
                 } else {
                     lossOrGain = "<h5 style='color:green'> +$" + lossOrGain + "<h5>";
                 }
 
-                // https://stackoverflow.com/a/153785
-                DecimalFormat df = new DecimalFormat("#.##");
 
                 JLabel positionLabel = new JLabel("<html> $" + df.format(data.get("market_value").getAsFloat()) + lossOrGain + "</html>");
                 positionLabel.setFont(new Font("Verdana", Font.BOLD, 12));

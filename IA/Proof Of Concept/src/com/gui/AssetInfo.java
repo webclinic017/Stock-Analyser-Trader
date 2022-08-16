@@ -96,7 +96,7 @@ public class AssetInfo extends JPanel {
         // TODO: Organise the action listener, make the class implement Action Listener
         simulate = new JButton("Simulate"); // TODO: or call it Backtesting/Backtracking?
         simulate.setFont(new Font("Verdana", Font.BOLD,12));
-        simulate.setBounds(170,200, 95, 25);
+        simulate.setBounds(170,190, 95, 25);
 
         simulate.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae){
