@@ -4,10 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="Bug Fixes and GUI improvements">
+    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="Added more logic to Trader, Bug fixes">
+      <change afterPath="$PROJECT_DIR$/PLTR log.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SHOP log.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/gui/AssetInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/AssetInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/gui/HomeScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/HomeScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/AlpacaDataStream.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/AlpacaDataStream.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/Browser_plotting.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/Python/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/StockInfoServer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/simulation-result.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/simulation-result.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/api/AlpacaAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/api/AlpacaAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/asset/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/asset/Stock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/trader/Trader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/trader/Trader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/api/AlpacaAPI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api/AlpacaAPI.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,13 +105,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1648929083891</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Few Improvements">
-      <created>1652030672635</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1652030672635</updated>
     </task>
     <task id="LOCAL-00013" summary="Skipped the caching of HistoricalData for now">
       <created>1652033978962</created>
@@ -440,7 +442,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660649713644</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="Fixed news broken content checker logic">
+      <created>1660650504057</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1660650504058</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -459,8 +468,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Adding padding to the table" />
-    <MESSAGE value="Adding the backtracking results at top" />
     <MESSAGE value="Added Correlation chart using Python, callable from Java, +few bug fixes" />
     <MESSAGE value="Idea of saving Watchlist as a ArrayList of Asset classes instead of ticker strings" />
     <MESSAGE value="Improvements to SimulationResults GUI" />
@@ -484,7 +491,9 @@
     <MESSAGE value="Added Flask server to execute trades with requests from Java" />
     <MESSAGE value="Bug Fixes and slight GUI improvements" />
     <MESSAGE value="Bug Fixes and GUI improvements" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bug Fixes and GUI improvements" />
+    <MESSAGE value="Fixed news broken content checker logic" />
+    <MESSAGE value="Added more logic to Trader, Bug fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added more logic to Trader, Bug fixes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

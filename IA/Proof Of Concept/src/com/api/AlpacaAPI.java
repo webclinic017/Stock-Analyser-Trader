@@ -7,8 +7,8 @@ import com.google.gson.JsonObject;
 public class AlpacaAPI {
     private String base_url = "https://paper-api.alpaca.markets";
     RequestHandler ReqHandler = new RequestHandler();
-    private String api_key_id = "PKZLW20DRB2DJFPPRMZV";
-    private String api_secret_key = "HS655suik2zGGRFXbqe5b7Xc1GRT8jHFVxQxzD1g";
+    private String api_key_id = "PKBRQ877H23MLZ6A5A44";
+    private String api_secret_key = "kYASo3caUfQ6yRdgMLC72aFkaXo7T7K9mCIK9pRa";
 
     public AlpacaAPI(){
     }
