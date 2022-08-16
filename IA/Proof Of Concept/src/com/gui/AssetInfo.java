@@ -82,6 +82,13 @@ public class AssetInfo extends JPanel {
             price.setHorizontalAlignment(SwingConstants.LEFT);
             price.setBounds(170, 160, 200, 15);
             add(price);
+        } else if(!Calendar.isMarketOpen() && asset.type.equals("us_equity")){
+            JLabel price = new JLabel("Close Price: $" + asset.price());
+            price.setFont(new Font("Verdana", Font.BOLD,13));
+            price.setHorizontalAlignment(SwingConstants.LEFT);
+            price.setBounds(170, 160, 200, 15);
+            add(price);
+
         }
 
         // TODO: I say use the python, more complexity...

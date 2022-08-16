@@ -75,7 +75,7 @@ public class HomeScreen extends JPanel {
         button = new JButton(""); // search icon
         button.setIcon(new ImageIcon(new ImageIcon("data/default/search.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
         button.setContentAreaFilled(false);
-        button.setBounds(230,99, 50, 30);
+        button.setBounds(225,99, 50, 30);
 
 
         JLabel recommendation = new JLabel("Recommendation: ");
@@ -169,7 +169,6 @@ public class HomeScreen extends JPanel {
 
         NewsData NewsData = new NewsData();
         System.out.println(Arrays.toString(watchlist));
-        counter = 20;
         JButton[] newslabel = new JButton[5];
         JLabel[] newsicon = new JLabel[5];
 
@@ -190,7 +189,7 @@ public class HomeScreen extends JPanel {
         for (JsonObject n: all_newsdata){
             if (count < 2){
                 try {
-                    if (!n.get("summary").getAsString().equals("") || !n.get("summary").getAsString().equals("\n")) {
+                    if (!n.get("summary").getAsString().equals("") && !n.get("summary").getAsString().equals("\n")) {
                         n.get("images").getAsJsonArray().get(2).getAsJsonObject().get("url").getAsString();
                         newsdata.add(n);
                         count++;
