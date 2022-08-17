@@ -75,7 +75,7 @@ public class Main {
 
         GUICaller GUICaller = new GUICaller();
 //        GUICaller.Login();
-//        GUICaller.startup();
+        GUICaller.startup();
 //        GUICaller.HomeScreen();
 //        GUICaller.AssetInfo(stock);
 //        GUICaller.SimulationResults(stock);
@@ -183,6 +183,8 @@ public class Main {
 
         Trader Trader = new Trader();
         Trader.dayTimeFrameTrader();
-        System.out.println(Trader.timeTilNextCandle("60min"));
+//        System.out.println(Trader.timeTilNextCandle("60min"));
+
+//        System.out.println(Asset.getLogo("MU"));
     }
 }

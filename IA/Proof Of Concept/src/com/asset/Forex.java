@@ -3,6 +3,7 @@ package com.asset;
 import javax.swing.*;
 import java.io.File;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -27,13 +28,7 @@ public class Forex extends Asset {
         if (local_icon.exists()) {
             this.icon = new ImageIcon("data/stock/" + ticker + "/" + ticker + ".png"); // setting the icon to the local file if exists
         } else {
-            // getting the logo -- requesting my server to convert the file to png from svg - TODO: Using my server
-            String url = "https://tools.lissankoirala.ml/svg-to-png?url=https://cloud.xm-cdn.com/static/research-portal/instruments_icons/" + ticker.toLowerCase() + ".svg";
-
-            try (InputStream in = new URL(url).openStream()) {
-                Files.copy(in, Paths.get("data/stock/" + ticker + "/" + ticker + ".png"));
-            }
-            this.icon = new ImageIcon("data/stock/" + ticker + "/" + ticker + ".png"); // setting the icon to the local file if exists
+            this.icon = new ImageIcon(getLogo(ticker)); // setting the icon to the local file if exists
         }
     }
 
@@ -43,5 +38,15 @@ public class Forex extends Asset {
         HistoricalData HistoricalDataGetter = new HistoricalData();
         this.historical_data = HistoricalDataGetter.get(ticker, YFticker, false, "1d", null);
         return historical_data;
+    }
+
+    public static String getLogo(String ticker) throws Exception {
+        // getting the logo -- requesting my server to convert the file to png from svg - TODO: Using my server
+        String url = "https://tools.lissankoirala.ml/svg-to-png?url=https://cloud.xm-cdn.com/static/research-portal/instruments_icons/" + ticker.toLowerCase() + ".svg";
+
+        try (InputStream in = new URL(url).openStream()) {
+            Files.copy(in, Paths.get("data/stock/" + ticker + "/" + ticker + ".png"));
+        }
+        return "data/stock/" + ticker + "/" + ticker + ".png";
     }
 }

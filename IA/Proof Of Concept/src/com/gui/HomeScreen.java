@@ -300,8 +300,8 @@ public class HomeScreen extends JPanel {
         for (int j = 0; j < 5; j++) {
             try {
                 JsonObject data = pos.get(j).getAsJsonObject();
-                Asset asset = Asset.create(data.get("symbol").getAsString());
 
+                ImageIcon icon = new ImageIcon(Asset.getLogo(data.get("symbol").getAsString()));
 
                 // https://stackoverflow.com/a/153785
                 DecimalFormat df = new DecimalFormat("#.##");
@@ -316,14 +316,14 @@ public class HomeScreen extends JPanel {
 
                 JLabel positionLabel = new JLabel("<html> $" + df.format(data.get("market_value").getAsFloat()) + lossOrGain + "</html>");
                 positionLabel.setFont(new Font("Verdana", Font.BOLD, 12));
-                positionLabel.setIcon(new ImageIcon(asset.icon.getImage().getScaledInstance(36, 36, Image.SCALE_DEFAULT))); // scaling the image properly so that there is no stretch
+                positionLabel.setIcon(new ImageIcon(icon.getImage().getScaledInstance(36, 36, Image.SCALE_DEFAULT))); // scaling the image properly so that there is no stretch
                 positionLabel.setBounds(680, (j * 61) + 100, 140, 50);
                 positionLabel.setHorizontalAlignment(SwingConstants.LEFT);
                 add(positionLabel);
             } catch (Exception e){
                 System.out.println("Error");
+                e.printStackTrace();
             }
-
         }
     }
 

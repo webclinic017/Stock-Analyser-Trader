@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 public class Crypto extends Asset {
 
     private String Baseticker;
-    CoinMarketCapAPI CoinMarketCapAPIHandler = new CoinMarketCapAPI();
+    static CoinMarketCapAPI CoinMarketCapAPIHandler = new CoinMarketCapAPI();
 
     public Crypto(String ticker) throws Exception {
         super(ticker);
@@ -29,17 +29,7 @@ public class Crypto extends Asset {
         if (local_icon.exists()) {
             this.icon = new ImageIcon("data/stock/" + ticker + "/" + ticker + ".png"); // setting the icon to the local file if exists
         } else {
-            JsonObject response = CoinMarketCapAPIHandler.crypto_info(Baseticker).get(0).getAsJsonObject();
-            JsonObject data = response.get("data").getAsJsonObject();
-            data = data.get(Baseticker).getAsJsonObject();
-
-            String url = data.get("logo").getAsString().replace("64x64","128x128"); // asking for a higher quality image...
-
-            try (InputStream in = new URL(url).openStream()) {
-                Files.copy(in, Paths.get("data/stock/" + ticker + "/" + ticker + ".png"));
-            }
-
-            this.icon = new ImageIcon("data/stock/" + ticker + "/" + ticker + ".png"); // setting the icon to the local file if exists
+            this.icon = new ImageIcon(getLogo(ticker)); // setting the icon to the local file if exists
         }
     }
 
@@ -63,5 +53,21 @@ public class Crypto extends Asset {
         System.out.println(response);
         String quote = response.get("trade").getAsJsonObject().get("p").getAsString();
         return quote;
+    }
+
+
+    public static String getLogo(String ticker) throws Exception {
+        String Bticker = ticker.replace("USD", "");
+        JsonObject response = CoinMarketCapAPIHandler.crypto_info(Bticker).get(0).getAsJsonObject();
+        JsonObject data = response.get("data").getAsJsonObject();
+        data = data.get(Bticker).getAsJsonObject();
+
+        String url = data.get("logo").getAsString().replace("64x64","128x128"); // asking for a higher quality image...
+
+        try (InputStream in = new URL(url).openStream()) {
+            Files.copy(in, Paths.get("data/stock/" + ticker + "/" + ticker + ".png"));
+        }
+
+        return "data/stock/" + ticker + "/" + ticker + ".png"; // returns the location of the file...
     }
 }

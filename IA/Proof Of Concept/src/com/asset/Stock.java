@@ -23,16 +23,7 @@ public class Stock extends Asset {
 
         // checking if local file for icon exists // TODO: add this to criterion for caching complexity
         if (!local_icon.exists()) { // if file doesn't exists// setting the icon to the local file if exists
-
-            String url = "https://companiesmarketcap.com/img/company-logos/128/" + YFticker + ".png";
-
-            try (InputStream in = new URL(url).openStream()) {
-                Files.copy(in, Paths.get("data/stock/" + ticker + "/" + ticker + ".png"));
-            } catch (Exception e){
-                System.out.println("Icon error : " + e);
-            }
-
-            this.icon = new ImageIcon("data/stock/" + ticker + "/" + ticker + ".png"); // setting the icon to the local file if exists
+            this.icon = new ImageIcon(getLogo(ticker)); // setting the icon to the local file if exists
         }
 
         // adding more information to the stock
@@ -73,5 +64,15 @@ public class Stock extends Asset {
 
     }
 
+    public static String getLogo(String ticker){
+        String YFticker = ticker.replace(".", "-");
+        String url = "https://companiesmarketcap.com/img/company-logos/128/" + YFticker + ".png";
 
+        try (InputStream in = new URL(url).openStream()) {
+            Files.copy(in, Paths.get("data/stock/" + ticker + "/" + ticker + ".png"));
+        } catch (Exception e){
+            System.out.println("Icon error : " + e);
+        }
+        return "data/stock/" + ticker + "/" + ticker + ".png";
+    }
 }
