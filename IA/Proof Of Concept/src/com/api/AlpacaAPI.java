@@ -5,6 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 public class AlpacaAPI {
+    private String localPythonURL = "http://localhost:8000/";
     private String base_url = "https://paper-api.alpaca.markets";
     RequestHandler ReqHandler = new RequestHandler();
     private String api_key_id = "PKBRQ877H23MLZ6A5A44";
@@ -42,11 +43,11 @@ public class AlpacaAPI {
     // TODO: Make sure that you enter your order information through a JSON message body. (The API does not accept orders through query params.)
     public boolean executeOrder(Asset asset, int amount, String side){ // side, either buy or sell
         // TODO: Generate client_order_id and save it in the logs, so can it associated later on why the trade was executed?
-        String data = "symbol="+asset+"&qty="+amount+"&side="+side+"&type=market&time_in_force=day"; // TODO: work in progress
+        String data = "?symbol="+asset+"&qty="+amount+"&side="+side; // TODO: decide quantity or amount...
 
         try {
             // TODO: Execute the trade... via python
-//            make_post_request("url", data);
+            make_request(localPythonURL + "/trade" + data);
 
             return true;
         } catch (Exception e){

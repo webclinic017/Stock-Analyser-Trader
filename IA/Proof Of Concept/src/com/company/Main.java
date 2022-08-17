@@ -10,6 +10,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.gui.GUICaller;
 import com.asset.Asset;
+import com.trader.Trader;
 import com.utils.FileHandler;
 
 import java.util.Arrays;
@@ -74,7 +75,7 @@ public class Main {
 
         GUICaller GUICaller = new GUICaller();
 //        GUICaller.Login();
-        GUICaller.startup();
+//        GUICaller.startup();
 //        GUICaller.HomeScreen();
 //        GUICaller.AssetInfo(stock);
 //        GUICaller.SimulationResults(stock);
@@ -150,7 +151,7 @@ public class Main {
 //        System.out.println(crypto.price());
 //        System.out.println(crypto.quote());
 
-        System.out.println(AlpacaAPIHandler.portfolioHistory());
+        System.out.println(AlpacaAPIHandler.portfolioHistory()); // TODO: Acts weired but will get fixed soon as they say
         // TODO: Extract the equity part of it and graph that... with losses as red and profits as green and with a start equity line
 
 //        System.out.println(AlpacaAPIHandler.createWatchlist("main", "TSLA,AAPL,MSFT"));
@@ -180,5 +181,8 @@ public class Main {
         // TODO: Enlarge the graph in the SimulationGUI
         // TODO: Speed up the the .simulate() by using proper string manipulation
 
+        Trader Trader = new Trader();
+        Trader.dayTimeFrameTrader();
+        System.out.println(Trader.timeTilNextCandle("60min"));
     }
 }

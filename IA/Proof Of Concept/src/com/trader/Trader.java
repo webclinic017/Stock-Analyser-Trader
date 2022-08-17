@@ -6,17 +6,44 @@ import com.user.UserPreferences;
 import com.utils.FileHandler;
 import com.utils.Utils;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 
 public class Trader {
     FileHandler FileHandler = new FileHandler();
-    AlpacaAPI AlpacaAPIHandler = new AlpacaAPI();
     UserPreferences UserPreferences = new UserPreferences();
 
     public Trader(){
     }
 
+    // Returns time in seconds
+    public int timeTilNextCandle(String timeframe){
+        String[] times = new SimpleDateFormat("HH,mm,ss").format(Calendar.getInstance().getTime()).split(",");
+        int seconds = Integer.parseInt(times[2]);
+        int min = Integer.parseInt(times[1]);
+        int hour = Integer.parseInt(times[0]);
+
+        if (timeframe.equals("1min")){
+            return 60-seconds;
+        }
+
+        else if (timeframe.equals("60min")){
+            return 60*(60-min) - (60-seconds);
+        }
+
+        else if (timeframe.equals("1d")){
+            return 60*60*(24-hour) - 60*(60-min) - (60-seconds);
+        }
+        return -1;
+    }
+
     public void dayTimeFrameTrader(){
-        String[][] assetList = Utils.convertToMultiDArrayFromCSV("DayTimeFrameList.csv", 3);
+        // TODO: check if it's market close time / or at market open
+        String[][] assetList = Utils.convertToMultiDArrayFromCSV("data/user/DayTimeFrameList.csv", 4);
+        for(String[] task: assetList){
+            // check crossover and buy sell
+        }
     }
 
     // TODO: Add a function if the timestep is 1d to check for crossover like 5 min before the market close or at market open
@@ -37,10 +64,11 @@ public class Trader {
 
             // checkNewCandle(); // Probably make python stream it on the set timeframe, then a java function checks for a change in a file to see if new data has come through...
             // calcSMA();
-            // checkCrossover();
 
             // get the price when the time hits, calculate the sma, if cross over, buy or sell...
             boolean crossover = false;
+            // checkCrossover();
+
             if (crossover){
                 asset.buy(amountPerTrade); // TODO: Converting this to money instead of trade size
             }
