@@ -5,18 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="Added more logic to Trader, Bug fixes">
-      <change afterPath="$PROJECT_DIR$/PLTR log.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SHOP log.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TSLA hourly log.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/user/DayTimeFrameList.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Python/AlpacaDataStream.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/AlpacaDataStream.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/Browser_plotting.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/Python/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/StockInfoServer.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/data/simulation-result.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/simulation-result.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/api/AlpacaAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/api/AlpacaAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/asset/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/asset/Stock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/trader/Trader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/trader/Trader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/utils/PersistentArrayList.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/api/AlpacaAPI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api/AlpacaAPI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/company/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/utils/PersistentArrayList.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,13 +105,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1648929083891</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Skipped the caching of HistoricalData for now">
-      <created>1652033978962</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1652033978962</updated>
     </task>
     <task id="LOCAL-00014" summary="Fixed Stock ticker bug, simulating a array of stocks...">
       <created>1652044058420</created>
@@ -449,7 +442,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660650504058</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="Added more logic to Trader, Bug fixes">
+      <created>1660676926195</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1660676926195</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="UnknownFeatures">
