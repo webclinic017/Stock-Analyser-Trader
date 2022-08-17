@@ -99,12 +99,6 @@ public class HistoricalData {
         return get(ticker, ticker, false, "1d", null); // calling the function and passing the same parameters as if YFticker is not given, assumes it's the same
     }
 
-    public Float[][] getIntraDay(Asset stock) throws Exception {
-        if (stock.type.equals("us_equity")){
-            get(stock.ticker, stock.ticker, true, "1d", null);
-        }
-        return null;
-    }
 
     // TODO: https://finnhub.io/docs/api/stock-candles | https://finnhub.io/docs/api/crypto-candles - useful for smaller resolution, intra-day trades...
 

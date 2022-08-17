@@ -168,10 +168,18 @@ public class SimulationResults extends JPanel {
             start.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent e) {
                     try {
-                        System.out.println("Getting data");
-                        asset.getIntraDay(options[timeframe.getSelectedIndex()]);
-                        System.out.println("Loading");
-                        displayResults();
+                        // TODO: Make a loading screen... probably just show a gif overwriting the entire screen, then when complete delete it...
+
+                        new Thread(() -> { // TODO: mention in criterion, separates so can run multiple
+                            try {
+                                System.out.println("Getting data");
+                                asset.getIntraDay(options[timeframe.getSelectedIndex()]);
+                                System.out.println("Loading");
+                                displayResults();
+                            } catch (Exception ignored){
+                            }
+                        }).start();
+
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }

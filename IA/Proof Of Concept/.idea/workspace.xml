@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="Added getting time till next candle plus a few more logics">
+    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="Made HomeScreen HIGHLY EFFICIENT by only loading necessary data points for the assets">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/simulation-result.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/simulation-result.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/asset/Asset.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/asset/Asset.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/asset/Crypto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/asset/Crypto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/asset/Forex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/asset/Forex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/asset/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/asset/Stock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/gui/HomeScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/HomeScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/company/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/asset/HistoricalData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/asset/HistoricalData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gui/SimulationResults.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/SimulationResults.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,13 +97,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1648929083891</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Made huge improvements to the backtesting">
-      <created>1652120350676</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1652120350676</updated>
     </task>
     <task id="LOCAL-00017" summary="Few improvements and Added Trader class">
       <created>1652210344946</created>
@@ -446,7 +434,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660739897978</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="Made HomeScreen HIGHLY EFFICIENT by only loading necessary data points for the assets">
+      <created>1660742088953</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1660742088953</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -465,7 +460,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Improvements to SimulationResults GUI" />
     <MESSAGE value="Adding an autocomplete for ticker search GUI, successfully collected famous/all stock, crypto forex tickers" />
     <MESSAGE value="Adding current price for asset" />
     <MESSAGE value="Proper validation of asset lists against AlpacaAPI and YahooFinanceAPI" />
@@ -490,7 +484,8 @@
     <MESSAGE value="Added more logic to Trader, Bug fixes" />
     <MESSAGE value="Executing trades successfully" />
     <MESSAGE value="Added getting time till next candle plus a few more logics" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added getting time till next candle plus a few more logics" />
+    <MESSAGE value="Made HomeScreen HIGHLY EFFICIENT by only loading necessary data points for the assets" />
+    <option name="LAST_COMMIT_MESSAGE" value="Made HomeScreen HIGHLY EFFICIENT by only loading necessary data points for the assets" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
