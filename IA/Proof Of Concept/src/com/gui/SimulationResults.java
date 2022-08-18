@@ -169,6 +169,10 @@ public class SimulationResults extends JPanel {
                 public void actionPerformed(ActionEvent e) {
                     try {
                         // TODO: Make a loading screen... probably just show a gif overwriting the entire screen, then when complete delete it...
+//                        Icon imgIcon = new ImageIcon(this.getClass().getResource("default/simulating.gif"));
+//                        JLabel label = new JLabel(imgIcon);
+//                        label.setBounds(668, 43, 46, 14); // You can use your own values
+//                        add(label);
 
                         new Thread(() -> { // TODO: mention in criterion, separates so can run multiple
                             try {
@@ -183,11 +187,26 @@ public class SimulationResults extends JPanel {
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
-
                 }
             });
-        }
 
+
+            JButton custom = new JButton("Customise");
+            custom.setIcon(new ImageIcon(new ImageIcon("data/default/customise.png").getImage().getScaledInstance(17, 17, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
+            custom.setBounds(255,480, 115, 30);;
+            add(custom);
+            custom.setContentAreaFilled(false);
+            custom.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        GUICaller.CustomizeSimluation(asset);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+
+            });
+        }
     }
 
     private String paddGain(String text){

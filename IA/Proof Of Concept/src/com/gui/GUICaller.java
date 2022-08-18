@@ -63,7 +63,7 @@ public class GUICaller {
     public static void SimulationResults(Asset asset) throws Exception {
         System.out.println("SEQUENCE: SimulationResults");
         JFrame frame = new JFrame("Simulation Results");
-        SimulationResults myGUI = new SimulationResults(440, 520, asset);
+        SimulationResults myGUI = new SimulationResults(440, 540, asset);
         frame.add(myGUI);
         frame.pack();
         frame.setVisible(true);
@@ -73,6 +73,15 @@ public class GUICaller {
         System.out.println("SEQUENCE: Simulate");
         JFrame frame = new JFrame("Backdating");
         SimulateGraphically myGUI = new SimulateGraphically(600, 630, asset, sma1, sma2);
+        frame.add(myGUI);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    public static void CustomizeSimluation(Asset asset) throws Exception {
+        System.out.println("SEQUENCE: Custom Simulation");
+        JFrame frame = new JFrame("Custom Simulation");
+        CustomSimulation myGUI = new CustomSimulation(280, 150, asset);
         frame.add(myGUI);
         frame.pack();
         frame.setVisible(true);

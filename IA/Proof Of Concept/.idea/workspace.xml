@@ -4,11 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="Made HomeScreen HIGHLY EFFICIENT by only loading necessary data points for the assets">
+    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="Added option to run custom simulations">
+      <change afterPath="$PROJECT_DIR$/data/default/customise.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/default/green-line.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/default/red-line.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/gui/CustomSimulation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/simulation-result.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/simulation-result.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/asset/HistoricalData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/asset/HistoricalData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gui/GUICaller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/GUICaller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gui/SimulateGraphically.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/SimulateGraphically.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/gui/SimulationResults.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/SimulationResults.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/company/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/gui/GUICaller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/gui/GUICaller.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,13 +105,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1648929083891</updated>
-    </task>
-    <task id="LOCAL-00017" summary="Few improvements and Added Trader class">
-      <created>1652210344946</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1652210344946</updated>
     </task>
     <task id="LOCAL-00018" summary="Added more links to data sources...">
       <created>1652264017557</created>
@@ -441,7 +442,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660742088953</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="Added Threading so that multiple simulations can run at once and not make the GUI freeze">
+      <created>1660750203260</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1660750203261</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -460,7 +468,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Adding an autocomplete for ticker search GUI, successfully collected famous/all stock, crypto forex tickers" />
     <MESSAGE value="Adding current price for asset" />
     <MESSAGE value="Proper validation of asset lists against AlpacaAPI and YahooFinanceAPI" />
     <MESSAGE value="Ideas for searching through the 3D array for ticker recommendation" />
@@ -485,7 +492,8 @@
     <MESSAGE value="Executing trades successfully" />
     <MESSAGE value="Added getting time till next candle plus a few more logics" />
     <MESSAGE value="Made HomeScreen HIGHLY EFFICIENT by only loading necessary data points for the assets" />
-    <option name="LAST_COMMIT_MESSAGE" value="Made HomeScreen HIGHLY EFFICIENT by only loading necessary data points for the assets" />
+    <MESSAGE value="Added Threading so that multiple simulations can run at once and not make the GUI freeze" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Threading so that multiple simulations can run at once and not make the GUI freeze" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
