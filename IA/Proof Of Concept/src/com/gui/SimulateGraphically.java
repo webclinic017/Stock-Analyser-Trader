@@ -46,15 +46,25 @@ public class SimulateGraphically extends JPanel {
         setLayout(null);
 
 
-        JLabel label = new JLabel("Backtesting");
+        JLabel label = new JLabel("SMA Crossover");
         label.setFont(new Font("Verdana", Font.BOLD, 20));
-        label.setBounds(100, 50, 150, 50);
+        label.setBounds(100, 50, 300, 50);
         add(label);
 
-        JLabel type = new JLabel("SMA Crossover");
+        JLabel type = new JLabel("Backtesting");
         type.setFont(new Font("Verdana", Font.BOLD, 12));
         type.setBounds(100, 75, 150, 50);
         add(type);
+
+        JLabel icon = new JLabel(asset.icon);
+        icon.setIcon(new ImageIcon(asset.icon.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
+        icon.setBounds(100,120, 40, 40);
+        add(icon);
+
+        JLabel name = new JLabel(asset.name);
+        name.setFont(new Font("Verdana", Font.BOLD, 15));
+        name.setBounds(150, 115, 350, 50);
+        add(name);
 
         JLabel buy = new JLabel("Buy");
         buy.setIcon(new ImageIcon(new ImageIcon("data/default/profit.png").getImage().getScaledInstance(8, 8, Image.SCALE_DEFAULT))); // scaling the image properly so that there is no stretch
@@ -65,6 +75,18 @@ public class SimulateGraphically extends JPanel {
         shortsell.setIcon(new ImageIcon(new ImageIcon("data/default/loss.png").getImage().getScaledInstance(8, 8, Image.SCALE_DEFAULT))); // scaling the image properly so that there is no stretch
         shortsell.setBounds(475, 570, 150, 15);
         add(shortsell);
+
+        JLabel sma1label = new JLabel("SMA (Short) --> " + sma1);
+        sma1label.setFont(new Font("Verdana", Font.BOLD, 12));
+        sma1label.setIcon(new ImageIcon(new ImageIcon("data/default/red-line.png").getImage().getScaledInstance(30, 12, Image.SCALE_DEFAULT))); // scaling the image properly so that there is no stretch
+        sma1label.setBounds(400, 120, 200, 30);
+        add(sma1label);
+
+        JLabel sma2label = new JLabel("SMA (Long)  --> " + sma2);
+        sma2label.setFont(new Font("Verdana", Font.BOLD, 12));
+        sma2label.setIcon(new ImageIcon(new ImageIcon("data/default/green-line.png").getImage().getScaledInstance(30, 12, Image.SCALE_DEFAULT))); // scaling the image properly so that there is no stretch
+        sma2label.setBounds(400, 140, 200, 30);
+        add(sma2label);
 
 
 
@@ -130,8 +152,8 @@ public class SimulateGraphically extends JPanel {
 
 
 
-        JButton start = new JButton("Simulate");
-        start.setBounds(100,130,90,25);
+        JButton start = new JButton("Visualise");
+        start.setBounds(100,180,90,25);
 
         start.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
