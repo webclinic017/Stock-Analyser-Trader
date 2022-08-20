@@ -46,7 +46,7 @@ public class SimulateGraphically extends JPanel {
         setLayout(null);
 
 
-        JLabel label = new JLabel("SMA Crossover");
+        JLabel label = new JLabel("MA Crossover");
         label.setFont(new Font("Verdana", Font.BOLD, 20));
         label.setBounds(100, 50, 300, 50);
         add(label);
@@ -76,13 +76,13 @@ public class SimulateGraphically extends JPanel {
         shortsell.setBounds(475, 570, 150, 15);
         add(shortsell);
 
-        JLabel sma1label = new JLabel("SMA (Short) --> " + sma1);
+        JLabel sma1label = new JLabel("MA (Short) --> " + sma1);
         sma1label.setFont(new Font("Verdana", Font.BOLD, 12));
         sma1label.setIcon(new ImageIcon(new ImageIcon("data/default/red-line.png").getImage().getScaledInstance(30, 12, Image.SCALE_DEFAULT))); // scaling the image properly so that there is no stretch
         sma1label.setBounds(400, 120, 200, 30);
         add(sma1label);
 
-        JLabel sma2label = new JLabel("SMA (Long)  --> " + sma2);
+        JLabel sma2label = new JLabel("MA (Long)  --> " + sma2);
         sma2label.setFont(new Font("Verdana", Font.BOLD, 12));
         sma2label.setIcon(new ImageIcon(new ImageIcon("data/default/green-line.png").getImage().getScaledInstance(30, 12, Image.SCALE_DEFAULT))); // scaling the image properly so that there is no stretch
         sma2label.setBounds(400, 140, 200, 30);

@@ -1,6 +1,7 @@
 package com.company;
 
 import com.analyzer.Analyze;
+import com.analyzer.tools.EMA;
 import com.api.AlpacaAPI;
 import com.api.AlphaVantageAPI;
 import com.api.FinnhubAPI;
@@ -75,10 +76,10 @@ public class Main {
 
         GUICaller GUICaller = new GUICaller();
 //        GUICaller.Login();
-        GUICaller.startup();
+//        GUICaller.startup();
 //        GUICaller.HomeScreen();
 //        GUICaller.AssetInfo(stock);
-//        GUICaller.SimulationResults(stock);
+        GUICaller.SimulationResults(stock);
 
 //        JsonArray data = AlpacaAPIHandler.getStockList();
 //        String value = String.valueOf(data);
@@ -182,7 +183,7 @@ public class Main {
         // TODO: Speed up the the .simulate() by using proper string manipulation
 
         Trader Trader = new Trader();
-        Trader.dayTimeFrameTrader();
+//        Trader.dayTimeFrameTrader();
 //        System.out.println(Trader.timeTilNextCandle("60min"));
 
 //        System.out.println(Asset.getLogo("MU"));
@@ -192,5 +193,23 @@ public class Main {
 
         // TODO: REMOVE THE RESTRICTION OF THE SMA TESTING TO LESS, SHOW IN CLIENT INTERACTION HE WANTED MORE TRADES HAPPENING... AND AFTER CHANGING IT MADE HIM MORE PROFITS AND IT WAS MORE RELIABLE
         // TODO: CHOOSE THE 5 SAMPLE SIMULATIONS SHOWN WISELY, MAYBE ONE FOR EACH CATEGORY ETC... OR MAKE IT ACCORDING TO THE USER PREFERENCE, THEN CAN SHOW IN SUCCESS CRITERION
+
+//        EMA ema = new EMA(20);
+//        System.out.println(ema.calculateEMA(stock));
+
+        // TODO: MIGHT HAVE TON OF BUGS TO BE FIXED
+        // TODO: SPECIALLY WHEN THE FILE IS SAVED AND THE REREAD, THE LOG FILE.
+        // TODO: THIS WORK IS FOR TOMORROW TO BE FIXED.
+        //
+        // TODO: REDUCE THE LIMIT TO WHICH MAs CAN BE CHOSEN
+
+        // TODO: SORT THE MOVING AVERAGES AS A CATEGORY, THEN DECIDE WHICH TYPE TO USE, LET'S SAY IF THE DX/DY IS SMALL, THEN WHAT? ETC
+        // TODO: THEN DO THESE CALCULATIONS TO FIND OUT LIKE HOW MUCH LEVERAGE TO USE, ETC. READ MY FIRST NOTES ON THIS PROJECT
+        // TODO: ALSO, TRADE MULTIPLE MARKETS TO INCREASE THE ODDS OF CAPTURING TRENDS...
+
+
+        // TODO: HAVE A WAY TO SEEING EXISTING POSITION BRFORE BUYING SELLING
+
+        // TODO: THEN HAVE A WAY TO CALCULATE THE STOP LOSS
     }
 }

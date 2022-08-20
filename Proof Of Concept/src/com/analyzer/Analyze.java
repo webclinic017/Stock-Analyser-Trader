@@ -2,14 +2,13 @@ package com.analyzer;
 
 // analyzes using all the relevant and makes a final decision
 
-import com.analyzer.backtesting.SMACrossoverTester;
+import com.analyzer.backtesting.CrossoverTester;
 import com.api.AlpacaAPI;
 import com.asset.Asset;
 import com.google.gson.JsonArray;
 import com.utils.FileHandler;
 import com.utils.Math;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class Analyze {
@@ -36,12 +35,12 @@ public class Analyze {
         for (String s: tickers){
             try {
                 Asset asset = Asset.create(s); // gets the proper class for the asset, either stock, crypto or forex...
-                SMACrossoverTester smaCrossoverTester = new SMACrossoverTester(asset);
+                CrossoverTester crossoverTester = new CrossoverTester(asset, "sma", "sma");
 
                 new Thread(() -> {
                     try {
                         // This saves the results to their directory...
-                        smaCrossoverTester.simulate();
+                        crossoverTester.simulate();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

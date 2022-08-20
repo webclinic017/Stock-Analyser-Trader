@@ -1,55 +1,77 @@
 package com.analyzer.backtesting;
 
+import com.analyzer.tools.EMA;
 import com.analyzer.tools.SMA;
 import com.asset.Asset;
 import com.utils.FileHandler;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 // TODO: Might wanna log the calculations to a csv file so that it can be processed in exel if wanted to
 // TODO: save the things to be logged to a arraylist then pass it to a thread to save to a file...
-public class SMACrossoverTester {
+public class CrossoverTester {
     private Asset asset;
     private Float[][] historicalData;
     private FileHandler fileHandler = new FileHandler();
 
     String ticker;
+    String type1, type2;
 
 
-    public SMACrossoverTester(Asset asset) throws Exception {
+    public CrossoverTester(Asset asset, String type1, String type2) {
         this.asset = asset;
         this.ticker = asset.ticker;
         this.historicalData = asset.historical_data;
+        this.type1 = type1.toLowerCase();
+        this.type2 = type2.toLowerCase();
     }
 
     // Simulating the data to figure out the gain made... if had bought at the closing price
     // TODO: make it accept other values such as opening price or average day price...
     // returns the total_gain with number of trades made...
-    public float[] test(int sma1, int sma2, boolean log_trades) throws Exception {
+
+    // TODO: SEPERATE THE ACTUAL CROSSOVER PART INTO A NEW CLASS TO MAKE IT NEATER, SO LIKE GIVE IT A INDEX OF DAY AND IT WILL RETURN BOOLEAN IF CROSSOVER OR NOT
+    public float[] test(int ma1, int ma2, boolean log_trades) throws Exception {
         float total_gain = 0;
         int numbers_of_trades = 0;
 
         StringBuilder buy_sell_log = new StringBuilder();
         String log = "";
 
+        ArrayList<Float> ma_data_1 = new ArrayList<>();
+        ArrayList<Float> ma_data_2 = new ArrayList<>();
 
-        SMA SMA_1 = new SMA(sma1);
-        SMA SMA_2 = new SMA(sma2);
+        // SETTING MOVING AVERAGE VALUES AND CALCULATING DATA
 
-        ArrayList<Float> sma_data_1 =  SMA_1.getSMAData(asset);
-        ArrayList<Float> sma_data_2 =  SMA_2.getSMAData(asset);
+        if (type1.equals("ema")) {
+            EMA MA_1 = new EMA(ma1);
+            ma_data_1 = MA_1.calculateEMA(asset);
+        } else if (type1.equals("sma")) {
+            SMA MA_1 = new SMA(ma1);
+            ma_data_1 = MA_1.getSMAData(asset);
+        }
 
-//        System.out.println(Arrays.deepToString(sma_data_1.toArray()));
-//        System.out.println(Arrays.deepToString(sma_data_2.toArray()));
+        if (type2.equals("ema")) {
+            EMA MA_2 = new EMA(ma2);
+            ma_data_2 = MA_2.calculateEMA(asset);
+        } else if (type2.equals("sma")) {
+            SMA MA_2 = new SMA(ma2);
+            ma_data_2 = MA_2.getSMAData(asset);
+        }
 
-        int total_data_size = sma_data_1.size();
 
-//        System.out.println(sma1 + " : " + sma2);
+//        System.out.println(Arrays.deepToString(ma_data_1.toArray()));
+//        System.out.println(Arrays.deepToString(ma_data_2.toArray()));
 
-        // creating an array with info if the sma1 was above or below sma2
+        int total_data_size = ma_data_1.size();
+
+//        System.out.println(ma1 + " : " + ma2);
+
+        // creating an array with info if the ma1 was above or below ma2
         Boolean[] crossover = new Boolean[total_data_size];
         for (int i = 0; i < total_data_size; i++){
-            if (sma_data_1.get(i) > sma_data_2.get(i)){
+            if (ma_data_1.get(i) > ma_data_2.get(i)){
                 crossover[i] = true;
             } else {
                 crossover[i] = false;
@@ -80,7 +102,7 @@ public class SMACrossoverTester {
 
 //        // printing the final results
 //        for (int i = 0; i < total_data_size; i++){
-//            System.out.println(sma_data_1.get(i) + " : " + sma_data_2.get(i) + " - " + crossover[i] + " -------- " + buy_sell[i]);
+//            System.out.println(ma_data_1.get(i) + " : " + ma_data_2.get(i) + " - " + crossover[i] + " -------- " + buy_sell[i]);
 //        }
 
 
@@ -117,7 +139,7 @@ public class SMACrossoverTester {
         }
 
         if (log_trades) {
-            fileHandler.writeToFile("data/stock/"+ticker+"/best-sma-crossover-simulation-trades.csv", String.valueOf(buy_sell_log),false);
+            fileHandler.writeToFile("data/stock/"+ticker+"/best-ma-crossover-simulation-trades.csv", String.valueOf(buy_sell_log),false);
         }
 
         return new float[]{(total_gain * 100), numbers_of_trades};
@@ -128,54 +150,54 @@ public class SMACrossoverTester {
         float[] result;
 
         float highest_returns = 0;
-        int bestSMA1 = 0;
-        int bestSMA2 = 0;
+        int bestMA1 = 0;
+        int bestMA2 = 0;
         int number_of_trades_best = 0; // number of trades for the best smas
 
         StringBuilder simulation_log = new StringBuilder();
 
 
-        // starting with the lowest sma of 5 as lower numbers produce insanely high uncertainty
-        // TODO: Figure out best best lower sma to start at
-        for (int sma1 = 20; sma1<201; sma1++){
-            for (int sma2 = 20; sma2<201; sma2++){
-                // TODO: if sma1 is bigger than sma2, this means that shorting is going one instead of buying, make this clear
+        // starting with the lowest ma of 5 as lower numbers produce insanely high uncertainty
+        // TODO: Figure out best best lower ma to start at
+        for (int testMA1 = 20; testMA1<201; testMA1++){
+            for (int testMA2 = 20; testMA2<201; testMA2++){
+                // TODO: if testMA1 is bigger than testMA2, this means that shorting is going one instead of buying, make this clear
 
-                // adding a gap min of 20 sma in between and making is so that sma1 is always smaller than sma2
-                if (sma2-sma1 > 20) {
-                    result = test(sma1, sma2, false);
+                // adding a gap min of 20 ma in between and making is so that testMA1 is always smaller than testMA2
+                if (testMA2-testMA1 > 20) {
+                    result = test(testMA1, testMA2, false);
                     float gain = result[0];
                     number_of_trades = (int) result[1];
 
                     // Comment this out to not log... TODO: Add a section in Preferences...
-                    String log = sma1 + "," + sma2 + "," + gain + "," + number_of_trades + "\n";
+                    String log = type1 + "," + testMA1 + "," + type2 + "," + testMA2 + "," + gain + "," + number_of_trades + "\n";
                     simulation_log.append(log); // TODO: Include in Criterion - FAR FAR FAR more effieicne then just String += log; less time and processing power
 
                     if (gain > highest_returns) {
                         highest_returns = gain;
-                        bestSMA1 = sma1;
-                        bestSMA2 = sma2;
+                        bestMA1 = testMA1;
+                        bestMA2 = testMA2;
                         number_of_trades_best = number_of_trades;
                     }
                 }
             }
-        }   
-        
+        }
+
         // TODO: This doesn't work currently, update it to the lastest trade it mades, currently if it does long,long,short, it says it shorted, ignoring the rest
         String position_type = "long";
-        if(bestSMA1>bestSMA2){position_type = "short";}
+        if(bestMA1>bestMA2){position_type = "short";}
 
-//        System.out.println(stock.name + " | Best SMA1 : " + bestSMA1 + " & SMA2 : " + bestSMA2 + " | Returns : " + highest_returns + " | No. of Trades : " + number_of_trades + " | Type : " + position_type);
-        String final_result = "SMA-Crossover," + ticker + "," + bestSMA1 + "," + bestSMA2 + "," + highest_returns + "," + number_of_trades_best + "," + position_type;
+//        System.out.println(stock.name + " | Best MA1 : " + bestMA1 + " & MA2 : " + bestMA2 + " | Returns : " + highest_returns + " | No. of Trades : " + number_of_trades + " | Type : " + position_type);
+        String final_result = "MA-Crossover," + ticker + "," + type1 + "," + bestMA1 + "," + type2 + "," + bestMA2 + "," + highest_returns + "," + number_of_trades_best + "," + position_type;
         System.out.println(final_result);
 
 
         // Logging to a file...
-        test(bestSMA1,bestSMA2,true); // making it log the trades...
-        fileHandler.writeToFile("data/stock/"+ticker+"/simulation-sma.csv", simulation_log.toString(),false);
+        test(bestMA1,bestMA2,true); // making it log the trades...
+        fileHandler.writeToFile("data/stock/"+ticker+"/simulation-ma.csv", simulation_log.toString(),false);
         fileHandler.writeToFile("data/simulation-result.csv",final_result,true); // adding all to a since file // TODO: remove duplicates
 
         // TODO: Want to return the highest returns as float? 30.73 % seems realistic and believable than 30 %
-        return new int[]{bestSMA1,bestSMA2, (int) highest_returns, number_of_trades};
+        return new int[]{bestMA1,bestMA2, (int) highest_returns, number_of_trades};
     }
 }

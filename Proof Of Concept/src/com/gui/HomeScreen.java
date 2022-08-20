@@ -176,10 +176,10 @@ public class HomeScreen extends JPanel {
         ArrayList<JsonObject> all_newsdata = new ArrayList<>();
 
         // TODO: worth mentioning in criterion C, the newer method of getting the news
-        int limit = 5;
+        int limit = 10;
         JsonArray response = NewsData.get(Watchlists.getAsString(), limit);
         System.out.println(response);
-        for (int i = 0; i<5; i++) {
+        for (int i = 0; i<10; i++) {
             all_newsdata.add(response.get(0).getAsJsonObject().get("news").getAsJsonArray().get(i).getAsJsonObject());
         }
 

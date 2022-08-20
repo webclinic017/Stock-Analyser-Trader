@@ -700,3 +700,4 @@ SMA-Crossover,AAPL,59,95,99.590546,5,long
 SMA-Crossover,TSLA,25,69,404.19623,8,long
 SMA-Crossover,AAPL,59,95,99.59056,5,long
 SMA-Crossover,TSLA,25,69,404.19623,8,long
+MA-Crossover,AAPL,ema,25,sma,54,86.848465,14,long
