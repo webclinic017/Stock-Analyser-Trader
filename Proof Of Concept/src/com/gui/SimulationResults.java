@@ -1,6 +1,6 @@
 package com.gui;
 
-import com.analyzer.backtesting.SMACrossoverTester;
+import com.analyzer.backtesting.CrossoverTester;
 import com.asset.Asset;
 import com.utils.FileHandler;
 import com.utils.Utils;
@@ -22,6 +22,7 @@ public class SimulationResults extends JPanel {
 
     int width, height;
     Asset asset;
+    JComboBox<String> maType1, maType2;
 
     FileHandler FileHandler = new FileHandler();
 
@@ -40,7 +41,7 @@ public class SimulationResults extends JPanel {
         label.setBounds(70, 40, 150, 50);
         add(label);
 
-        JLabel type = new JLabel("SMA Crossover");
+        JLabel type = new JLabel("MA Crossover");
         type.setFont(new Font("Verdana", Font.BOLD, 12));
         type.setBounds(70, 65, 150, 50);
         add(type);
@@ -131,6 +132,22 @@ public class SimulationResults extends JPanel {
                 }
             }
         });
+
+        JLabel maoptionsLabel = new JLabel("MA (Short)    MA (Long)");
+        maoptionsLabel.setBounds(240, 105, 200, 20);
+        add(maoptionsLabel);
+
+
+        String[] maOptions1 = {"EMA", "SMA"};
+        maType1 = new JComboBox<>(maOptions1);
+        maType1.setBounds(240, 125, 55, 20);
+        add(maType1);
+
+        String[] maOptions2 = {"SMA", "EMA"};
+        maType2 = new JComboBox<>(maOptions2);
+        maType2.setBounds(315, 125, 55, 20);
+        add(maType2);
+
 
 
         // only show intraday option if it's a stock
@@ -229,14 +246,16 @@ public class SimulationResults extends JPanel {
 
     private void displayResults() throws Exception {
 
-        SMACrossoverTester smaCrossoverTester = new SMACrossoverTester(asset);
-        int[] data = smaCrossoverTester.simulate(); // does the simulation and saves it to a file...
+        CrossoverTester crossoverTester = new CrossoverTester(asset, (String) maType1.getSelectedItem(), (String) maType2.getSelectedItem());
+        System.out.println(maType1.getSelectedItem());
+        System.out.println((String) maType2.getSelectedItem());
+        int[] data = crossoverTester.simulate(); // does the simulation and saves it to a file...
         int bestsma1 = data[0];
         int bestsma2 = data[1];
 
         // file handler, read in the simulation results saved to a csv and show it in a table
         // converting into 2D parsed csv file
-        String[][] simulation_results = Utils.convertToMultiDArrayFromCSV("data/stock/" + asset.ticker + "/simulation-sma.csv", 4);
+        String[][] simulation_results = Utils.convertToMultiDArrayFromCSV("data/stock/" + asset.ticker + "/simulation-ma.csv", 6);
 
         // Showing the best result
         JButton top = new JButton();
@@ -264,7 +283,7 @@ public class SimulationResults extends JPanel {
         for (int i = 0; i<5; i++){
 
             results[i] = new JButton();
-            String text = "<html>" + simulation_results[i][0] + ", " + simulation_results[i][1] + ", " + paddGain(simulation_results[i][2]) + ", " + simulation_results[i][3] + "</html>";
+            String text = "<html>" + simulation_results[i][1] + ", " + simulation_results[i][3] + ", " + paddGain(simulation_results[i][4]) + ", " + simulation_results[i][5] + "</html>";
             results[i].setText(text);
 //            results[i].setFont(new Font("Verdana", Font.BOLD,12));
             results[i].setBounds(70,(i*35)+295, 300, 30);
