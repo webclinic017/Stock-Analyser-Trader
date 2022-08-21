@@ -35,7 +35,6 @@ public class SimulationResults extends JPanel {
         this.setPreferredSize(new Dimension(width, height));
         setLayout(null);
 
-
         JLabel label = new JLabel("Backtesting");
         label.setFont(new Font("Verdana", Font.BOLD, 20));
         label.setBounds(70, 40, 150, 50);
@@ -119,14 +118,24 @@ public class SimulationResults extends JPanel {
         reset.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
                 try {
-                    Date date = new Date(start_time.getText());
-                    long start = date.getTime() / 1000;
 
-                    date = new Date(end_time.getText());
-                    long end = date.getTime() / 1000;
+                    new Thread(() -> { // TODO: mention in criterion, separates so can run multiple
+                        try {
+                            Date date = new Date(start_time.getText());
+                            long start = date.getTime() / 1000;
 
-                    asset.getHistorical_data(start, end);
-                    displayResults();
+                            date = new Date(end_time.getText());
+                            long end = date.getTime() / 1000;
+
+                            if (end > start){ // end time needs to be greater than start time
+                                asset.getHistorical_data(start, end);
+                                displayResults();
+                            }
+                        } catch (Exception ignored){
+                        }
+                    }).start();
+
+
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
@@ -195,7 +204,7 @@ public class SimulationResults extends JPanel {
                             try {
                                 System.out.println("Getting data");
                                 asset.getIntraDay(options[timeframe.getSelectedIndex()]);
-                                System.out.println("Loading");
+                                System.out.println("Running Simulation");
                                 displayResults();
                             } catch (Exception ignored){
                             }
@@ -208,9 +217,9 @@ public class SimulationResults extends JPanel {
             });
 
 
-            JButton custom = new JButton("Customise");
+            JButton custom = new JButton("Run Custom");
             custom.setIcon(new ImageIcon(new ImageIcon("data/default/customise.png").getImage().getScaledInstance(17, 17, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
-            custom.setBounds(255,480, 115, 30);;
+            custom.setBounds(245,480, 125, 30);
             add(custom);
             custom.setContentAreaFilled(false);
             custom.addActionListener(new ActionListener(){
@@ -250,8 +259,8 @@ public class SimulationResults extends JPanel {
         System.out.println(maType1.getSelectedItem());
         System.out.println((String) maType2.getSelectedItem());
         int[] data = crossoverTester.simulate(); // does the simulation and saves it to a file...
-        int bestsma1 = data[0];
-        int bestsma2 = data[1];
+        int bestma1 = data[0];
+        int bestma2 = data[1];
 
         // file handler, read in the simulation results saved to a csv and show it in a table
         // converting into 2D parsed csv file
@@ -259,21 +268,21 @@ public class SimulationResults extends JPanel {
 
         // Showing the best result
         JButton top = new JButton();
-        top.setText("<html>" + bestsma1 + ", " + bestsma2 + ", " + paddGain(String.valueOf(data[2])) + ", " + data[3] + "</html>");
+        top.setText("<html>" + bestma1 + ", " + bestma2 + ", " + paddGain(String.valueOf(data[2])) + ", " + data[3] + "</html>");
         top.setBounds(70,260, 300, 30);
         top.setHorizontalAlignment(SwingConstants.LEFT);
         top.setContentAreaFilled(false);
         top.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
                 try {
-                    GUICaller.Simulate(asset, bestsma1, bestsma2);
+                    GUICaller.Simulate(asset, bestma1, bestma2, (String) maType1.getSelectedItem(), (String) maType2.getSelectedItem());
+
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
         });
         add(top);
-
 
 
         // Showing top 5 results...
@@ -293,7 +302,7 @@ public class SimulationResults extends JPanel {
             results[i].addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent e) {
                     try {
-                        GUICaller.Simulate(asset, Integer.parseInt(simulation_results[current][0]), Integer.parseInt(simulation_results[current][1]));
+                        GUICaller.Simulate(asset, Integer.parseInt(simulation_results[current][1]), Integer.parseInt(simulation_results[current][3]), simulation_results[current][0], simulation_results[current][2]);
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }

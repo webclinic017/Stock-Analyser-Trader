@@ -1,5 +1,6 @@
 package com.gui;
 
+import com.analyzer.tools.EMA;
 import com.analyzer.tools.SMA;
 import com.asset.Asset;
 import com.utils.FileHandler;
@@ -26,21 +27,30 @@ public class SimulateGraphically extends JPanel {
 
     // for paint canvas - putting it here for scopes
     ArrayList<Float> close_prices = new ArrayList<>();
-    ArrayList<Float> sma1_data = new ArrayList<>();
-    ArrayList<Float> sma2_data = new ArrayList<>();
+    ArrayList<Float> ma1_data = new ArrayList<>();
+    ArrayList<Float> ma2_data = new ArrayList<>();
 
     float highest_data_point;
     float previous_highest_data_point;
 
     // making them non-primitive to hold null
-    Boolean sma_crossover_buy_state; // true if sma1 > sma2
-    Boolean previous_sma_crossover_buy_state;
+    Boolean ma_crossover_buy_state; // true if sma1 > sma2
+    Boolean previous_ma_crossover_buy_state;
+
+    String maType1, maType2;
+    String ma1LabelLine = "data/default/red-line.png";
+    String ma2LabelLine = "data/default/green-line.png";
+    Color ma1Color = Color.RED;
+    Color ma2Color = Color.GREEN;
 
     // TODO: Add a iframe and embed tradingview
-    public SimulateGraphically(int width, int height, Asset asset, int sma1, int sma2) throws Exception {
+    public SimulateGraphically(int width, int height, Asset asset, int ma1, int ma2, String type1, String type2) throws Exception {
         this.width = width;
         this.height = height;
         this.asset = asset;
+        this.maType1 = type1.toLowerCase();
+        this.maType2 = type2.toLowerCase();
+        if (maType1.equals("ema")) {ma1Color = Color.BLUE; ma2Color = Color.RED; ma1LabelLine = "data/default/blue-line.png"; ma2LabelLine = "data/default/red-line.png";}
 
         this.setPreferredSize(new Dimension(width, height));
         setLayout(null);
@@ -76,31 +86,31 @@ public class SimulateGraphically extends JPanel {
         shortsell.setBounds(475, 570, 150, 15);
         add(shortsell);
 
-        JLabel sma1label = new JLabel("MA (Short) --> " + sma1);
-        sma1label.setFont(new Font("Verdana", Font.BOLD, 12));
-        sma1label.setIcon(new ImageIcon(new ImageIcon("data/default/red-line.png").getImage().getScaledInstance(30, 12, Image.SCALE_DEFAULT))); // scaling the image properly so that there is no stretch
-        sma1label.setBounds(400, 120, 200, 30);
-        add(sma1label);
+        JLabel ma1label = new JLabel(maType1.toUpperCase() + " (Short) --> " + ma1);
+        ma1label.setFont(new Font("Verdana", Font.BOLD, 12));
+        ma1label.setIcon(new ImageIcon(new ImageIcon(ma1LabelLine).getImage().getScaledInstance(30, 12, Image.SCALE_DEFAULT))); // scaling the image properly so that there is no stretch
+        ma1label.setBounds(400, 120, 200, 30);
+        add(ma1label);
 
-        JLabel sma2label = new JLabel("MA (Long)  --> " + sma2);
-        sma2label.setFont(new Font("Verdana", Font.BOLD, 12));
-        sma2label.setIcon(new ImageIcon(new ImageIcon("data/default/green-line.png").getImage().getScaledInstance(30, 12, Image.SCALE_DEFAULT))); // scaling the image properly so that there is no stretch
-        sma2label.setBounds(400, 140, 200, 30);
-        add(sma2label);
+        JLabel ma2label = new JLabel(maType2.toUpperCase() + " (Long)  --> " + ma2);
+        ma2label.setFont(new Font("Verdana", Font.BOLD, 12));
+        ma2label.setIcon(new ImageIcon(new ImageIcon(ma2LabelLine).getImage().getScaledInstance(30, 12, Image.SCALE_DEFAULT))); // scaling the image properly so that there is no stretch
+        ma2label.setBounds(400, 140, 200, 30);
+        add(ma2label);
 
 
 
         // TODO: Show an animation of this as it's happening... and a new thread will do the normal .simulate() call...
-        // TODO: will keep the user busy while the real whole simulation runs...
+        // TODO: will keep the user busy while the real whole simulation runs... ESPECIALLY FOR THE 1 MIN ONES
 //        int[][] sma_to_show = {{20,50}, {50,180}};
 
 //        for (int[] ints : sma_to_show) {
-//            int sma1 = ints[0];
-//            int sma2 = ints[1];
+//            int ma1 = ints[0];
+//            int ma2 = ints[1];
 //
-//            float[] result = smaCrossoverTester.test(sma1, sma2, false);
+//            float[] result = smaCrossoverTester.test(ma1, ma2, false);
 //            float gain = result[0];
-//            System.out.println(sma1 + " " + sma2);
+//            System.out.println(ma1 + " " + ma2);
 //            System.out.println(gain);
 //            System.out.println(result[1]);
 //        }
@@ -113,19 +123,36 @@ public class SimulateGraphically extends JPanel {
 
 
 
-        System.out.println(sma1 + " , " + sma2);
-        SMA SMA_1 = new SMA(sma1);
-        SMA SMA_2 = new SMA(sma2);
+        System.out.println(ma1 + " , " + ma2);
 
-        ArrayList<Float> all_sma_data_1 =  SMA_1.getSMAData(asset);
-        ArrayList<Float> all_sma_data_2 =  SMA_2.getSMAData(asset);
+        ArrayList<Float> all_ma_data_1 =  new ArrayList<>();
+        ArrayList<Float> all_ma_data_2 =  new ArrayList<>();
+
+
+        if (maType1.equals("ema")) {
+            EMA MA_1 = new EMA(ma1);
+            all_ma_data_1 = MA_1.calculateEMA(asset);
+        } else if (maType1.equals("sma")) {
+            SMA MA_1 = new SMA(ma1);
+            all_ma_data_1 = MA_1.getSMAData(asset);
+        }
+
+        if (maType2.equals("ema")) {
+            EMA MA_2 = new EMA(ma2);
+            all_ma_data_2 = MA_2.calculateEMA(asset);
+        } else if (maType2.equals("sma")) {
+            SMA MA_2 = new SMA(ma2);
+            all_ma_data_2 = MA_2.getSMAData(asset);
+        }
+
+
 
         // TODO: this is only useful if using simulation over it's lifetime and see how it performed in the 2 years
-        // TODO: mention this : stripping the data points of historical data points to the last 550 data points, this means sma1 and sma2 also no longer start from the bottom as they would have been calculated from previous time frames already
+        // TODO: mention this : stripping the data points of historical data points to the last 550 data points, this means ma1 and ma2 also no longer start from the bottom as they would have been calculated from previous time frames already
         // stripping the data points to the last 550 data points - that 2 years and about 3 months, fits perfectly in the screen
         ArrayList<Float> historical_data = Utils.stripArrayList(all_historical_data, 550, false);
-        ArrayList<Float> sma_data_1 = Utils.stripArrayList(all_sma_data_1, 550, false);
-        ArrayList<Float> sma_data_2 = Utils.stripArrayList(all_sma_data_2, 550, false);
+        ArrayList<Float> ma_data_1 = Utils.stripArrayList(all_ma_data_1, 550, false);
+        ArrayList<Float> ma_data_2 = Utils.stripArrayList(all_ma_data_2, 550, false);
 
 
 
@@ -140,8 +167,8 @@ public class SimulateGraphically extends JPanel {
                     // TODO: add to the arraylist of lines... then repaint...
 
                     close_prices.add(historical_data.get(counter));
-                    sma1_data.add(sma_data_1.get(counter));
-                    sma2_data.add(sma_data_2.get(counter));
+                    ma1_data.add(ma_data_1.get(counter));
+                    ma2_data.add(ma_data_2.get(counter));
 
                     counter++;
                     repaint();
@@ -203,8 +230,8 @@ public class SimulateGraphically extends JPanel {
 
             int max_y_point = 630; // getting the point in the middle... making that tha base...
             float previous_close = (close_prices.get(0) / highest_data_point * (height / 2)) + 10; // getting the first data point as previous close so that it doesn't start from 0
-            float previous_sma1 = (sma1_data.get(0) / highest_data_point * (height / 2)) + 10;
-            float previous_sma2 = (sma2_data.get(0) / highest_data_point * (height / 2)) + 10;
+            float previous_ma1 = (ma1_data.get(0) / highest_data_point * (height / 2)) + 10;
+            float previous_ma2 = (ma2_data.get(0) / highest_data_point * (height / 2)) + 10;
 
             int day_counter = 20; // padding of 20 days to the left of screen in GUI
 
@@ -217,41 +244,41 @@ public class SimulateGraphically extends JPanel {
 
 
                 // printing the sma1
-                float current_sma1 = (sma1_data.get(i) / highest_data_point * (height / 2)) + 10; // 5 for close price
-                g.setColor(Color.RED);
-                g.drawLine(day_counter, max_y_point - (int) previous_sma1, day_counter + 1, max_y_point - (int) current_sma1); // TODO: adjust the +2 based on the number of data points
-                previous_sma1 = current_sma1;
+                float current_ma1 = (ma1_data.get(i) / highest_data_point * (height / 2)) + 10; // 5 for close price
+                g.setColor(ma1Color);
+                g.drawLine(day_counter, max_y_point - (int) previous_ma1, day_counter + 1, max_y_point - (int) current_ma1); // TODO: adjust the +2 based on the number of data points
+                previous_ma1 = current_ma1;
 
 
                 // printing the sma2
-                float current_sma2 = (sma2_data.get(i) / highest_data_point * (height / 2)) + 10; // 5 for close price
-                g.setColor(Color.GREEN);
-                g.drawLine(day_counter, max_y_point - (int) previous_sma2, day_counter + 1, max_y_point - (int) current_sma2); // TODO: adjust the +2 based on the number of data points
-                previous_sma2 = current_sma2;
+                float current_ma2 = (ma2_data.get(i) / highest_data_point * (height / 2)) + 10; // 5 for close price
+                g.setColor(ma2Color);
+                g.drawLine(day_counter, max_y_point - (int) previous_ma2, day_counter + 1, max_y_point - (int) current_ma2); // TODO: adjust the +2 based on the number of data points
+                previous_ma2 = current_ma2;
 
 
                 // drawing the horizontal lines for crossovers
-
-                if (current_sma1 > current_sma2){
-                    sma_crossover_buy_state = true;
+                // TODO: IMPROVE THIS CAUSE IT JUST BUYS AT FIRST
+                if (current_ma1 > current_ma2){
+                    ma_crossover_buy_state = true;
                 } else {
-                    sma_crossover_buy_state = false;
+                    ma_crossover_buy_state = false;
                 }
 
-                if (sma_crossover_buy_state !=previous_sma_crossover_buy_state){ // then crossover happened
-                    if (sma_crossover_buy_state) { // if it changed to true, it means buy state
+                if (ma_crossover_buy_state != previous_ma_crossover_buy_state){ // then crossover happened
+                    if (ma_crossover_buy_state) { // if it changed to true, it means buy state
                         System.out.println("BUY");
                         System.out.println(close_price);
                         g.setColor(Color.GREEN);
 //                        g.drawLine(day_counter,0, day_counter, height);
 
-                        g.drawPolygon(new int[] {day_counter-5, day_counter, day_counter+5}, new int[] {(int) (max_y_point-current_sma1+5), (int) (max_y_point-current_sma1-5), (int) (max_y_point-current_sma1+5)}, 3);
+                        g.drawPolygon(new int[] {day_counter-5, day_counter, day_counter+5}, new int[] {(int) (max_y_point-current_ma1+5), (int) (max_y_point-current_ma1-5), (int) (max_y_point-current_ma1+5)}, 3);
                         g.setColor(Color.green);
-                        g.fillPolygon(new int[] {day_counter-5, day_counter, day_counter+5}, new int[] {(int) (max_y_point-current_sma1+5), (int) (max_y_point-current_sma1-5), (int) (max_y_point-current_sma1+5)}, 3);
+                        g.fillPolygon(new int[] {day_counter-5, day_counter, day_counter+5}, new int[] {(int) (max_y_point-current_ma1+5), (int) (max_y_point-current_ma1-5), (int) (max_y_point-current_ma1+5)}, 3);
 
 //                        JLabel label = new JLabel("Buy");
 //                        label.setFont(new Font("Verdana", Font.PLAIN, 8));
-//                        label.setBounds(day_counter-8, (int) (max_y_point-current_sma1-5), 150, 50);
+//                        label.setBounds(day_counter-8, (int) (max_y_point-current_ma1-5), 150, 50);
 //                        add(label);
 
                     } else { // if current was false, it's a short
@@ -260,19 +287,19 @@ public class SimulateGraphically extends JPanel {
                         g.setColor(Color.RED);
 //                        g.drawLine(day_counter,0, day_counter, height);
 
-                        g.drawPolygon(new int[] {day_counter-5, day_counter, day_counter+5}, new int[] {(int) (max_y_point-current_sma1-5), (int) (max_y_point-current_sma1+5), (int) (max_y_point-current_sma1-5)}, 3);
+                        g.drawPolygon(new int[] {day_counter-5, day_counter, day_counter+5}, new int[] {(int) (max_y_point-current_ma1-5), (int) (max_y_point-current_ma1+5), (int) (max_y_point-current_ma1-5)}, 3);
                         g.setColor(Color.red);
-                        g.fillPolygon(new int[] {day_counter-5, day_counter, day_counter+5}, new int[] {(int) (max_y_point-current_sma1-5), (int) (max_y_point-current_sma1+5), (int) (max_y_point-current_sma1-5)}, 3);
+                        g.fillPolygon(new int[] {day_counter-5, day_counter, day_counter+5}, new int[] {(int) (max_y_point-current_ma1-5), (int) (max_y_point-current_ma1+5), (int) (max_y_point-current_ma1-5)}, 3);
 
 //                        JLabel label = new JLabel("Short");
 //                        label.setFont(new Font("Verdana", Font.PLAIN, 8));
-//                        label.setBounds(day_counter-8, (int) (max_y_point-current_sma1-5), 150, 50);
+//                        label.setBounds(day_counter-8, (int) (max_y_point-current_ma1-5), 150, 50);
 //                        add(label);
 
                     }
                 }
 
-                previous_sma_crossover_buy_state = sma_crossover_buy_state;
+                previous_ma_crossover_buy_state = ma_crossover_buy_state;
                 day_counter++;
 
             }
