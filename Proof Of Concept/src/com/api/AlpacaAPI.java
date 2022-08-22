@@ -16,8 +16,8 @@ public class AlpacaAPI {
 
     // makes the final request with the headers necessary like the stock.com.api keys, etc
     // This is useful as I don't have to repeat it in every method, like specifying the stock.com.api keys etc...
-    public JsonArray make_request(String request_url) throws Exception {
-        return ReqHandler.get(request_url, "APCA-API-KEY-ID", api_key_id, "APCA-API-SECRET-KEY", api_secret_key);
+    public JsonArray make_request(String request_url) throws Exception { // cache simply turned off for alpaca as response time is quick
+        return ReqHandler.get(request_url, "APCA-API-KEY-ID", api_key_id, "APCA-API-SECRET-KEY", api_secret_key, false);
     }
 
     public String make_post_request(String request_url, String data) throws Exception {

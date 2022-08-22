@@ -1,8 +1,6 @@
 package com.api;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 
 public class CoinMarketCapAPI {
     RequestHandler ReqHandler = new RequestHandler();
@@ -11,14 +9,13 @@ public class CoinMarketCapAPI {
     public CoinMarketCapAPI(){
     }
 
-    public JsonArray make_request(String request_url) throws Exception {
-        return ReqHandler.get(request_url+"&CMC_PRO_API_KEY="+api_key_token);
+    public JsonArray make_request(String request_url, boolean cache) throws Exception {
+        return ReqHandler.get(request_url+"&CMC_PRO_API_KEY="+api_key_token, cache);
     }
 
     public JsonArray crypto_info(String ticker) throws Exception {
         String request_url = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/info?symbol="+ticker;
-        return make_request(request_url);
+        return make_request(request_url, true);
     }
-
 
 }

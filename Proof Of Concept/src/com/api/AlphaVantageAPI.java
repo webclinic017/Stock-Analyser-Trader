@@ -14,13 +14,13 @@ public class AlphaVantageAPI {
     public AlphaVantageAPI(){
     }
 
-    public JsonArray make_request(String request_url) throws Exception {
-        return ReqHandler.get(request_url+"&apikey="+api_key_token);
+    public JsonArray make_request(String request_url, boolean cache) throws Exception {
+        return ReqHandler.get(request_url+"&apikey="+api_key_token, cache);
     }
 
     public JsonArray company_profile(String ticker) throws Exception {
         String request_url = "https://www.alphavantage.co/query?function=OVERVIEW&symbol="+ticker;
-        return make_request(request_url);
+        return make_request(request_url, true);
     }
 
     public String getIntraDay(String ticker, String timeframe) throws Exception {
@@ -35,12 +35,12 @@ public class AlphaVantageAPI {
             for (int j=1; j<=12; j++) {
                 String request_url = base_url + "&slice=year" + i + "month" + j;
 
-                String data = ReqHandler.getString(request_url);
+                String data = ReqHandler.getString(request_url, true);
                 while (true){
                     if (data.contains("Our standard API call frequency is 5 calls per minute")) {
                         System.out.println("Sleeping cause hit API limit...");
                         Thread.sleep(3000);
-                        data = ReqHandler.getString(request_url);
+                        data = ReqHandler.getString(request_url, true);
                     }
                     else {
                         break;

@@ -2,6 +2,7 @@ package com.api;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.utils.Cache;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -15,6 +16,14 @@ import java.net.http.HttpResponse;
 public class RequestHandler {
 
     public RequestHandler(){
+    }
+
+    public String tryCache(String url){
+        return Cache.get(url);
+    }
+
+    public void setCache(String url, String data){
+        Cache.insert(url, data);
     }
 
     // Used JsonArray to meke all use the same type, cause the stock.com.api sometimes returns JsonObject and sometimes JsonArray
@@ -31,37 +40,61 @@ public class RequestHandler {
         }
     }
 
-    public String getString(String uri) throws Exception {
+    public String getString(String url, boolean cache) throws Exception {
+        // Checking if cache exists
+        if (cache){
+            String cacheResponse = tryCache(url);
+            if (cacheResponse!=null) {return cacheResponse;}
+        }
+
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(uri))
+                .uri(URI.create(url))
                 .build();
 
         HttpResponse<String> response =
                 client.send(request, HttpResponse.BodyHandlers.ofString());
 
         String data = response.body();
+
+        if (cache){Cache.insert(url, data);} // Saving to cache
+
         return data;
     }
 
-    public JsonArray get(String uri) throws Exception {
+    public JsonArray get(String url, boolean cache) throws Exception {
+        // Checking if cache exists
+        if (cache){
+            String cacheResponse = tryCache(url);
+            if (cacheResponse!=null) {return jsonify(cacheResponse);}
+        }
+
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(uri))
+                .uri(URI.create(url))
                 .build();
 
         HttpResponse<String> response =
                 client.send(request, HttpResponse.BodyHandlers.ofString());
 
         String data = response.body();
+
+        if (cache){Cache.insert(url, data);} // Saving to cache
+
         return jsonify(data);
     }
 
     // TODO : make the numbers of cookies dynamic, pass it as a array or something!
-    public JsonArray get(String uri, String header_name_1, String header_value_1, String header_name_2, String header_value_2) throws Exception {
+    public JsonArray get(String url, String header_name_1, String header_value_1, String header_name_2, String header_value_2, boolean cache) throws Exception {
+        // Checking if cache exists
+        if (cache){
+            String cacheResponse = tryCache(url);
+            if (cacheResponse!=null) {return jsonify(cacheResponse);}
+        }
+
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(uri))
+                .uri(URI.create(url))
                 .header(header_name_1, header_value_1)
                 .header(header_name_2, header_value_2)
                 .build();
@@ -70,6 +103,9 @@ public class RequestHandler {
                 client.send(request, HttpResponse.BodyHandlers.ofString());
 
         String data = response.body();
+
+        if (cache){Cache.insert(url, data);} // Saving to cache
+
         return jsonify(data);
     }
 
@@ -102,8 +138,5 @@ public class RequestHandler {
         bufferedReader.close();
 
         return response.toString();
-
     }
-
-
 }

@@ -19,12 +19,12 @@ public class YahooFinanceApi {
         // "1620777600" - 1y
         // "1589241600" - 2y
         String request_url = String.format(historical_data_url, ticker, 1589241600, unixNow); // url, ticker, start time, end time, time interval eg: 1d, 1M
-        return ReqHandler.getString(request_url);
+        return ReqHandler.getString(request_url, false);
     }
 
     public String get_historical(String ticker, long start, long end) throws Exception {
         String request_url = String.format(historical_data_url, ticker, start, end); // url, ticker, start time, end time, time interval eg: 1d, 1M
-        return ReqHandler.getString(request_url);
+        return ReqHandler.getString(request_url, true);
     }
 
 }
