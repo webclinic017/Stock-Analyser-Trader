@@ -3,7 +3,7 @@ package com.utils;
 import java.sql.*;
 
 public class Cache {
-
+    String[] timeoutURLS = {"https://www.alphavantage.co/query?function=OVERVIEW", "https://pro-api.coinmarketcap.com/v1/cryptocurrency/info", "https://finnhub.io/api/v1/stock/profile2"};
 
     public Cache() {
     }

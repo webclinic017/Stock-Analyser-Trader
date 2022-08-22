@@ -4,26 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="SQL Database for Caching requests skeleton">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/xerial_sqlite_jdbc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/cache.db" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Stock-Analyser-Trader.iml" afterDir="false" />
+    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="Implemented Caching at the RequestHandler level">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source Code.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Source Code.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/simulation-result.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/simulation-result.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/api/AlpacaAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/api/AlpacaAPI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/api/AlphaVantageAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/api/AlphaVantageAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/api/CoinMarketCapAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/api/CoinMarketCapAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/api/FinnhubAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/api/FinnhubAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/api/RequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/api/RequestHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/api/YahooFinanceApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/api/YahooFinanceApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/utils/Cache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/utils/Cache.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/utils/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/utils/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/api/AlpacaAPI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api/AlpacaAPI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/api/RequestHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api/RequestHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/api/YahooFinanceApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/api/YahooFinanceApi.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/company/Main.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,20 +97,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1648929083891</updated>
-    </task>
-    <task id="LOCAL-00020" summary="Labelled data">
-      <created>1652296076547</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1652296076547</updated>
-    </task>
-    <task id="LOCAL-00021" summary="Massive Upgrade, implemented Inheritance so that now it supports all the assets (stock, crypto, forex) and makes the constructor clean &amp; added a new api">
-      <created>1652816862173</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1652816862173</updated>
     </task>
     <task id="LOCAL-00022" summary="Avoiding unnecessary API calls">
       <created>1652819727747</created>
@@ -457,7 +427,21 @@
       <option name="project" value="LOCAL" />
       <updated>1661190755508</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="Replaced SQL with SQLite, implemented Caching">
+      <created>1661202802280</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1661202802280</updated>
+    </task>
+    <task id="LOCAL-00070" summary="Implemented Caching at the RequestHandler level">
+      <created>1661202838302</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1661202838302</updated>
+    </task>
+    <option name="localTasksCounter" value="71" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -479,8 +463,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/../.." />
     </ignored-roots>
-    <MESSAGE value="Ideas for searching through the 3D array for ticker recommendation" />
-    <MESSAGE value="Idea to separate data into training and testing" />
     <MESSAGE value="Added a class to Execute real trades" />
     <MESSAGE value="Improvements and added functionalities." />
     <MESSAGE value="Added few ideas" />
@@ -504,7 +486,9 @@
     <MESSAGE value="Added Threading so that multiple simulations can run at once and not make the GUI freeze" />
     <MESSAGE value="Much higher customizability for EMA/SMA options in GUI" />
     <MESSAGE value="SQL Database for Caching requests skeleton" />
-    <option name="LAST_COMMIT_MESSAGE" value="SQL Database for Caching requests skeleton" />
+    <MESSAGE value="Replaced SQL with SQLite, implemented Caching" />
+    <MESSAGE value="Implemented Caching at the RequestHandler level" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented Caching at the RequestHandler level" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -25,7 +25,6 @@ public class AlphaVantageAPI {
 
     public String getIntraDay(String ticker, String timeframe) throws Exception {
 //        String request_url = String.format("", ticker, start, end, duration); // url, ticker, start time, end time, time interval eg: 1d, 1M
-
         String base_url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY_EXTENDED&apikey=8DQF8MN8W4O10K8I&symbol=" + ticker + "&interval="+timeframe;
 
         // TODO: worth mentioning criterion? deleting the contents of the file, need to do it becuase the following code appends to the file to prevent high memory usuage
@@ -35,12 +34,15 @@ public class AlphaVantageAPI {
             for (int j=1; j<=12; j++) {
                 String request_url = base_url + "&slice=year" + i + "month" + j;
 
-                String data = ReqHandler.getString(request_url, true);
+                // as it's the current month, we want updated data every request
+                boolean cache = !request_url.contains("year1month1");
+
+                String data = ReqHandler.getString(request_url, cache);
                 while (true){
                     if (data.contains("Our standard API call frequency is 5 calls per minute")) {
                         System.out.println("Sleeping cause hit API limit...");
                         Thread.sleep(3000);
-                        data = ReqHandler.getString(request_url, true);
+                        data = ReqHandler.getString(request_url, cache);
                     }
                     else {
                         break;
