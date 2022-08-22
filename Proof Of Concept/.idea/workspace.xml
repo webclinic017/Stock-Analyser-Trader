@@ -4,18 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="Added option to run custom simulations">
-      <change afterPath="$PROJECT_DIR$/data/default/blue-line.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/default/green-line.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/default/red-line.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="Much higher customizability for EMA/SMA options in GUI">
+      <change afterPath="$PROJECT_DIR$/src/com/utils/Cache.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/utils/Database.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/simulation-result.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/simulation-result.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/gui/CustomSimulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/CustomSimulation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/gui/GUICaller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/GUICaller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/gui/SimulateGraphically.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/SimulateGraphically.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/gui/SimulationResults.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/SimulationResults.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/gui/GUICaller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/gui/GUICaller.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,13 +97,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1648929083891</updated>
-    </task>
-    <task id="LOCAL-00018" summary="Added more links to data sources...">
-      <created>1652264017557</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1652264017557</updated>
     </task>
     <task id="LOCAL-00019" summary="Bug Fixes in backtesting and added simulation results">
       <created>1652295911534</created>
@@ -449,7 +434,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660750203261</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="Much higher customizability for EMA/SMA options in GUI">
+      <created>1661087597536</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1661087597536</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -471,7 +463,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/../.." />
     </ignored-roots>
-    <MESSAGE value="Adding current price for asset" />
     <MESSAGE value="Proper validation of asset lists against AlpacaAPI and YahooFinanceAPI" />
     <MESSAGE value="Ideas for searching through the 3D array for ticker recommendation" />
     <MESSAGE value="Idea to separate data into training and testing" />
@@ -496,7 +487,8 @@
     <MESSAGE value="Added getting time till next candle plus a few more logics" />
     <MESSAGE value="Made HomeScreen HIGHLY EFFICIENT by only loading necessary data points for the assets" />
     <MESSAGE value="Added Threading so that multiple simulations can run at once and not make the GUI freeze" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Threading so that multiple simulations can run at once and not make the GUI freeze" />
+    <MESSAGE value="Much higher customizability for EMA/SMA options in GUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Much higher customizability for EMA/SMA options in GUI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
