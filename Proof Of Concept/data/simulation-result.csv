@@ -725,3 +725,7 @@ MA-Crossover,AAPL,ema,23,sma,179,431.34833,12,long
 MA-Crossover,AAPL,ema,20,sma,197,781.84216,18,long
 MA-Crossover,AAPL,ema,20,sma,198,1508.2285,52,long
 MA-Crossover,AAPL,ema,20,sma,200,1806.9042,76,long
+MA-Crossover,AAPL,ema,25,sma,54,86.84849,14,long
+MA-Crossover,AAPL,ema,25,sma,54,86.84847,14,long
+MA-Crossover,TSLA,ema,22,sma,75,429.77246,10,long
+MA-Crossover,AAPL,ema,25,sma,54,86.848465,14,long

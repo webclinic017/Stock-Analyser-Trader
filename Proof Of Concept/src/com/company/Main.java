@@ -12,6 +12,8 @@ import com.google.gson.JsonObject;
 import com.gui.GUICaller;
 import com.asset.Asset;
 import com.trader.Trader;
+import com.utils.Cache;
+import com.utils.Database;
 import com.utils.FileHandler;
 
 import java.util.Arrays;
@@ -63,7 +65,7 @@ public class Main {
 //        float average = Math.average(numbs);
 //        System.out.println(average);
 
-        Asset stock = Asset.create("AAPL");
+//        Asset stock = Asset.create("AAPL");
 //        System.out.println(stock.info);
 //        System.out.println(stock.getNewsData());
 
@@ -76,10 +78,10 @@ public class Main {
 
         GUICaller GUICaller = new GUICaller();
 //        GUICaller.Login();
-//        GUICaller.startup();
+        GUICaller.startup();
 //        GUICaller.HomeScreen();
 //        GUICaller.AssetInfo(stock);
-        GUICaller.SimulationResults(stock);
+//        GUICaller.SimulationResults(stock);
 
 //        JsonArray data = AlpacaAPIHandler.getStockList();
 //        String value = String.valueOf(data);
@@ -152,7 +154,7 @@ public class Main {
 //        System.out.println(crypto.price());
 //        System.out.println(crypto.quote());
 
-        System.out.println(AlpacaAPIHandler.portfolioHistory()); // TODO: Acts weired but will get fixed soon as they say
+//        System.out.println(AlpacaAPIHandler.portfolioHistory()); // TODO: Acts weired but will get fixed soon as they say
         // TODO: Extract the equity part of it and graph that... with losses as red and profits as green and with a start equity line
 
 //        System.out.println(AlpacaAPIHandler.createWatchlist("main", "TSLA,AAPL,MSFT"));
@@ -161,7 +163,7 @@ public class Main {
         // TODO: GET ALL THE AVAILABLE STOCKS FROM ALPACA, THEN SEPARATE THEM INTO CATEGORIES USING FINNHUB API, THEN SIMULATE THEM... AFTER THAT FIND A MEAN TO FIT ALL THE STOCKS FROM THAT CATEGORY... PERHAPS USE PYTHON TO DO AND USE SOME DATA SCIENCE STUFF...
 
 //        System.out.println(AlpacaAPIHandler.getStockList());
-        System.out.println(Asset.industry("TSLA"));
+//        System.out.println(Asset.industry("TSLA"));
 
 //        System.out.println(FinnhubAPIHandler.constituents("NDX"));
 
@@ -211,5 +213,20 @@ public class Main {
         // TODO: HAVE A WAY TO SEEING EXISTING POSITION BRFORE BUYING SELLING
 
         // TODO: THEN HAVE A WAY TO CALCULATE THE STOP LOSS
+
+
+
+        // DATABASE
+//        Database DatabaseHandler = new Database("data/cache.db");
+//        Cache cache = new Cache();
+//        cache.createTable();
+//        Cache.insert("https://google.com", "this is the test data, with ' too");
+//        System.out.println(Cache.get("https://google.com"));
+//        Cache.insert("https://google.com", "this is the test data, with ' too");
+//        System.out.println(Cache.get("https://google.com"));
+
+
+
+        // TODO: clear api cache from finnhub and alphavantage, run a update thread on background, once every x, just for company profile
     }
 }

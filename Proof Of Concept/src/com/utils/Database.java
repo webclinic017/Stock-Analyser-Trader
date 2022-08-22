@@ -2,29 +2,41 @@ package com.utils;
 
 import java.sql.*;
 
+// TODO: when reading and writing add a few tries before returning error as when writing the db is locked
 public class Database {
-    String username; // TODO: Get this from user preference file
-    String password;
+    String databaseFile;
 
-    public Database(String username, String password){
-        this.username = username;
-        this.password = password;
+    public Database(String databaseFile){
+        this.databaseFile = databaseFile;
     }
 
-    public ResultSet execute(String query) throws SQLException { // we want to throw exception if it doesn't work, so it can do the normal request
-        
-        // Creating a connection to the database
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/stock", username , password);
+    public Connection getConnection() throws SQLException {
+        Connection connection = DriverManager.getConnection("jdbc:sqlite:"+databaseFile);
+        return connection;
+    }
 
-        // Creating a statement
-        Statement statement = connection.createStatement();
+    public ResultSet execute(String query) {
 
-        // 3. Execute SQL query
-        ResultSet response = statement.executeQuery(query);
+        try {
+            // Creating a connection to the database
+            Connection connection = getConnection();
 
-        return response;
-        // TODO: close the connection
+            // Creating a statement
+            Statement statement = connection.createStatement();
 
+            // Executing SQL query
+            ResultSet response = statement.executeQuery(query);
+
+            // Closing connection to the database
+            connection.close();
+
+            return response;
+
+        } catch (Exception e){
+            System.out.println("Error executing SQLite Query");
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }
