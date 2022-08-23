@@ -53,8 +53,13 @@ public class SimulationResults extends JPanel {
 
         JLabel name = new JLabel(asset.name);
         name.setFont(new Font("Verdana", Font.BOLD, 15));
-        name.setBounds(120, 105, 350, 50);
+        name.setBounds(120, 100, 350, 50);
         add(name);
+
+        JLabel ipo = new JLabel("IPO: " + asset.ipo);
+        ipo.setFont(new Font("Verdana", Font.PLAIN, 9));
+        ipo.setBounds(120, 115, 350, 50);
+        add(ipo);
 
 
 
@@ -94,7 +99,7 @@ public class SimulationResults extends JPanel {
         start_time_l.setBounds(70, 145, 150, 50);
         add(start_time_l);
 
-        JTextField start_time = new JTextField("01/08/2020");
+        JTextField start_time = new JTextField("01/01/2020");
         start_time.setBounds(70, 180, 95, 20);
         add(start_time);
 
@@ -215,24 +220,23 @@ public class SimulationResults extends JPanel {
                     }
                 }
             });
-
-
-            JButton custom = new JButton("Run Custom");
-            custom.setIcon(new ImageIcon(new ImageIcon("data/default/customise.png").getImage().getScaledInstance(17, 17, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
-            custom.setBounds(245,480, 125, 30);
-            add(custom);
-            custom.setContentAreaFilled(false);
-            custom.addActionListener(new ActionListener(){
-                public void actionPerformed(ActionEvent e) {
-                    try {
-                        GUICaller.CustomizeSimluation(asset);
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-                }
-
-            });
         }
+
+        JButton custom = new JButton("Run Custom");
+        custom.setIcon(new ImageIcon(new ImageIcon("data/default/customise.png").getImage().getScaledInstance(17, 17, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
+        custom.setBounds(245,480, 125, 30);
+        add(custom);
+        custom.setContentAreaFilled(false);
+        custom.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    GUICaller.CustomizeSimluation(asset);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+        });
     }
 
     private String paddGain(String text){

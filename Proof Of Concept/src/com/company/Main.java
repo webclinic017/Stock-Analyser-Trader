@@ -228,5 +228,6 @@ public class Main {
 
 
         // TODO: clear api cache from finnhub and alphavantage, run a update thread on background, once every x, just for company profile
+        // TODO: Add info for cryptos in AssetInfo already got from coinmarketcap api when loading image...
     }
 }

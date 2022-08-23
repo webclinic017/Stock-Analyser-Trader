@@ -22,7 +22,22 @@ public class Crypto extends Asset {
         this.Baseticker = ticker.replace("USD", "");
         getHistorical_data();
 
+        // setting some info about it
+        JsonObject response = CoinMarketCapAPIHandler.crypto_info(Baseticker).get(0).getAsJsonObject();
+        System.out.println(response);
+        JsonObject data = response.get("data").getAsJsonObject();
+        data = data.get(Baseticker).getAsJsonObject();
+
+        this.name = name.replace(" pair", ""); // BTC/USD instead of BTC/USD pair
+        this.country = "Global";
+        this.industry = "Blockchain";
+        this.sector = "Crypto";
+        this.ipo = data.get("date_added").getAsString().split("T")[0];
+        this.weburl = data.get("urls").getAsJsonObject().get("explorer").getAsJsonArray().get(0).getAsString();
+        // TODO: maybe show weburl
+
         // getting the right logo...
+
 
         // checking if local file for icon exists // TODO: add this to criterion for caching complexity
         File local_icon = new File("data/stock/" + ticker + "/" + ticker + ".png");
@@ -59,10 +74,12 @@ public class Crypto extends Asset {
     public static String getLogo(String ticker) throws Exception {
         String Bticker = ticker.replace("USD", "");
         JsonObject response = CoinMarketCapAPIHandler.crypto_info(Bticker).get(0).getAsJsonObject();
+        System.out.println(response);
         JsonObject data = response.get("data").getAsJsonObject();
         data = data.get(Bticker).getAsJsonObject();
 
         String url = data.get("logo").getAsString().replace("64x64","128x128"); // asking for a higher quality image...
+        String ipo = data.get("date_added").getAsString();
 
         try (InputStream in = new URL(url).openStream()) {
             Files.copy(in, Paths.get("data/stock/" + ticker + "/" + ticker + ".png"));

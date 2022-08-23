@@ -69,17 +69,18 @@ public class HomeScreen extends JPanel {
 
         textfield = new JTextField();
         textfield.setMargin(new Insets(2,13,3,2)); // padding the text
-        textfield.setBounds(60,100, 150, 30);
+        textfield.setBounds(60,96, 150, 30);
 
 
         button = new JButton(""); // search icon
         button.setIcon(new ImageIcon(new ImageIcon("data/default/search.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
         button.setContentAreaFilled(false);
-        button.setBounds(225,99, 50, 30);
+        button.setBounds(225,95, 50, 30);
 
 
-        JLabel recommendation = new JLabel("Recommendation: ");
-        recommendation.setBounds(60,30, 250, 30);
+        JLabel recommendation = new JLabel("");
+        recommendation.setFont(new Font("Verdana", Font.PLAIN, 12));
+        recommendation.setBounds(65,118, 250, 30);
         add(recommendation);
 
 
@@ -164,7 +165,7 @@ public class HomeScreen extends JPanel {
         // TODO: make a method to return unique news, no stock overlaps cause sometimes getting news from same company
         JLabel news = new JLabel("News");
         news.setFont(new Font("Verdana", Font.BOLD, 20));
-        news.setBounds(60, 130, 150, 50);
+        news.setBounds(60, 135, 150, 50);
         add(news);
 
         NewsData NewsData = new NewsData();
@@ -367,7 +368,7 @@ public class HomeScreen extends JPanel {
 
         for (String[] element : combined){
 
-            if (counter > 5){
+            if (counter == 3){
                 break;
             }
 
@@ -385,11 +386,10 @@ public class HomeScreen extends JPanel {
         }
 
         System.out.println(matches);
-
-
-
-        return String.valueOf(matches);
-
+        if (matches.size()>1) { // as if the user types it exactly we don't need to recommend it
+            return String.valueOf(matches).replace("[", "").replace("]", "");
+        }
+        return "";
     }
 
 
