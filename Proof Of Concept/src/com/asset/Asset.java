@@ -171,6 +171,10 @@ public abstract class Asset {
     }
 
     public Float[][] getIntraDay(String timeframe) throws Exception {
+        if (timeframe.equals("1d")){
+            getHistorical_data();
+            return historical_data;
+        }
         this.historical_data = HistoricalDataGetter.get(ticker, ticker, true, timeframe, null);
         intraDayAvailable = true; // setting the flag true means other functions can not return this data instead of the 1d data
         return historical_data;

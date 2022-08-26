@@ -12,7 +12,7 @@ public class CustomSimulation extends JPanel implements ActionListener{
     JButton button;
     JLabel ma1label, ma2label, asseticon;
     JTextField sma1, sma2;
-    JComboBox maType1, maType2;
+    JComboBox maType1, maType2, timeframe;
 
     public CustomSimulation(int width, int height, Asset asset) {
         this.asset = asset;
@@ -53,9 +53,20 @@ public class CustomSimulation extends JPanel implements ActionListener{
         asseticon.setBounds(195,15, 50, 80);
         add(asseticon);
 
+        String[] options = {"1d", "60min", "30min", "15min", "5min", "1min"};
+
+        JLabel historyTime = new JLabel("Timeframe ");
+        historyTime.setBounds(15, 88, 75, 30);
+        add(historyTime);
+
+        // https://docs.oracle.com/javase/tutorial/uiswing/components/combobox.html
+        timeframe = new JComboBox<>(options);
+        timeframe.setBounds(80, 90, 58, 25);
+        add(timeframe);
+
         button = new JButton("Simulate");
         button.addActionListener(this);
-        button.setBounds(80,93, 90, 25);
+        button.setBounds(145,93, 90, 25);
         add(button);
 
     }
@@ -65,6 +76,13 @@ public class CustomSimulation extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e){
         int sma1_value = Integer.parseInt(sma1.getText());
         int sma2_value = Integer.parseInt(sma2.getText());
+        String chosentimeframe = (String) timeframe.getSelectedItem();
+
+        try {
+            asset.getIntraDay(chosentimeframe);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
         new Thread(() -> { // TODO: mention in criterion, separates so can run multiple
             try {

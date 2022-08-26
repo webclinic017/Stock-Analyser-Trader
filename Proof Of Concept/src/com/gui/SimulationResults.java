@@ -37,28 +37,28 @@ public class SimulationResults extends JPanel {
 
         JLabel label = new JLabel("Backtesting");
         label.setFont(new Font("Verdana", Font.BOLD, 20));
-        label.setBounds(70, 40, 150, 50);
+        label.setBounds(70, 20, 150, 50);
         add(label);
 
         JLabel type = new JLabel("MA Crossover");
         type.setFont(new Font("Verdana", Font.BOLD, 12));
-        type.setBounds(70, 65, 150, 50);
+        type.setBounds(70, 45, 150, 50);
         add(type);
 
 
         JLabel icon = new JLabel(asset.icon);
         icon.setIcon(new ImageIcon(asset.icon.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
-        icon.setBounds(70,110, 40, 40);
+        icon.setBounds(70,90, 40, 40);
         add(icon);
 
         JLabel name = new JLabel(asset.name);
         name.setFont(new Font("Verdana", Font.BOLD, 15));
-        name.setBounds(120, 100, 350, 50);
+        name.setBounds(120, 80, 350, 50);
         add(name);
 
         JLabel ipo = new JLabel("IPO: " + asset.ipo);
         ipo.setFont(new Font("Verdana", Font.PLAIN, 9));
-        ipo.setBounds(120, 115, 350, 50);
+        ipo.setBounds(120, 95, 350, 50);
         add(ipo);
 
 
@@ -68,7 +68,7 @@ public class SimulationResults extends JPanel {
         JButton export = new JButton("Export");
 //            results[i].setFont(new Font("Verdana", Font.BOLD,12));
         export.setIcon(new ImageIcon(new ImageIcon("data/default/export.png").getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
-        export.setBounds(270, 60, 100, 30);
+        export.setBounds(270, 40, 100, 30);
         export.setHorizontalAlignment(SwingConstants.LEFT);
         export.setContentAreaFilled(false);
         export.addActionListener(new ActionListener(){
@@ -94,6 +94,11 @@ public class SimulationResults extends JPanel {
 
         // start_date and end_date selector
 
+        JLabel daytimeframelabel = new JLabel("1-day Timeframe");
+        daytimeframelabel.setFont(new Font("Verdana", Font.BOLD, 12));
+        daytimeframelabel.setBounds(70, 145, 150, 15);
+        add(daytimeframelabel);
+
         JLabel start_time_l = new JLabel("Start time");
         start_time_l.setFont(new Font("Verdana", Font.PLAIN, 12));
         start_time_l.setBounds(70, 145, 150, 50);
@@ -115,8 +120,8 @@ public class SimulationResults extends JPanel {
         end_time.setBounds(175, 180, 95, 20);
         add(end_time);
 
-        JButton reset = new JButton("Reset");
-        reset.setIcon(new ImageIcon(new ImageIcon("data/default/redo.png").getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
+        JButton reset = new JButton("Start");
+//        reset.setIcon(new ImageIcon(new ImageIcon("data/default/redo.png").getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
         reset.setBounds(280, 177, 90, 25);
         add(reset);
         reset.setContentAreaFilled(false);
@@ -148,18 +153,18 @@ public class SimulationResults extends JPanel {
         });
 
         JLabel maoptionsLabel = new JLabel("MA (Short)    MA (Long)");
-        maoptionsLabel.setBounds(240, 105, 200, 20);
+        maoptionsLabel.setBounds(240, 90, 200, 20);
         add(maoptionsLabel);
 
 
         String[] maOptions1 = {"EMA", "SMA"};
         maType1 = new JComboBox<>(maOptions1);
-        maType1.setBounds(240, 125, 55, 20);
+        maType1.setBounds(240, 110, 55, 20);
         add(maType1);
 
         String[] maOptions2 = {"SMA", "EMA"};
         maType2 = new JComboBox<>(maOptions2);
-        maType2.setBounds(315, 125, 55, 20);
+        maType2.setBounds(315, 110, 55, 20);
         add(maType2);
 
 

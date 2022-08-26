@@ -735,3 +735,15 @@ MA-Crossover,AAPL,ema,85,sma,109,20.602453,91,long
 MA-Crossover,AAPL,ema,25,sma,54,86.84847,14,long
 MA-Crossover,BTCUSD,ema,37,sma,147,4520.327,13,long
 MA-Crossover,BTCUSD,ema,20,sma,42,492.0621,19,long
+MA-Crossover,TSLA,ema,22,sma,61,48.33901,6,long
+MA-Crossover,TSLA,ema,22,sma,61,48.33901,6,long
+MA-Crossover,TSLA,ema,22,sma,61,48.33901,6,long
+MA-Crossover,TSLA,ema,22,sma,61,48.33901,6,long
+MA-Crossover,TSLA,ema,22,sma,61,48.33901,6,long
+MA-Crossover,AAPL,ema,25,sma,54,86.84845,14,long
+MA-Crossover,AAPL,ema,25,sma,54,86.84845,14,long
+MA-Crossover,AAPL,ema,25,sma,54,86.84845,14,long
+MA-Crossover,AAPL,ema,20,sma,52,22.709005,153,long
+MA-Crossover,AAPL,ema,25,sma,54,86.84845,14,long
+MA-Crossover,AAPL,ema,20,sma,52,22.709005,153,long
+MA-Crossover,AAPL,sma,82,sma,167,1741.8638,51,long
