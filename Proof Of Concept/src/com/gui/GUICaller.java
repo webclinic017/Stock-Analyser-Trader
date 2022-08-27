@@ -1,6 +1,7 @@
 package com.gui;
 
 import com.asset.Asset;
+import com.utils.Cache;
 
 import javax.swing.*;
 import java.lang.Thread;
@@ -14,6 +15,8 @@ public class GUICaller {
 
     public void startup(){
         // TODO: Start everything off here, manage caching etc... Start instantiating assets from watchlist etc... and save it a arraylist
+
+        new Thread(Cache::resetExpiredURLs).start();
 
         // starting a thread to load the Homescreen while the user logs in.
         new Thread(() -> {

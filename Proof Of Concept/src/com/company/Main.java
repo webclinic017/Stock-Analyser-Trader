@@ -1,22 +1,12 @@
 package com.company;
 
 import com.analyzer.Analyze;
-import com.analyzer.tools.EMA;
 import com.api.AlpacaAPI;
-import com.api.AlphaVantageAPI;
 import com.api.FinnhubAPI;
-import com.api.RequestHandler;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.gui.GUICaller;
-import com.asset.Asset;
 import com.trader.Trader;
 import com.utils.Cache;
-import com.utils.Database;
 import com.utils.FileHandler;
-
-import java.util.Arrays;
 
 // TODO: FIND A WAY TO SEPARATE THE DATA INTO TRAINING AND TESTING - INCLUDE IN CRITERIONS AND EMAIL COMMUNICATIONS...
 
@@ -75,7 +65,6 @@ public class Main {
 
 //        SMACrossover smaCrossover = new SMACrossover();
 //        System.out.println(smaCrossover.check(stock, 50, 180)); // returns true or false, over or under.
-
         GUICaller GUICaller = new GUICaller();
 //        GUICaller.Login();
         GUICaller.startup();
@@ -224,8 +213,8 @@ public class Main {
 //        System.out.println(Cache.get("https://google.com"));
 //        Cache.insert("https://google.com", "this is the test data, with ' too");
 //        System.out.println(Cache.get("https://google.com"));
-
-
+//        System.out.println(Cache.setTimeoutDate("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY_EXTENDED"));
+//        Cache.resetTimeoutURLs();
 
         // TODO: clear api cache from finnhub and alphavantage, run a update thread on background, once every x, just for company profile
         // TODO: Add info for cryptos in AssetInfo already got from coinmarketcap api when loading image...

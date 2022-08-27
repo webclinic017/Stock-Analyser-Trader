@@ -18,11 +18,11 @@ public class RequestHandler {
     public RequestHandler(){
     }
 
-    public String tryCache(String url){
+    private String tryCache(String url){
         return Cache.get(url);
     }
 
-    public void setCache(String url, String data){
+    private void setCache(String url, String data){
         Cache.insert(url, data);
     }
 
@@ -57,7 +57,7 @@ public class RequestHandler {
 
         String data = response.body();
 
-        if (cache){Cache.insert(url, data);} // Saving to cache
+        if (cache){setCache(url, data);} // Saving to cache
 
         return data;
     }
@@ -79,7 +79,7 @@ public class RequestHandler {
 
         String data = response.body();
 
-        if (cache){Cache.insert(url, data);} // Saving to cache
+        if (cache){setCache(url, data);} // Saving to cache
 
         return jsonify(data);
     }
@@ -104,7 +104,7 @@ public class RequestHandler {
 
         String data = response.body();
 
-        if (cache){Cache.insert(url, data);} // Saving to cache
+        if (cache){setCache(url, data);} // Saving to cache
 
         return jsonify(data);
     }

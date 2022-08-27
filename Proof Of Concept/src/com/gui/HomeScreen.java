@@ -49,7 +49,7 @@ public class HomeScreen extends JPanel {
             open_or_close_label.setBounds(360,90, 100, 30);
 
         } else {
-            open_or_close_label.setIcon(new ImageIcon(new ImageIcon("data/default/green.jpg").getImage().getScaledInstance(8, 8, Image.SCALE_DEFAULT))); // scaling the image properly so that there is no stretch
+            open_or_close_label.setIcon(new ImageIcon(new ImageIcon("data/default/green.jpg").getImage().getScaledInstance(8, 8, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
             open_or_close_label.setBounds(350,90, 110, 30);
         }
 
@@ -117,7 +117,7 @@ public class HomeScreen extends JPanel {
 
             watchlistlabel[i] = new JButton("  " + asset.ticker);
             watchlistlabel[i].setFont(new Font("Verdana", Font.BOLD,12));
-            watchlistlabel[i].setIcon(new ImageIcon(asset.icon.getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT))); // scaling the image properly so that there is no stretch
+            watchlistlabel[i].setIcon(new ImageIcon(asset.icon.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
             watchlistlabel[i].setBounds(500,(i*61)+100, 140, 50);
             watchlistlabel[i].setHorizontalAlignment(SwingConstants.LEFT);
             watchlistlabel[i].setContentAreaFilled(false); // TODO: Try how this differs for MacOS
@@ -317,7 +317,7 @@ public class HomeScreen extends JPanel {
 
                 JLabel positionLabel = new JLabel("<html> $" + df.format(data.get("market_value").getAsFloat()) + lossOrGain + "</html>");
                 positionLabel.setFont(new Font("Verdana", Font.BOLD, 12));
-                positionLabel.setIcon(new ImageIcon(icon.getImage().getScaledInstance(36, 36, Image.SCALE_DEFAULT))); // scaling the image properly so that there is no stretch
+                positionLabel.setIcon(new ImageIcon(icon.getImage().getScaledInstance(36, 36, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
                 positionLabel.setBounds(680, (j * 61) + 100, 140, 50);
                 positionLabel.setHorizontalAlignment(SwingConstants.LEFT);
                 add(positionLabel);
