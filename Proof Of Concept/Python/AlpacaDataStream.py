@@ -2,7 +2,7 @@ import alpaca_trade_api as tradeapi
 from alpaca_trade_api.stream import Stream
 from alpaca_trade_api.common import URL
 from flask import Flask, request
-
+import random
 
 app = Flask(__name__)
 
@@ -26,7 +26,7 @@ stream = Stream(api_key,
 
 stream.on_crypto_bar(quote_callback, 'BTCUSD')
 
-stream.run()
+# stream.run()
 
 
 api = tradeapi.REST(api_key, api_secret, base_url, api_version='v2')
@@ -36,13 +36,16 @@ def trade():
     symbol = request.args.get('symbol')
     qty = request.args.get('qty')
     side = request.args.get('side')
+    onTraderCandleType = request.args.get('onTraderCandleType') # record of what Trader bought the asset
+    # generate random 38 characters
+    randomchars = onTraderCandleType + "-" + ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ') for i in range(40))
+    print(randomchars)
 
     try:
-        answer = api.submit_order(symbol, qty=qty, side=side, time_in_force='gtc')
+        answer = api.submit_order(symbol, qty=qty, side=side, time_in_force='gtc', client_order_id=randomchars)
         return "Success"
     except Exception as e:
         return str(e)    
-
 
 
 
