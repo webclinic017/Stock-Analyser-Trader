@@ -65,7 +65,7 @@ public class SimulationResults extends JPanel {
 
         // export option for further processing in external pieces of software if preferred by the user
 
-        JButton export = new JButton("Export");
+        JButton export = new JButton(" Export");
 //            results[i].setFont(new Font("Verdana", Font.BOLD,12));
         export.setIcon(new ImageIcon(new ImageIcon("data/default/export.png").getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
         export.setBounds(270, 40, 100, 30);

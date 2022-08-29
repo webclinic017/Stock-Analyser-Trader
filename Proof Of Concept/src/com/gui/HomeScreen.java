@@ -46,7 +46,7 @@ public class HomeScreen extends JPanel {
         ;
         if (open_or_close.equals("Market Closed")){
             open_or_close_label.setIcon(new ImageIcon(new ImageIcon("data/default/red.png").getImage().getScaledInstance(8, 8, Image.SCALE_DEFAULT))); // scaling the image properly so that there is no stretch
-            open_or_close_label.setBounds(360,90, 100, 30);
+            open_or_close_label.setBounds(350,90, 110, 30);
 
         } else {
             open_or_close_label.setIcon(new ImageIcon(new ImageIcon("data/default/green.jpg").getImage().getScaledInstance(8, 8, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch

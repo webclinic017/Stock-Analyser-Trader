@@ -165,7 +165,6 @@ public class Main {
         // TODO: DEFINITELY IMPLEMENT THIS (BUT PERHAPS STICK WITH 1D SIMULATION OR EVEN WHEN CREATING AN ACCOUNT, HAVE AN TYPE LIKE AGGRESSIVE, PASSIVE ETC)
         // TODO: This has intraday option, show client interaction, possibly after the client tested and said he had to wait days for a hit so he wanted me to train intraday stocks so i needed intraday market data for free
         // TODO: https://www.alphavantage.co/documentation/#intraday-extended
-        // TODO: Figure out adjusted close difference and either add to one data set or remove from another
 
 //        System.out.println(Arrays.deepToString(stock.getIntraDay("60min")));
 //        System.out.println(Arrays.deepToString(stock.getHistorical_data()));
@@ -190,9 +189,6 @@ public class Main {
 
         // TODO: MIGHT HAVE TON OF BUGS TO BE FIXED
         // TODO: SPECIALLY WHEN THE FILE IS SAVED AND THE REREAD, THE LOG FILE.
-        // TODO: THIS WORK IS FOR TOMORROW TO BE FIXED.
-        //
-        // TODO: REDUCE THE LIMIT TO WHICH MAs CAN BE CHOSEN
 
         // TODO: SORT THE MOVING AVERAGES AS A CATEGORY, THEN DECIDE WHICH TYPE TO USE, LET'S SAY IF THE DX/DY IS SMALL, THEN WHAT? ETC
         // TODO: THEN DO THESE CALCULATIONS TO FIND OUT LIKE HOW MUCH LEVERAGE TO USE, ETC. READ MY FIRST NOTES ON THIS PROJECT
@@ -216,7 +212,9 @@ public class Main {
 //        System.out.println(Cache.setTimeoutDate("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY_EXTENDED"));
 //        Cache.resetTimeoutURLs();
 
-        // TODO: clear api cache from finnhub and alphavantage, run a update thread on background, once every x, just for company profile
-        // TODO: Add info for cryptos in AssetInfo already got from coinmarketcap api when loading image...
+
+        // TODO: add 20-30 points for JComboBox
+
+        // TODO: SHOW ERROR IF STOCK NOT EXISTS
     }
 }
