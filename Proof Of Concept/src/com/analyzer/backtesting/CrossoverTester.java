@@ -159,7 +159,7 @@ public class CrossoverTester {
 
         // starting with the lowest ma of 5 as lower numbers produce insanely high uncertainty
         // TODO: Figure out best best lower ma to start at
-        for (int testMA1 = 20; testMA1<201; testMA1++){
+        for (int testMA1 = 12; testMA1<201; testMA1++){
             for (int testMA2 = 20; testMA2<201; testMA2++){
                 // TODO: if testMA1 is bigger than testMA2, this means that shorting is going one instead of buying, make this clear
 
