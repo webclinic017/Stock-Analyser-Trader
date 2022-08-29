@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 // TODO: Preference selector after logging in
+// TODO: JUST A CSV WILL WORK JUST FINE AS IT'S JUST ONE USER
 public class Preferences extends JPanel implements ActionListener{
     // canvas for other GUI widgets
     JFrame frame;

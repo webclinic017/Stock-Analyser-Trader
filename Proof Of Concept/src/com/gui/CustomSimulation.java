@@ -86,7 +86,7 @@ public class CustomSimulation extends JPanel implements ActionListener{
 
         new Thread(() -> { // TODO: mention in criterion, separates so can run multiple
             try {
-                GUICaller.Simulate(asset, sma1_value, sma2_value, (String) maType1.getSelectedItem(), (String) maType1.getSelectedItem());
+                GUICaller.Simulate(asset, sma1_value, sma2_value, (String) maType1.getSelectedItem(), (String) maType2.getSelectedItem());
             } catch (Exception ignored){
             }
         }).start();
