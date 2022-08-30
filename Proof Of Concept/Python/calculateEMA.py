@@ -15,3 +15,18 @@ df = web.DataReader(symbol, 'yahoo') # TODO: use the same source Java uses to ge
 
 ema = calculate_ema(df['Close'], 20)
 print(ema)
+
+
+# using pandas' built in function
+
+import pandas as pd
+import numpy as np
+
+def ema(values, period):
+    values = np.array(values)
+    return pd.ewma(values, span=period)[-1]
+
+values = [9, 5, 10, 16, 5]
+period = 5
+
+print ema(values, period)
