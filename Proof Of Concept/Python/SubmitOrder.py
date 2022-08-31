@@ -17,3 +17,12 @@ market_order_data = MarketOrderRequest(
 market_order = trading_client.submit_order(
                 order_data=market_order_data
                 )
+
+# way to send a market order with money value instead of quantity
+# api.submit_order(
+#     symbol='SPY',
+#     notional=450,  # notional value of 1.5 shares of SPY at $300
+#     side='buy',
+#     type='market',
+#     time_in_force='day',
+# )

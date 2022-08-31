@@ -1,11 +1,9 @@
+from alpaca_trade_api.stream import Stream
+import requests
 import sys
 
-
 # symbols = sys.argv[1].split(",")
-# TODO: find out whether the symbol is a stock or crypto and pass it to the respective function
-# OR JUST MAKE JAVA SEND THEM SEPERATELY... SO LIKE SEPERATE THREADS FOR SEPERATE ASSETS
-# TODO: YEAH DEFINATELY DO THAT: SO LIKE THE ARGS WILL BE SOMETHING LIKE: stocks: AAPL,GOOG,MSFT,FB,AMZN,TSLA,NFLX crypto: BTCUSD, ETHUSD
-# AND IT'S FINE IF THERE AREN'T EVERY ASSET CLASS, IT WILL JUST THROW A ERROR SILENTLY
+# With checks, we can just pass the symbols list and it will filter it out itself, so pass the symbols list to both functions
 
 # find a way to get the latest price of the asset in the right timeframe and update the MAs accordingly and call the check signal method
 
@@ -19,10 +17,6 @@ def checkSignal(data):
 ## FOR OTHER TIMEFRAMES, KNOW WHEN THE NEW CANDLE IS, LIKE IT'S AT 30 MINUTES PAST FOR THE STOCKS LIKE THAT, 
 ## THEN QUERY THE PRICE AT THAT POINT, THEN DO THE SAME AS DESCRIBED ABOVE.
 
-# request the existing flask server... WE WANT THIS SEPERATE AND STAND ALONE AS IT CAN BE RAN ON THE SERVER 24/7
-def order():
-    pass
-
 
 # TODO: ADD THE NEW PRICE TO THE PRICE LIST AND THEN RECALCULATE THE MAs THEN CALL THE checkSignal()
 def newPriceData(symbol, price):
@@ -32,10 +26,13 @@ def newPriceData(symbol, price):
     # checkSignal(data)
 
 
+def executeTrade(symbol, qty, side, onTraderCandleType):
+    data = requests.get("http://localhost:5000/trade?symbol=" + symbol + "&qty=" + qty + "&side=" + side + "&onTraderCandleType=" + onTraderCandleType)
+    return data.text # maybe return True/False
+
 # TODO: GET THE HISTORICAL DATA AND HAVE THEM ALL STORED IN A SINGLE DATA FRAME
+# TODO: ADD LOGIC PERHAPS THAT COUNTS THE NUMBER OF 1 MIN CANDLES, WHEN REACHES 1H, CALLS THE FUNCTION TO TRADE 1H TIMEFRAME
 
-
-from alpaca_trade_api.stream import Stream
 
 api_key = "PKBRQ877H23MLZ6A5A44"
 api_secret = "kYASo3caUfQ6yRdgMLC72aFkaXo7T7K9mCIK9pRa"
@@ -44,39 +41,29 @@ base_url = 'https://paper-api.alpaca.markets'
 
 # maybe just have these going on, looks sick on the terminal
 async def print_trade(t):
-    print('trade', t)
+    print('Trade ', t)
 
 async def print_quote(q):
-    print('quote', q)
+    print('Quote ', q)
 
-async def print_trade_update(tu):
-    print('trade update', tu)
-
-async def print_crypto_trade(t):
-    print('crypto trade', t)
-
-
-    
 
 
 def main():
-    feed = 'iex'  #  < - replace to SIP if you have PRO subscription
-    
+    feed = 'iex' 
 
     stream = Stream(api_key,
                 api_secret,
                 base_url=base_url,
                 data_feed='iex') 
     
-    # stream.subscribe_trade_updates(print_trade_update)
+    stream.subscribe_quotes(print_quote, 'AAPL')
     # stream.subscribe_trades(print_trade, 'AAPL')
-    # stream.subscribe_quotes(print_quote, 'IBM')
-    # stream.subscribe_crypto_trades(print_crypto_trade, 'BTCUSD')
-
+    # stream.subscribe_crypto_trades(print_trade, 'BTCUSD')
+    
 
     ## UPON TESTING, THIS RETURNS 3 PRICES FROM THREE DIFFERENT EXCHANGES: ERSX, CBSE, FTXU
     # i'VE NOW GOT TO CHOOSE ONE OF THEM, PROBABLY JUST WHICH HISTORICAL DATA I HAVE THE MAs BASED ON
-    @stream.on_crypto_bar('')  ###### THIS WORKS ##### prints every 1 minute at 30 seconds
+    @stream.on_crypto_bar('BTCUSD')  ###### THIS WORKS ##### prints every 1 minute at 30 seconds
     async def _(bar):
         print('BAR CRYPTO\n', bar)
         newPriceData(bar.symbol, bar.close)
