@@ -1,8 +1,35 @@
 from alpaca_trade_api.stream import Stream
+from alpaca_trade_api.rest import REST
 import requests
+import pandas as pd
 import sys
+from datetime import datetime
+
+
+
+api = REST('PKBRQ877H23MLZ6A5A44', 'kYASo3caUfQ6yRdgMLC72aFkaXo7T7K9mCIK9pRa')
+
+data = {}
+
 
 # symbols = sys.argv[1].split(",")
+
+def getHistoricalData(symbol, period="1Min"): # PROBABLY THE PERIOD CAN ONLY BE 1min, YEAH! LET'S DO THIS FOR NOW!
+    # TODO: DO WE WANT TO GET IT FROM ALPHAVANTAGE? OR FROM ALPACA? WHICH ONE GIVES UP UNTIL THE MOST RECENT?
+    # TODO: ALSO: MAINLY, IF WE RUN THE SOFTWARE ONLY BEFORE THE MARKET OPEN, WE'LL GET THE MOST RECENT DATA WITHOUT ANY MISSES,
+    # TODO: SO THIS IS A REQUIREMENT! TRADER CAN ONLY BE RAN BEFORE THE MARKET OPEN! SO NO DATA IS LOST! 
+    # THIS WAY WE CAN HAVE THE MINUTE DATA EASILY FROM ALPACA AS 15MIN IS WAY PAST GONE!
+
+    bars = api.get_bars(symbol, period, "2022-08-28", adjustment='all').df["close"].values.tolist()
+    data["TSLA"] = bars
+
+
+
+
+
+
+
+
 # With checks, we can just pass the symbols list and it will filter it out itself, so pass the symbols list to both functions
 
 # find a way to get the latest price of the asset in the right timeframe and update the MAs accordingly and call the check signal method
@@ -17,13 +44,68 @@ def checkSignal(data):
 ## FOR OTHER TIMEFRAMES, KNOW WHEN THE NEW CANDLE IS, LIKE IT'S AT 30 MINUTES PAST FOR THE STOCKS LIKE THAT, 
 ## THEN QUERY THE PRICE AT THAT POINT, THEN DO THE SAME AS DESCRIBED ABOVE.
 
+ema = 20
+sma = 180
+
+def calculateEMA(symbol, period=ema):
+    global data
+
+    print(type(symbol))
+
+    priceList = data["TSLA"]
+    priceList = pd.DataFrame(priceList)
+    ema = pd.DataFrame()
+
+    ema["ema"] = priceList.ewm(span=period, adjust=False).mean()
+
+    ema = ema["ema"].tolist()
+
+    data[str("TSLA") + "-EMA"] = ema
+
+def calculateSMA(symbol, period=sma):
+    global data
+
+    priceList = data["TSLA"]
+    # turn into pandas dataframe
+    priceList = pd.DataFrame(priceList)
+    sma = pd.DataFrame()
+    sma["sma"] = priceList.rolling(window=period).mean()
+
+    # convert only the sma values to list
+    sma = sma["sma"].tolist()
+
+    data[str("TSLA") + "-SMA"] = sma
+
+
+
 
 # TODO: ADD THE NEW PRICE TO THE PRICE LIST AND THEN RECALCULATE THE MAs THEN CALL THE checkSignal()
 def newPriceData(symbol, price):
+
     print(symbol, "- Close:", price)
     # add the new values
-    # calculateMA(data)
+
+    # now = datetime.now()
+    # current_time = now.strftime("%Y-%m-%d %H:%M:%S")
+    # # TODO: THE TIMESTAMP IS NOT IN THE CORRECT FORMAT, BUT THE CODE WORKS
+    # newData = {symbol: [price]}
+    # newDataFrame = pd.DataFrame(newData)
+    # print(newDataFrame)
+
+    # data = data.append(newDataFrame, ignore_index = True)
+    # print(data)
+
+    data["TSLA"].append(price)
+
+    calculateSMA(data)
+    calculateEMA(data)
+    
+    
     # checkSignal(data)
+    # print(data)
+    print("EMA: " + str(data[str("TSLA") + "-EMA"][-1]))
+    print("SMA: " + str(data[str("TSLA") + "-SMA"][-1]))
+
 
 
 def executeTrade(symbol, qty, side, onTraderCandleType):
@@ -56,27 +138,30 @@ def main():
                 base_url=base_url,
                 data_feed='iex') 
     
-    stream.subscribe_quotes(print_quote, 'AAPL')
+    # stream.subscribe_quotes(print_quote, 'AAPL')
     # stream.subscribe_trades(print_trade, 'AAPL')
     # stream.subscribe_crypto_trades(print_trade, 'BTCUSD')
     
 
     ## UPON TESTING, THIS RETURNS 3 PRICES FROM THREE DIFFERENT EXCHANGES: ERSX, CBSE, FTXU
     # i'VE NOW GOT TO CHOOSE ONE OF THEM, PROBABLY JUST WHICH HISTORICAL DATA I HAVE THE MAs BASED ON
-    @stream.on_crypto_bar('BTCUSD')  ###### THIS WORKS ##### prints every 1 minute at 30 seconds
-    async def _(bar):
-        print('BAR CRYPTO\n', bar)
-        newPriceData(bar.symbol, bar.close)
+    # @stream.on_crypto_bar('BTCUSD')  ###### THIS WORKS ##### prints every 1 minute at 30 seconds
+    # async def _(bar):
+    #     print('BAR CRYPTO\n', bar)
+    #     newPriceData(bar.symbol, bar.close)
 
     # retruns price every minute at 00 seconds
-    @stream.on_bar('AAPL')
+    @stream.on_bar(symbol)
     async def _(bar):
         print('BAR STOCK\n', bar)  
         newPriceData(bar.symbol, bar.close)
-        
         
     stream.run()
 
 
 if __name__ == "__main__":
+    # GETTING DATA
+    symbol = "TSLA"
+    getHistoricalData(symbol)
+    
     main()

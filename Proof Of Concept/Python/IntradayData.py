@@ -6,8 +6,8 @@ client = StockHistoricalDataClient('PKBRQ877H23MLZ6A5A44', 'kYASo3caUfQ6yRdgMLC7
 
 request_params = StockBarsRequest(
                         symbol_or_symbols=["AAPL"],
-                        timeframe=TimeFrame.Hour,
-                        start="2020-01-01"
+                        timeframe=TimeFrame.Minute,
+                        start="2022-08-01"
                         )
 
 bars = client.get_stock_bars(request_params)
