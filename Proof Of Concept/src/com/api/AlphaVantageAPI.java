@@ -31,7 +31,7 @@ public class AlphaVantageAPI {
         String base_url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY_EXTENDED&apikey=8DQF8MN8W4O10K8I&symbol=" + ticker + "&interval="+timeframe;
 
         // TODO: worth mentioning criterion? deleting the contents of the file, need to do it becuase the following code appends to the file to prevent high memory usuage
-        FileHandler.writeToFile("data/stock/" + ticker + "/" + ticker + "-intraday.csv", "", false);
+        FileHandler.writeToFile("data/stock/" + ticker + "/" + ticker + "-" + timeframe.toLowerCase() + ".csv", "", false);
 
         for (int i=1; i<=2; i++) {
             for (int j=1; j<=12; j++) {
@@ -54,11 +54,11 @@ public class AlphaVantageAPI {
                 }
 
                 data = data.replaceAll("time,open,high,low,close,volume", "").replaceAll("(?m)^[ \t]*\r?\n", "");
-                FileHandler.writeToFile("data/stock/" + ticker + "/" + ticker + "-intraday.csv", data, true);
+                FileHandler.writeToFile("data/stock/" + ticker + "/" + ticker + "-" + timeframe.toLowerCase() + ".csv", data, true);
             }
         }
 
-        ArrayList<String> data = FileHandler.readFromFile("data/stock/" + ticker + "/" + ticker + "-intraday.csv");
+        ArrayList<String> data = FileHandler.readFromFile("data/stock/" + ticker + "/" + ticker + "-" + timeframe.toLowerCase() + ".csv");
 
         // REVERSING THE ENTIRE FILE AS YEAR2MONTH12 IS THE EARLIEST DATA, AND WE WANT THAT TO BE IN THE TOP OF THE FILE FOR SIMULATION
         data = Utils.reverseArrayList(data);
@@ -86,8 +86,8 @@ public class AlphaVantageAPI {
 
         // TODO: MAIN PRIORITY, MAKE SURE NEW LINE CHARACTERS ARE REMOVED... THE REMOVE THE CHANGE OF NULL TO STRING IN HISTORICALDATA.JAVA
 
-        FileHandler.writeToFile("data/stock/" + ticker + "/" + ticker + "-intraday.csv", String.valueOf(finalString), false);
-        return "data/stock/" + ticker + "/" + ticker + "-intraday.csv"; // returns the file location...
+        FileHandler.writeToFile("data/stock/" + ticker + "/" + ticker + "-" + timeframe.toLowerCase() + ".csv", String.valueOf(finalString), false);
+        return "data/stock/" + ticker + "/" + ticker + "-" + timeframe.toLowerCase() + ".csv"; // returns the file location...
     }
 
 }

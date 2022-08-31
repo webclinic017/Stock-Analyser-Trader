@@ -163,8 +163,6 @@ public class CrossoverTester {
             for (int testMA2 = 20; testMA2<201; testMA2++){
                 // TODO: if testMA1 is bigger than testMA2, this means that shorting is going one instead of buying, make this clear
 
-                // adding a gap min of 20 ma in between and making is so that testMA1 is always smaller than testMA2
-                if (testMA2-testMA1 > 20) {
                     result = test(testMA1, testMA2, false);
                     float gain = result[0];
                     number_of_trades = (int) result[1];
@@ -179,7 +177,7 @@ public class CrossoverTester {
                         bestMA2 = testMA2;
                         number_of_trades_best = number_of_trades;
                     }
-                }
+
             }
         }
 

@@ -108,7 +108,7 @@ public class AssetInfo extends JPanel {
         simulate.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae){
                 try {
-                    GUICaller.SimulationResults(asset);
+                    GUICaller.SimulationResults(Asset.create(asset.ticker)); // we want a new instantiation of a class every time as the historical data is manipulated
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
