@@ -2,7 +2,10 @@ package com.api;
 
 import com.google.gson.JsonArray;
 import com.utils.FileHandler;
+import com.utils.Utils;
+
 import java.util.ArrayList;
+import java.util.Collections;
 
 // TODO: Retired api, not in use cause slow and inconsistent
 public class AlphaVantageAPI {
@@ -32,10 +35,11 @@ public class AlphaVantageAPI {
 
         for (int i=1; i<=2; i++) {
             for (int j=1; j<=12; j++) {
-                String request_url = base_url + "&slice=year" + i + "month" + j;
+                String slice = "&slice=year" + i + "month" + j;
+                String request_url = base_url + slice;
 
                 // as it's the current month, we want updated data every request
-                boolean cache = !request_url.contains("year1month1");
+                boolean cache = !slice.equals("&slice=year1month1");
 
                 String data = ReqHandler.getString(request_url, cache);
                 while (true){
@@ -55,6 +59,11 @@ public class AlphaVantageAPI {
         }
 
         ArrayList<String> data = FileHandler.readFromFile("data/stock/" + ticker + "/" + ticker + "-intraday.csv");
+
+        // REVERSING THE ENTIRE FILE AS YEAR2MONTH12 IS THE EARLIEST DATA, AND WE WANT THAT TO BE IN THE TOP OF THE FILE FOR SIMULATION
+        data = Utils.reverseArrayList(data);
+
+
         StringBuilder finalString = new StringBuilder();
 
         for (int i = 0; i<data.size(); i++){

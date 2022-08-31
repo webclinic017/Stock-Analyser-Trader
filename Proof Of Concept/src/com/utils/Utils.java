@@ -10,7 +10,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.StringTokenizer;
 
 public class Utils {
@@ -100,6 +99,42 @@ public class Utils {
         return array;
     }
 
+    public static String[] getRowOf2DArray(String[][] array, int rowNum){
+        String[] toReturn = new String[array.length];
+        for (int i = 0; i < array.length; i++){
+            toReturn[i] = array[i][rowNum];
+        }
+        return toReturn;
+    }
+
+
+
+    public static void selectionSortByColumn(String[][] array, int row) {
+
+        String[] arraySortRow = getRowOf2DArray(array, row);
+
+        int arrayLength = arraySortRow.length;
+
+        // One by one move boundary of unsorted subarray
+        for (int i = 0; i < arrayLength-1; i++) {
+            // Find the minimum element in unsorted array
+            int min_idx = i;
+            for (int j = i+1; j < arrayLength; j++) {
+                if (Integer.parseInt(arraySortRow[j]) < Integer.parseInt(arraySortRow[min_idx])) {
+                    min_idx = j;
+                }
+            }
+
+            // Swap the found minimum element with the first element
+            int temp = Integer.parseInt(arraySortRow[min_idx]);
+            arraySortRow[min_idx] = arraySortRow[i];
+            arraySortRow[i] = String.valueOf(temp);
+
+            // TODO: NOW WE ACTUALLY WANT TO SWAP THE ENTIRE ROW OF THE ORIGINAL ARRAY AS DONE TO THE PREVIOUS ARRAY
+        }
+
+    }
+
     public static float[] findHighestAndLowest(float[] data){
         float highest = data[0];
         float lowest = data[0]; // make it the first number of the element can't be zero numbers might always be bigger than zero,
@@ -122,6 +157,17 @@ public class Utils {
             float_data[i] = data.get(i);
         }
         return findHighestAndLowest(float_data);
+    }
+
+    public static ArrayList<String> reverseArrayList(ArrayList<String> arrayList) {
+        ArrayList<String> revArrayList = new ArrayList<>();
+        for (int i = arrayList.size() - 1; i >= 0; i--) {
+            // Append the elements in reverse order
+            revArrayList.add(arrayList.get(i));
+        }
+
+        // Return the reversed arraylist
+        return revArrayList;
     }
 
     // data, int index_to_stop, boolean from front or from start...

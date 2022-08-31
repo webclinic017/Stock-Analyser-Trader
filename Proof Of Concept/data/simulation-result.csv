@@ -770,3 +770,10 @@ MA-Crossover,AAPL,ema,12,sma,33,102.20325,18,long
 MA-Crossover,AAPL,ema,12,sma,33,102.203224,18,long
 MA-Crossover,AAPL,ema,12,sma,33,102.20325,18,long
 MA-Crossover,AAPL,ema,12,sma,33,102.203285,18,long
+MA-Crossover,AAPL,sma,12,sma,49,14.249166,195,long
+MA-Crossover,AAPL,sma,12,sma,49,14.249166,195,long
+MA-Crossover,AAPL,ema,12,sma,33,102.20328,18,long
+MA-Crossover,AAPL,sma,12,sma,49,14.249166,195,long
+MA-Crossover,AAPL,ema,0,sma,0,0.0,0,long
+MA-Crossover,AAPL,ema,0,sma,0,0.0,0,long
+MA-Crossover,AAPL,sma,12,sma,33,82.925865,280,long
