@@ -24,7 +24,17 @@ def trade():
     print(randomchars)
 
     try:
-        answer = api.submit_order(symbol, qty=qty, side=side, time_in_force='gtc', client_order_id=randomchars)
+        answer = api.submit_order(symbol, qty=qty, side=side, time_in_force='gtc', client_order_id=randomchars) # TODO: MAKE SURE THIS IS THE CORRECT TIME IN FORCE
+        return "Success"
+    except Exception as e:
+        return str(e)   
+
+
+@app.route('/close-position', methods=['GET'])
+def closePosition():
+    symbol = request.args.get('symbol')
+    try:
+        answer = api.close_position(symbol)
         return "Success"
     except Exception as e:
         return str(e)    
