@@ -15,6 +15,8 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 
@@ -104,7 +106,7 @@ public class SimulationResults extends JPanel {
         start_time_l.setBounds(70, 145, 150, 50);
         add(start_time_l);
 
-        JTextField start_time = new JTextField("01/01/2020");
+        JTextField start_time = new JTextField("01/01/2019");
         start_time.setBounds(70, 180, 95, 20);
         add(start_time);
 
@@ -262,49 +264,46 @@ public class SimulationResults extends JPanel {
         return gain;
     }
 
+    public void sortResults(String filename){
+        String[][] array = Utils.convertToMultiDArrayFromCSV(filename, 6);
+        ArrayList<String> arraylist = FileHandler.readFromFile(filename);
+        ArrayList<String> sortedResults = Utils.selectionSortByColumn(arraylist, array, 4);
+
+        // formatting: removing the leading empty line character and the first result as it's already saved
+        sortedResults.remove(0);
+
+        // converting into string
+        StringBuilder sortedResultString = new StringBuilder(); // alot more efficient for adding string together
+        for (String line: sortedResults){
+            sortedResultString.append(line + "\n");
+        }
+        FileHandler.writeToFile(filename, String.valueOf(sortedResultString), false);
+    }
+
     private void displayResults() throws Exception {
 
         CrossoverTester crossoverTester = new CrossoverTester(asset, (String) maType1.getSelectedItem(), (String) maType2.getSelectedItem());
         System.out.println(maType1.getSelectedItem());
         System.out.println((String) maType2.getSelectedItem());
-        int[] data = crossoverTester.simulate(); // does the simulation and saves it to a file...
-        int bestma1 = data[0];
-        int bestma2 = data[1];
+        crossoverTester.simulate(); // does the simulation and saves it to a file...
 
         // file handler, read in the simulation results saved to a csv and show it in a table
         // converting into 2D parsed csv file
-        String[][] simulation_results = Utils.convertToMultiDArrayFromCSV("data/stock/" + asset.ticker + "/simulation-ma.csv", 6);
+        String filename = "data/stock/" + asset.ticker + "/simulation-ma.csv";
+        sortResults(filename);
+        String[][] simulation_results = Utils.convertToMultiDArrayFromCSV(filename, 6);
 
-        // Showing the best result
-        JButton top = new JButton();
-        top.setText("<html>" + bestma1 + ", " + bestma2 + ", " + paddGain(String.valueOf(data[2])) + ", " + data[3] + "</html>");
-        top.setBounds(70,260, 300, 30);
-        top.setHorizontalAlignment(SwingConstants.LEFT);
-        top.setContentAreaFilled(false);
-        top.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    GUICaller.Simulate(asset, bestma1, bestma2, (String) maType1.getSelectedItem(), (String) maType2.getSelectedItem());
+        // Showing top 6 results...
+        JButton[] results = new JButton[6];
 
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-        });
-        add(top);
-
-
-        // Showing top 5 results...
-        JButton[] results = new JButton[5];
-
-        // top 5
-        for (int i = 0; i<5; i++){
+        // top 6
+        for (int i = 0; i<6; i++){
 
             results[i] = new JButton();
             String text = "<html>" + simulation_results[i][1] + ", " + simulation_results[i][3] + ", " + paddGain(simulation_results[i][4]) + ", " + simulation_results[i][5] + "</html>";
             results[i].setText(text);
 //            results[i].setFont(new Font("Verdana", Font.BOLD,12));
-            results[i].setBounds(70,(i*35)+295, 300, 30);
+            results[i].setBounds(70,(i*35)+260, 300, 30);
             results[i].setHorizontalAlignment(SwingConstants.LEFT);
             results[i].setContentAreaFilled(false);
             int current = i;

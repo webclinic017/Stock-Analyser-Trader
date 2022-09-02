@@ -3,10 +3,16 @@ package com.company;
 import com.analyzer.Analyze;
 import com.api.AlpacaAPI;
 import com.api.FinnhubAPI;
+import com.asset.Asset;
 import com.gui.GUICaller;
+import com.gui.SimulationResults;
 import com.trader.Trader;
 import com.utils.Cache;
 import com.utils.FileHandler;
+import com.utils.Utils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 // TODO: FIND A WAY TO SEPARATE THE DATA INTO TRAINING AND TESTING - INCLUDE IN CRITERIONS AND EMAIL COMMUNICATIONS...
 

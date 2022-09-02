@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Utils {
@@ -99,19 +100,22 @@ public class Utils {
         return array;
     }
 
-    public static String[] getRowOf2DArray(String[][] array, int rowNum){
-        String[] toReturn = new String[array.length];
+
+    public static Float[] getRowOf2DArray(String[][] array, int rowNum){
+        Float[] toReturn = new Float[array.length];
         for (int i = 0; i < array.length; i++){
-            toReturn[i] = array[i][rowNum];
+            try {
+                toReturn[i] = Float.valueOf(array[i][rowNum]);
+            } catch (Exception ignored){} // as it simply means it reached a empty line
         }
         return toReturn;
     }
 
 
+    // returns in acending order
+    public static ArrayList<String> selectionSortByColumn(ArrayList<String> arrayList, String[][] array, int column) {
 
-    public static void selectionSortByColumn(String[][] array, int row) {
-
-        String[] arraySortRow = getRowOf2DArray(array, row);
+        Float[] arraySortRow = getRowOf2DArray(array, column);
 
         int arrayLength = arraySortRow.length;
 
@@ -120,19 +124,31 @@ public class Utils {
             // Find the minimum element in unsorted array
             int min_idx = i;
             for (int j = i+1; j < arrayLength; j++) {
-                if (Integer.parseInt(arraySortRow[j]) < Integer.parseInt(arraySortRow[min_idx])) {
-                    min_idx = j;
+                try {
+                    if (arraySortRow[j] < arraySortRow[min_idx]) {
+                        min_idx = j;
+                    }
+                } catch (Exception e){
                 }
             }
 
             // Swap the found minimum element with the first element
-            int temp = Integer.parseInt(arraySortRow[min_idx]);
-            arraySortRow[min_idx] = arraySortRow[i];
-            arraySortRow[i] = String.valueOf(temp);
+            try {
+                float temp = arraySortRow[min_idx];
+                arraySortRow[min_idx] = arraySortRow[i];
+                arraySortRow[i] = temp;
 
-            // TODO: NOW WE ACTUALLY WANT TO SWAP THE ENTIRE ROW OF THE ORIGINAL ARRAY AS DONE TO THE PREVIOUS ARRAY
+                // SWAPPING THE ACTUAL ARRAYLIST
+                String tempA = arrayList.get(min_idx);
+                arrayList.set(min_idx, arrayList.get(i));
+                arrayList.set(i, tempA);
+            } catch (Exception ignored){ // some lines are empty and will hit null exception
+            }
+
         }
+        arrayList = reverseArrayList(arrayList);
 
+        return arrayList;
     }
 
     public static float[] findHighestAndLowest(float[] data){
@@ -159,6 +175,7 @@ public class Utils {
         return findHighestAndLowest(float_data);
     }
 
+    // TODO: provide the link from where i got it
     public static ArrayList<String> reverseArrayList(ArrayList<String> arrayList) {
         ArrayList<String> revArrayList = new ArrayList<>();
         for (int i = arrayList.size() - 1; i >= 0; i--) {

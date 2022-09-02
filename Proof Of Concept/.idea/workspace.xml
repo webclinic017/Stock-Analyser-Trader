@@ -9,21 +9,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="Instantiating new asset class on each simulation to keep it separate, bug fixes">
+    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="Trader.py works, updates its price and recalculates the MAs upon new data">
       <change afterPath="$PROJECT_DIR$/.idea/artifacts/Source_Code_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python/AAPL.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python/archive.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/GetPrice.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/GetPrice.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/IntradayData.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/IntradayData.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/Python/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Python/Trader.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/Trader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/calculateEMA.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/calculateEMA.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/simulation-result.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/simulation-result.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/analyzer/tools/EMA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/analyzer/tools/EMA.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gui/SimulationResults.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/SimulationResults.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/utils/Utils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/company/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/utils/Utils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/utils/Utils.class" afterDir="false" />
@@ -117,13 +113,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1648929083891</updated>
-    </task>
-    <task id="LOCAL-00033" summary="Solved a major bug, preventing program from crashing if null data points in HistoricalData">
-      <created>1653910323846</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1653910323846</updated>
     </task>
     <task id="LOCAL-00034" summary="GUI improvements, Padding and auto Capitalisation for ticker field">
       <created>1653915915679</created>
@@ -461,7 +450,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661952597780</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="Trader.py works, updates its price and recalculates the MAs upon new data">
+      <created>1661982407816</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1661982407816</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -483,7 +479,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/../.." />
     </ignored-roots>
-    <MESSAGE value="Added the ability to show executed trades in HomeScreen, Added logics to the Trader class" />
     <MESSAGE value="Added Flask server to execute trades with requests from Java" />
     <MESSAGE value="Bug Fixes and slight GUI improvements" />
     <MESSAGE value="Bug Fixes and GUI improvements" />
@@ -508,7 +503,8 @@
     <MESSAGE value="Added few methods, Added Server.py" />
     <MESSAGE value="Fixed a massive bug, Asset data from AlphaVantageAPI was in reverse order" />
     <MESSAGE value="Instantiating new asset class on each simulation to keep it separate, bug fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Instantiating new asset class on each simulation to keep it separate, bug fixes" />
+    <MESSAGE value="Trader.py works, updates its price and recalculates the MAs upon new data" />
+    <option name="LAST_COMMIT_MESSAGE" value="Trader.py works, updates its price and recalculates the MAs upon new data" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
