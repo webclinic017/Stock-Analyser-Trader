@@ -90,6 +90,15 @@ public class GUICaller {
         frame.setVisible(true);
     }
 
+    public static void Trader(Asset asset) throws Exception {
+        System.out.println("SEQUENCE: Trader");
+        JFrame frame = new JFrame("Trader");
+        Trader myGUI = new Trader(280, 150, asset);
+        frame.add(myGUI);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
 
     public void Login(){
         System.out.println("SEQUENCE: Login");

@@ -61,7 +61,7 @@ public class Main {
 //        float average = Math.average(numbs);
 //        System.out.println(average);
 
-//        Asset stock = Asset.create("AAPL");
+        Asset stock = Asset.create("AAPL");
 //        System.out.println(stock.info);
 //        System.out.println(stock.getNewsData());
 
@@ -222,5 +222,8 @@ public class Main {
         // TODO: add 20-30 points for JComboBox
 
         // TODO: SHOW ERROR IF STOCK NOT EXISTS
+
+        // TODO: HAVE OPTION TO SEE THE SCHEDULED AND RUNNING TRADES, CAN RUN MULTIPLE, WELL JUST SHOW THAT IT CAN
+        // TODO: AND IF TRADER ALREADY TRADING ON IT, SHOW A TICK MARK IN GUI
     }
 }

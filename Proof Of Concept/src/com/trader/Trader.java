@@ -9,7 +9,7 @@ import com.utils.Utils;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-
+// TODO: SAY I MADE IT IN JAVA!!! THEN USER WANTED IT TO BE HOSTED ON THE SERVER!
 public class Trader {
     FileHandler FileHandler = new FileHandler();
     UserPreferences UserPreferences = new UserPreferences();

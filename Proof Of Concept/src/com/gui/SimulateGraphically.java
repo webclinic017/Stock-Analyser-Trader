@@ -2,6 +2,7 @@ package com.gui;
 
 import com.analyzer.tools.EMA;
 import com.analyzer.tools.SMA;
+import com.api.RequestHandler;
 import com.asset.Asset;
 import com.utils.FileHandler;
 import com.utils.Utils;
@@ -189,6 +190,23 @@ public class SimulateGraphically extends JPanel {
         });
         add(start);
 
+        JButton visualise = new JButton("Auto-Trade");
+        visualise.setBounds(200,180,100,25);
+
+        visualise.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                RequestHandler requestHandler = new RequestHandler();
+                try {
+                    requestHandler.get("http://localhost:5000/trader?symbol="+asset.ticker+"&ma1="+ma1+"&ma2="+ma2+"&ma1-type="+maType1+"&ma2-type="+maType2, false);
+                    visualise.setText("Auto-Trading");
+                    visualise.setIcon(new ImageIcon(new ImageIcon("data/default/tick.png").getImage().getScaledInstance(10, 15, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
+                    visualise.setBounds(200,180,122,25);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+        add(visualise);
 
         // So when the animation is running for a few will be running on screen, it does the actual simulation
 
