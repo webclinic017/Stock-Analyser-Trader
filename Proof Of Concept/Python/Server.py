@@ -40,6 +40,17 @@ def closePosition():
         return str(e)    
 
 
+@app.route('/trader', methods=['GET'])
+def traderStarter():
+    symbol = request.args.get('symbol')
+    ma1 = request.args.get('ma1')
+    ma2 = request.args.get('ma2')
+    ma1Type = request.args.get('ma1-type')
+    ma2Type = request.args.get('ma2-type')
+    # TODO: EXECUTE THE ACTUAL TRADER
+
+    return "OK"
+
 
 if __name__ == '__main__':
     app.run(debug=True)

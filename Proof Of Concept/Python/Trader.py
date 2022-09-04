@@ -41,8 +41,13 @@ def checkSignal(symbol, data):
     lastSMA = data["TSLA-SMA"][-2]
     currentSMA = data["TSLA-SMA"][-1]
 
+
+    if lastEMA > lastSMA:
+        previousEMAHigherThanSMA = True
+
     if currentEMA > currentSMA:
         currentEMAHigherThanSMA = True
+
     
     if currentEMA < currentSMA:
         currentEMAHigherThanSMA = False
