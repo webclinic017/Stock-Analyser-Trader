@@ -833,3 +833,7 @@ MA-Crossover,AAPL,ema,15,sma,20,201.79807,35,long
 MA-Crossover,AAPL,ema,15,sma,20,201.79811,35,long
 MA-Crossover,AAPL,ema,15,sma,20,201.79816,35,long
 MA-Crossover,AAPL,ema,15,sma,20,201.79811,35,long
+MA-Crossover,AAPL,ema,15,sma,20,201.79807,36,long
+MA-Crossover,TSLA,ema,112,sma,125,1688.0991,5,long
+MA-Crossover,BTCUSD,ema,12,sma,39,704.72473,28,long
+MA-Crossover,AAPL,ema,15,sma,20,201.79811,36,long

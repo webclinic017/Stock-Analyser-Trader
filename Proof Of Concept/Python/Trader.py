@@ -44,13 +44,17 @@ def checkSignal(symbol, data):
 
     if lastEMA > lastSMA:
         previousEMAHigherThanSMA = True
+    
+    if lastEMA < lastSMA:
+        previousEMAHigherThanSMA = False
+
 
     if currentEMA > currentSMA:
         currentEMAHigherThanSMA = True
-
     
     if currentEMA < currentSMA:
         currentEMAHigherThanSMA = False
+
 
     if currentEMAHigherThanSMA != previousEMAHigherThanSMA: # crossover happened
         if currentEMAHigherThanSMA:
@@ -121,8 +125,8 @@ def actOnSignal(symbol, signal):
 ## FOR OTHER TIMEFRAMES, KNOW WHEN THE NEW CANDLE IS, LIKE IT'S AT 30 MINUTES PAST FOR THE STOCKS LIKE THAT, 
 ## THEN QUERY THE PRICE AT THAT POINT, THEN DO THE SAME AS DESCRIBED ABOVE.
 
-ema = 20
-sma = 180
+ema = 10
+sma = 12
 
 def calculateEMA(symbol, period=ema):
     global data
