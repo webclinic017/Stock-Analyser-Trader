@@ -13,6 +13,7 @@ app = Flask(__name__)
 
 api = tradeapi.REST(api_key, api_secret, base_url, api_version='v2')
 
+# this is used by java, trader and POSSIBLY TODO: SEE IF IT CAN BE JUST USED BY TRADINVVIEW DIRECTLY WITH WEBHOOKS
 @app.route('/trade', methods=['GET'])
 def trade():
     symbol = request.args.get('symbol')
@@ -21,7 +22,8 @@ def trade():
     onTraderCandleType = request.args.get('onTraderCandleType') # record of what Trader bought the asset
     # generate random 38 characters
     randomchars = onTraderCandleType + "-" + ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ') for i in range(40))
-    print(randomchars)
+    print(symbol + ": " + qty + ", " + side)
+
 
     try:
         answer = api.submit_order(symbol, qty=qty, side=side, time_in_force='gtc', client_order_id=randomchars) # TODO: MAKE SURE THIS IS THE CORRECT TIME IN FORCE
