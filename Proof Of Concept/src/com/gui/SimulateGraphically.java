@@ -203,6 +203,7 @@ public class SimulateGraphically extends JPanel {
                     visualise.setBounds(200,180,122,25);
                 } catch (Exception ex) {
                     ex.printStackTrace();
+                    // JOptionPane.showMessageDialog(this, "Unsuccessful, the server is down");
                 }
             }
         });

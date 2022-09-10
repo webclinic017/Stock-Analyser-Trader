@@ -34,7 +34,7 @@ public abstract class Asset {
     public String[] news_data;
 
     public Float[][] historical_data;
-    public boolean intraDayAvailable = false;
+    public String historicalDataTimeframe = "1d";
 
     AlpacaAPI AlpacaAPIHandler = new AlpacaAPI();
     static FinnhubAPI FinnhubAPIHandler = new FinnhubAPI();
@@ -176,7 +176,7 @@ public abstract class Asset {
             return historical_data;
         }
         this.historical_data = HistoricalDataGetter.get(ticker, ticker, true, timeframe, null);
-        intraDayAvailable = true; // setting the flag true means other functions can not return this data instead of the 1d data
+        historicalDataTimeframe = timeframe; // lets other functions know what timeframe is the historical data in
         return historical_data;
     }
 

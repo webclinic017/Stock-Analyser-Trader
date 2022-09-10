@@ -192,7 +192,7 @@ public class CrossoverTester {
 
         // Logging to a file...
         test(bestMA1,bestMA2,true); // making it log the trades...
-        fileHandler.writeToFile("data/stock/"+ticker+"/simulation-ma.csv", simulation_log.toString(),false);
+        fileHandler.writeToFile("data/stock/"+ticker+"/simulation-"+type1+"-"+type2+"-"+asset.historicalDataTimeframe+".csv", simulation_log.toString(),false);
         fileHandler.writeToFile("data/simulation-result.csv",final_result,true); // adding all to a since file // TODO: remove duplicates
 
         // TODO: Want to return the highest returns as float? 30.73 % seems realistic and believable than 30 %

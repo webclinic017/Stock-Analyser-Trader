@@ -16,16 +16,20 @@ import java.math.MathContext;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 
 
 public class SimulationResults extends JPanel {
 
     int width, height;
+
+    int resultIndexStart = 0;
+    JButton previousResults, nextResults, clearResults;
+    // to show top 6 results, initialising all here so that later can just overwrite with .setText() for multiple simulation results
+    JButton[] results = {new JButton(),new JButton(),new JButton(),new JButton(),new JButton(),new JButton()};
+
     Asset asset;
     JComboBox<String> maType1, maType2;
-
     FileHandler FileHandler = new FileHandler();
 
     // TODO: Add a iframe and embed tradingview
@@ -141,7 +145,8 @@ public class SimulationResults extends JPanel {
 
                             if (end > start){ // end time needs to be greater than start time
                                 asset.getHistorical_data(start, end);
-                                displayResults();
+                                resultIndexStart = 0; // want to display the highest everytime
+                                displayResults(true);
                             }
                         } catch (Exception ignored){
                         }
@@ -217,7 +222,9 @@ public class SimulationResults extends JPanel {
                                 System.out.println("Getting data");
                                 asset.getIntraDay(options[timeframe.getSelectedIndex()]);
                                 System.out.println("Running Simulation");
-                                displayResults();
+                                resultIndexStart = 0; // want to display the highest everytime
+                                displayResults(true);
+
                             } catch (Exception ignored){
                             }
                         }).start();
@@ -280,33 +287,45 @@ public class SimulationResults extends JPanel {
         FileHandler.writeToFile(filename, String.valueOf(sortedResultString), false);
     }
 
-    private void displayResults() throws Exception {
+    private void displayResults(boolean runSimulationAgain) {
+        String type1 = (String) maType1.getSelectedItem();
+        String type2 = (String) maType2.getSelectedItem();
 
-        CrossoverTester crossoverTester = new CrossoverTester(asset, (String) maType1.getSelectedItem(), (String) maType2.getSelectedItem());
+        CrossoverTester crossoverTester = new CrossoverTester(asset, type1, type2);
         System.out.println(maType1.getSelectedItem());
         System.out.println((String) maType2.getSelectedItem());
-        crossoverTester.simulate(); // does the simulation and saves it to a file...
+
+
+        String filename = "data/stock/"+asset.ticker+"/simulation-"+type1+"-"+type2+"-"+asset.historicalDataTimeframe+".csv";
+
+        if (runSimulationAgain){
+            // TODO: GIF OF SIMULATION RUNNING IN GUI
+            try {
+                crossoverTester.simulate(); // does the simulation and updates/saves to a file
+                // converting into 2D parsed csv file, TODO: CRITERION: doing here so that it only has to do once, IMMEDIATELY AFTER SIMULATION
+                sortResults(filename);
+            } catch (Exception e) {
+                System.out.println("Error while running simulation");
+                // TODO: SHOW ERROR IN THE GUI TOO, A POP UP WILL WORK
+            }
+        }
+
 
         // file handler, read in the simulation results saved to a csv and show it in a table
-        // converting into 2D parsed csv file
-        String filename = "data/stock/" + asset.ticker + "/simulation-ma.csv";
-        sortResults(filename);
         String[][] simulation_results = Utils.convertToMultiDArrayFromCSV(filename, 6);
 
-        // Showing top 6 results...
-        JButton[] results = new JButton[6];
 
         // top 6
         for (int i = 0; i<6; i++){
+            int simulationResultsIndex = resultIndexStart + i;
 
-            results[i] = new JButton();
-            String text = "<html>" + simulation_results[i][1] + ", " + simulation_results[i][3] + ", " + paddGain(simulation_results[i][4]) + ", " + simulation_results[i][5] + "</html>";
+            String text = "<html>" + simulation_results[simulationResultsIndex][1] + ", " + simulation_results[simulationResultsIndex][3] + ", " + paddGain(simulation_results[simulationResultsIndex][4]) + ", " + simulation_results[simulationResultsIndex][5] + "</html>";
             results[i].setText(text);
 //            results[i].setFont(new Font("Verdana", Font.BOLD,12));
             results[i].setBounds(70,(i*35)+260, 300, 30);
             results[i].setHorizontalAlignment(SwingConstants.LEFT);
             results[i].setContentAreaFilled(false);
-            int current = i;
+            int current = simulationResultsIndex;
             results[i].addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent e) {
                     try {
@@ -319,6 +338,54 @@ public class SimulationResults extends JPanel {
 
             add(results[i]);
         }
+
+        previousResults = new JButton("");
+        previousResults.setToolTipText("Previous Results");
+        previousResults.setIcon(new ImageIcon(new ImageIcon("data/default/back.jpg").getImage().getScaledInstance(18, 18, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
+        previousResults.setBounds(70,485, 25, 20);
+        previousResults.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                resultIndexStart = resultIndexStart-6;
+                if (resultIndexStart<0){resultIndexStart=0;}
+                for (JButton btn: results){
+                    remove(btn);
+                }
+                displayResults(false);
+            }
+        });
+        previousResults.setVisible(true);
+        add(previousResults);
+
+        nextResults = new JButton("");
+        nextResults.setToolTipText("Next Results");
+        nextResults.setIcon(new ImageIcon(new ImageIcon("data/default/ahead.jpg").getImage().getScaledInstance(18, 18, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
+        nextResults.setBounds(100,485, 25, 20);
+        nextResults.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                resultIndexStart = resultIndexStart+6;
+                for (JButton btn: results){
+                    remove(btn);
+                }
+                displayResults(false);
+            }
+        });
+        nextResults.setVisible(true);
+        add(nextResults);
+
+        clearResults = new JButton("");
+        clearResults.setToolTipText("Clear Results");
+        clearResults.setIcon(new ImageIcon(new ImageIcon("data/default/bin.png").getImage().getScaledInstance(14, 14, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
+        clearResults.setBounds(130,485, 20, 20);
+        clearResults.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                for (JButton btn: results){
+                    remove(btn);
+                    repaint();
+                }
+            }
+        });
+        add(clearResults);
+
         repaint();
     }
 }
