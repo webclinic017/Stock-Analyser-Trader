@@ -23,8 +23,10 @@ public class SimulationResults extends JPanel {
 
     int width, height;
 
+    JLabel loading;
+
     int resultIndexStart = 0;
-    JButton previousResults, nextResults, clearResults;
+    JButton previousResults, nextResults, clearResultsBtn;
     // to show top 6 results, initialising all here so that later can just overwrite with .setText() for multiple simulation results
     JButton[] results = {new JButton(),new JButton(),new JButton(),new JButton(),new JButton(),new JButton()};
 
@@ -40,6 +42,13 @@ public class SimulationResults extends JPanel {
 
         this.setPreferredSize(new Dimension(width, height));
         setLayout(null);
+
+        // loading gif
+        loading = new JLabel(new ImageIcon("data/default/loading.gif"));
+        loading.setBounds(120,250, 200, 200);
+        loading.setVisible(false);
+        add(loading);
+
 
         JLabel label = new JLabel("Backtesting");
         label.setFont(new Font("Verdana", Font.BOLD, 20));
@@ -144,9 +153,12 @@ public class SimulationResults extends JPanel {
                             long end = date.getTime() / 1000;
 
                             if (end > start){ // end time needs to be greater than start time
+                                clearResults(); // clearing previous simulations results from GUI
+                                loading.setVisible(true);
                                 asset.getHistorical_data(start, end);
                                 resultIndexStart = 0; // want to display the highest everytime
                                 displayResults(true);
+                                loading.setVisible(false);
                             }
                         } catch (Exception ignored){
                         }
@@ -219,12 +231,14 @@ public class SimulationResults extends JPanel {
 
                         new Thread(() -> { // TODO: mention in criterion, separates so can run multiple
                             try {
+                                clearResults(); // clearing previous simulations results from GUI
                                 System.out.println("Getting data");
+                                loading.setVisible(true);
                                 asset.getIntraDay(options[timeframe.getSelectedIndex()]);
                                 System.out.println("Running Simulation");
                                 resultIndexStart = 0; // want to display the highest everytime
                                 displayResults(true);
-
+                                loading.setVisible(false);
                             } catch (Exception ignored){
                             }
                         }).start();
@@ -347,9 +361,6 @@ public class SimulationResults extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 resultIndexStart = resultIndexStart-6;
                 if (resultIndexStart<0){resultIndexStart=0;}
-                for (JButton btn: results){
-                    remove(btn);
-                }
                 displayResults(false);
             }
         });
@@ -363,29 +374,30 @@ public class SimulationResults extends JPanel {
         nextResults.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
                 resultIndexStart = resultIndexStart+6;
-                for (JButton btn: results){
-                    remove(btn);
-                }
                 displayResults(false);
             }
         });
         nextResults.setVisible(true);
         add(nextResults);
 
-        clearResults = new JButton("");
-        clearResults.setToolTipText("Clear Results");
-        clearResults.setIcon(new ImageIcon(new ImageIcon("data/default/bin.png").getImage().getScaledInstance(14, 14, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
-        clearResults.setBounds(130,485, 20, 20);
-        clearResults.addActionListener(new ActionListener(){
+        clearResultsBtn = new JButton("");
+        clearResultsBtn.setToolTipText("Clear Results");
+        clearResultsBtn.setIcon(new ImageIcon(new ImageIcon("data/default/bin.png").getImage().getScaledInstance(14, 14, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
+        clearResultsBtn.setBounds(130,485, 20, 20);
+        clearResultsBtn.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
-                for (JButton btn: results){
-                    remove(btn);
-                    repaint();
-                }
+                clearResults();
             }
         });
-        add(clearResults);
+        add(clearResultsBtn);
 
         repaint();
+    }
+
+    private void clearResults(){
+        for (JButton btn: results){
+            remove(btn);
+            repaint();
+        }
     }
 }

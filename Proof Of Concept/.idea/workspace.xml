@@ -9,23 +9,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="Update Server.py">
+    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="Huge updates to Results GUI, ability show more results and clear results">
       <change afterPath="$PROJECT_DIR$/.idea/artifacts/Source_Code_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/default/ahead.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/default/back.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/default/bin.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/data/default/loading.gif" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Python/Trader.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/Trader.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/simulation-result.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/simulation-result.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/analyzer/backtesting/CrossoverTester.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/analyzer/backtesting/CrossoverTester.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/asset/Asset.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/asset/Asset.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/gui/SimulateGraphically.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/SimulateGraphically.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/gui/SimulationResults.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/SimulationResults.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/company/Main.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,13 +109,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1648929083891</updated>
-    </task>
-    <task id="LOCAL-00041" summary="Idea of saving Watchlist as a ArrayList of Asset classes instead of ticker strings">
-      <created>1654350538333</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1654350538333</updated>
     </task>
     <task id="LOCAL-00042" summary="Improvements to SimulationResults GUI">
       <created>1654358341364</created>
@@ -461,7 +446,14 @@
       <option name="project" value="LOCAL" />
       <updated>1662584004042</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="Huge updates to Results GUI, ability show more results and clear results">
+      <created>1662812973475</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1662812973475</updated>
+    </task>
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -483,7 +475,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/../.." />
     </ignored-roots>
-    <MESSAGE value="Made HomeScreen HIGHLY EFFICIENT by only loading necessary data points for the assets" />
     <MESSAGE value="Added Threading so that multiple simulations can run at once and not make the GUI freeze" />
     <MESSAGE value="Much higher customizability for EMA/SMA options in GUI" />
     <MESSAGE value="SQL Database for Caching requests skeleton" />
@@ -508,7 +499,8 @@
     <MESSAGE value="Updated live Trader logics" />
     <MESSAGE value="Bug Fixes on Trader, now it can hold trades until crossover happens" />
     <MESSAGE value="Update Server.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update Server.py" />
+    <MESSAGE value="Huge updates to Results GUI, ability show more results and clear results" />
+    <option name="LAST_COMMIT_MESSAGE" value="Huge updates to Results GUI, ability show more results and clear results" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
