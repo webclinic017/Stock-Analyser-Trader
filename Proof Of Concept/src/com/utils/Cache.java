@@ -38,7 +38,7 @@ public class Cache {
             }
 
             // after getting the urls, deleting them from the cache...
-            executeCommand = "DELETE FROM url_cache WHERE expire >= \""+getCurrentTime()+"\"";
+            executeCommand = "DELETE FROM url_cache WHERE expire <= \""+getCurrentTime()+"\"";
             Statement statement = connection.createStatement();
             statement.execute(executeCommand);
 
