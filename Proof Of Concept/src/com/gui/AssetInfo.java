@@ -14,6 +14,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 
 import static java.lang.Math.abs;
@@ -73,6 +74,18 @@ public class AssetInfo extends JPanel {
         technicalAboutLabel.setHorizontalAlignment(SwingConstants.LEFT);
         technicalAboutLabel.setBounds(350, 60, 500, 100);
         add(technicalAboutLabel);
+
+        JButton googletrends = new JButton();
+        googletrends.setIcon(new ImageIcon(new ImageIcon("data/default/googletrends.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+        googletrends.setContentAreaFilled(false);
+        googletrends.setBounds(350, 180, 30, 30);
+        googletrends.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ae){
+                Utils.openWebpage(URI.create("https://trends.google.com/trends/explore?q="+asset.ticker));
+            }
+        });
+        add(googletrends);
+        repaint();
 
 
         // TODO: worth mentioning in Criterion C?

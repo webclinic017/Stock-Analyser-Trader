@@ -1,5 +1,6 @@
 package com.utils;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.InputStream;
@@ -230,6 +231,20 @@ public class Utils {
         return downloadFromLink(url, saving_to);
     }
 
+
+    // https://stackoverflow.com/a/10967469
+    public static boolean openWebpage(URI uri) {
+        Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+        if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+            try {
+                desktop.browse(uri);
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
 
 
 }

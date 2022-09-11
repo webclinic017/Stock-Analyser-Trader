@@ -75,7 +75,7 @@ public class Main {
 //        GUICaller.Login();
 //        GUICaller.startup();
 //        GUICaller.HomeScreen();
-//        GUICaller.AssetInfo(stock);
+        GUICaller.AssetInfo(stock);
         GUICaller.SimulationResults(stock);
 
 //        JsonArray data = AlpacaAPIHandler.getStockList();

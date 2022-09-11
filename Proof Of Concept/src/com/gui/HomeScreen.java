@@ -21,6 +21,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static com.utils.Utils.openWebpage;
+
 // TODO: Considering making this the home page so will include other info as well...
 public class HomeScreen extends JPanel {
     // canvas for other GUI widgets
@@ -392,18 +394,4 @@ public class HomeScreen extends JPanel {
         return "";
     }
 
-
-    // https://stackoverflow.com/a/10967469
-    public static boolean openWebpage(URI uri) {
-        Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
-        if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
-            try {
-                desktop.browse(uri);
-                return true;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return false;
-    }
 }
