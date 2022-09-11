@@ -159,13 +159,17 @@ public class SimulationResults extends JPanel {
                             date = new Date(end_time.getText());
                             long end = date.getTime() / 1000;
 
-                            if (end > start){ // end time needs to be greater than start time
+                            if (end > start){ // end time needs to be greater than start
+                                end_time.setBackground(Color.white);
+
                                 clearResults(); // clearing previous simulations results from GUI
                                 loading.setVisible(true);
                                 asset.getHistorical_data(start, end);
                                 resultIndexStart = 0; // want to display the highest everytime
                                 displayResults(true);
                                 loading.setVisible(false);
+                            } else {
+                                end_time.setBackground(Color.RED);
                             }
                         } catch (Exception ignored){
                         }
