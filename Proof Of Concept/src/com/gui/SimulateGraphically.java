@@ -90,13 +90,13 @@ public class SimulateGraphically extends JPanel {
         JLabel ma1label = new JLabel(maType1.toUpperCase() + " (Short) --> " + ma1);
         ma1label.setFont(new Font("Verdana", Font.BOLD, 12));
         ma1label.setIcon(new ImageIcon(new ImageIcon(ma1LabelLine).getImage().getScaledInstance(30, 12, Image.SCALE_DEFAULT))); // scaling the image properly so that there is no stretch
-        ma1label.setBounds(400, 120, 200, 30);
+        ma1label.setBounds(380, 120, 200, 30);
         add(ma1label);
 
         JLabel ma2label = new JLabel(maType2.toUpperCase() + " (Long)  --> " + ma2);
         ma2label.setFont(new Font("Verdana", Font.BOLD, 12));
         ma2label.setIcon(new ImageIcon(new ImageIcon(ma2LabelLine).getImage().getScaledInstance(30, 12, Image.SCALE_DEFAULT))); // scaling the image properly so that there is no stretch
-        ma2label.setBounds(400, 140, 200, 30);
+        ma2label.setBounds(380, 140, 200, 30);
         add(ma2label);
 
 
@@ -157,22 +157,26 @@ public class SimulateGraphically extends JPanel {
 
 
 
-//        // Found this... source : https://stackoverflow.com/a/21801845
-
-        Timer timer = new Timer(5, new ActionListener() {
+//        // Found this... source : https://stackoverflow.com/a/21801845 modified for my needs by creating a separate Actionlistner because I want to access the timer variable from inside
+        Timer timer = new Timer(5, null);
+        timer.addActionListener(new ActionListener() {
             int counter = 0; // counting the iterations to get the index of the data for next loop
             public void actionPerformed(ActionEvent e) {
                 if (false) { // when you want to stop it...
                     ((Timer) e.getSource()).stop();
                 } else {
-                    // TODO: add to the arraylist of lines... then repaint...
 
-                    close_prices.add(historical_data.get(counter));
-                    ma1_data.add(ma_data_1.get(counter));
-                    ma2_data.add(ma_data_2.get(counter));
+                    try {
+                        close_prices.add(historical_data.get(counter));
+                        ma1_data.add(ma_data_1.get(counter));
+                        ma2_data.add(ma_data_2.get(counter));
 
-                    counter++;
-                    repaint();
+                        counter++;
+                        repaint();
+                    } catch (Exception error){
+                        System.out.println("Simulation finished");
+                        timer.stop();
+                    }
 
                 }
             }
@@ -190,24 +194,24 @@ public class SimulateGraphically extends JPanel {
         });
         add(start);
 
-        JButton visualise = new JButton("Auto-Trade");
-        visualise.setBounds(200,180,100,25);
+        JButton autoTrade = new JButton("Auto-Trade");
+        autoTrade.setBounds(200,180,100,25);
 
-        visualise.addActionListener(new ActionListener(){
+        autoTrade.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
                 RequestHandler requestHandler = new RequestHandler();
                 try {
                     requestHandler.get("http://localhost:5000/trader?symbol="+asset.ticker+"&ma1="+ma1+"&ma2="+ma2+"&ma1-type="+maType1+"&ma2-type="+maType2, false);
-                    visualise.setText("Auto-Trading");
-                    visualise.setIcon(new ImageIcon(new ImageIcon("data/default/tick.png").getImage().getScaledInstance(10, 15, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
-                    visualise.setBounds(200,180,122,25);
+                    autoTrade.setText("Auto-Trading");
+                    autoTrade.setIcon(new ImageIcon(new ImageIcon("data/default/tick.png").getImage().getScaledInstance(10, 15, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
+                    autoTrade.setBounds(200,180,122,25);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     // JOptionPane.showMessageDialog(this, "Unsuccessful, the server is down");
                 }
             }
         });
-        add(visualise);
+        add(autoTrade);
 
         // So when the animation is running for a few will be running on screen, it does the actual simulation
 

@@ -24,6 +24,13 @@ public class SimulationResults extends JPanel {
     int width, height;
 
     JLabel loading;
+    JLabel labels = new JLabel();
+    JLabel sortByLabel = new JLabel();
+    JButton sortByProfit = new JButton();
+    JButton sortByTrades = new JButton();
+    JButton sortByMA1 = new JButton();
+    JButton sortByMA2 = new JButton();
+
 
     int resultIndexStart = 0;
     JButton previousResults, nextResults, clearResultsBtn;
@@ -137,7 +144,7 @@ public class SimulationResults extends JPanel {
 
         JButton reset = new JButton("Start");
 //        reset.setIcon(new ImageIcon(new ImageIcon("data/default/redo.png").getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
-        reset.setBounds(280, 177, 90, 25);
+        reset.setBounds(285, 177, 85, 25);
         add(reset);
         reset.setContentAreaFilled(false);
         reset.addActionListener(new ActionListener(){
@@ -206,18 +213,20 @@ public class SimulationResults extends JPanel {
 
             JLabel historyTime = new JLabel("Timeframe: ");
             historyTime.setFont(new Font("Ubuntu", Font.BOLD, 11));
-            historyTime.setBounds(145, 215, 75, 30);
+            historyTime.setBounds(138, 215, 75, 30);
             add(historyTime);
 
             // https://docs.oracle.com/javase/tutorial/uiswing/components/combobox.html
             JComboBox<String> timeframe = new JComboBox<>(options);
-            timeframe.setBounds(210, 218, 60, 25);
+            timeframe.setBounds(203, 218, 60, 25);
+// MAC:            timeframe.setBounds(203, 218, 90, 25);
+
             add(timeframe);
 
 
 
             JButton start = new JButton("Start");
-            start.setBounds(280, 218, 90, 25);
+            start.setBounds(285, 218, 85, 25);
             add(start);
             start.setContentAreaFilled(false);
             start.addActionListener(new ActionListener(){
@@ -271,24 +280,25 @@ public class SimulationResults extends JPanel {
         // padding the results
         float percentage_gain = Float.parseFloat(text);
         BigDecimal bd = new BigDecimal(percentage_gain);
-        bd = bd.round(new MathContext(4)); // TODO: make this relative
-        float rounded = bd.floatValue();
 
         String gain;
 
-        // TODO: Use local files
-        if (rounded > 0){
-            gain = "<img src='" + new File("data/default/profit.png").toURI() + "' width='9' height='10'> " + rounded + " %";
+        if (percentage_gain > 0){
+            bd = bd.round(new MathContext(4));
+            float rounded = bd.floatValue();
+            gain = "&nbsp;<img src='" + new File("data/default/profit.png").toURI() + "' width='9' height='10'> " + rounded + "%";
         } else {
-            gain = "<img src='" + new File("data/default/loss.png").toURI() + "' width='9' height='9'> " + rounded + " %";
+            bd = bd.round(new MathContext(3));
+            float rounded = bd.floatValue();
+            gain = "<img src='" + new File("data/default/loss.png").toURI() + "' width='9' height='9'>" + rounded + "%";
         }
         return gain;
     }
 
-    public void sortResults(String filename){
+    public void sortResults(String filename, int sortColumn){
         String[][] array = Utils.convertToMultiDArrayFromCSV(filename, 6);
         ArrayList<String> arraylist = FileHandler.readFromFile(filename);
-        ArrayList<String> sortedResults = Utils.selectionSortByColumn(arraylist, array, 4);
+        ArrayList<String> sortedResults = Utils.selectionSortByColumn(arraylist, array, sortColumn);
 
         // formatting: removing the leading empty line character and the first result as it's already saved
         sortedResults.remove(0);
@@ -317,7 +327,7 @@ public class SimulationResults extends JPanel {
             try {
                 crossoverTester.simulate(); // does the simulation and updates/saves to a file
                 // converting into 2D parsed csv file, TODO: CRITERION: doing here so that it only has to do once, IMMEDIATELY AFTER SIMULATION
-                sortResults(filename);
+                sortResults(filename, 4);
             } catch (Exception e) {
                 System.out.println("Error while running simulation");
                 // TODO: SHOW ERROR IN THE GUI TOO, A POP UP WILL WORK
@@ -328,15 +338,21 @@ public class SimulationResults extends JPanel {
         // file handler, read in the simulation results saved to a csv and show it in a table
         String[][] simulation_results = Utils.convertToMultiDArrayFromCSV(filename, 6);
 
+        // Labels
+        labels.setText("   "+type1+", "+type2+",   Profit (%),  Trades");
+        labels.setBounds(70,260, 300, 30);
+        add(labels);
+
+
 
         // top 6
-        for (int i = 0; i<6; i++){
+        for (int i = 0; i<5; i++){
             int simulationResultsIndex = resultIndexStart + i;
 
-            String text = "<html>" + simulation_results[simulationResultsIndex][1] + ", " + simulation_results[simulationResultsIndex][3] + ", " + paddGain(simulation_results[simulationResultsIndex][4]) + ", " + simulation_results[simulationResultsIndex][5] + "</html>";
+            String text = "<html>" + simulation_results[simulationResultsIndex][1] + ", " + simulation_results[simulationResultsIndex][3] + "," + paddGain(simulation_results[simulationResultsIndex][4]) + ",&nbsp;" + simulation_results[simulationResultsIndex][5] + "</html>";
             results[i].setText(text);
-//            results[i].setFont(new Font("Verdana", Font.BOLD,12));
-            results[i].setBounds(70,(i*35)+260, 300, 30);
+            results[i].setFont(new Font("Consolas", Font.BOLD,13));
+            results[i].setBounds(70,(i*35)+295, 200, 30);
             results[i].setHorizontalAlignment(SwingConstants.LEFT);
             results[i].setContentAreaFilled(false);
             int current = simulationResultsIndex;
@@ -362,6 +378,7 @@ public class SimulationResults extends JPanel {
                 resultIndexStart = resultIndexStart-6;
                 if (resultIndexStart<0){resultIndexStart=0;}
                 displayResults(false);
+                repaint();
             }
         });
         previousResults.setVisible(true);
@@ -375,6 +392,7 @@ public class SimulationResults extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 resultIndexStart = resultIndexStart+6;
                 displayResults(false);
+                repaint();
             }
         });
         nextResults.setVisible(true);
@@ -391,13 +409,83 @@ public class SimulationResults extends JPanel {
         });
         add(clearResultsBtn);
 
+
+
+
+
+        // Sort Result options
+
+        sortByLabel.setText("Sort by (Asc):");
+        sortByLabel.setBounds(300, 295, 85, 25);
+        add(sortByLabel);
+
+
+        sortByProfit.setText("Profit");
+        sortByProfit.setBounds(300,320, 75, 20);
+        sortByProfit.setContentAreaFilled(false);
+
+        sortByProfit.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                sortResults(filename, 4);
+                displayResults(false);
+            }
+        });
+        add(sortByProfit);
+
+
+        sortByTrades.setText("Trades");
+        sortByTrades.setBounds(300,345, 75, 20);
+        sortByTrades.setContentAreaFilled(false);
+
+        sortByTrades.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                sortResults(filename, 5);
+                displayResults(false);
+            }
+        });
+        add(sortByTrades);
+
+
+        sortByMA1.setText(type1);
+        sortByMA1.setBounds(300,370, 75, 20);
+        sortByMA1.setContentAreaFilled(false);
+
+        sortByMA1.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                sortResults(filename, 0);
+                displayResults(false);
+            }
+        });
+        add(sortByMA1);
+
+
+        sortByMA2.setText(type2);
+        sortByMA2.setBounds(300,395, 75, 20);
+        sortByMA2.setContentAreaFilled(false);
+
+        sortByMA2.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                sortResults(filename, 1);
+                displayResults(false);
+            }
+        });
+        add(sortByMA2);
+
+
         repaint();
     }
 
     private void clearResults(){
         for (JButton btn: results){
-            remove(btn);
-            repaint();
+            remove(btn); // clearing the actual results
         }
+        // clearing things associated with results
+        remove(labels);
+        remove(sortByLabel);
+        remove(sortByProfit);
+        remove(sortByTrades);
+        remove(sortByMA1);
+        remove(sortByMA2);
+        repaint();
     }
 }
