@@ -76,14 +76,15 @@ public class AssetInfo extends JPanel {
         add(technicalAboutLabel);
 
         JButton googletrends = new JButton();
-        googletrends.setIcon(new ImageIcon(new ImageIcon("data/default/googletrends.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+        googletrends.setIcon(new ImageIcon(new ImageIcon("data/default/googletrends.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
         googletrends.setContentAreaFilled(false);
-        googletrends.setBounds(350, 180, 30, 30);
+        googletrends.setBounds(350, 180, 20, 20);
         googletrends.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae){
                 Utils.openWebpage(URI.create("https://trends.google.com/trends/explore?q="+asset.ticker));
             }
         });
+        googletrends.setBorderPainted(false);
         add(googletrends);
         repaint();
 
