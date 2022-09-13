@@ -98,7 +98,7 @@ def actOnSignal(symbol, signal):
 
         # TODO: CHECK IF WE HAVE A POSITION OR SOMETHING ELSE
         # close all positions first, then buy more
-        # closePosition(symbol)
+        closePosition(symbol)
 
 
         qty = calculateTradeSizeAllocation(symbol)
@@ -108,7 +108,7 @@ def actOnSignal(symbol, signal):
 
         # TODO: CHECK IF WE HAVE A POSITION OR SOMETHING ELSE
         # close all positions first, then short more
-        # closePosition(symbol)
+        closePosition(symbol)
 
 
         qty = calculateTradeSizeAllocation(symbol)

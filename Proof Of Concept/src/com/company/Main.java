@@ -75,8 +75,8 @@ public class Main {
 //        GUICaller.Login();
 //        GUICaller.startup();
 //        GUICaller.HomeScreen();
-        GUICaller.AssetInfo(stock);
-        GUICaller.SimulationResults(stock);
+//        GUICaller.AssetInfo(stock);
+//        GUICaller.SimulationResults(stock);
 
 //        JsonArray data = AlpacaAPIHandler.getStockList();
 //        String value = String.valueOf(data);
@@ -225,5 +225,7 @@ public class Main {
 
         // TODO: HAVE OPTION TO SEE THE SCHEDULED AND RUNNING TRADES, CAN RUN MULTIPLE, WELL JUST SHOW THAT IT CAN
         // TODO: AND IF TRADER ALREADY TRADING ON IT, SHOW A TICK MARK IN GUI
+
+        GUICaller.Trader(stock);
     }
 }

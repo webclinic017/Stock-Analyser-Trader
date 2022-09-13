@@ -206,15 +206,14 @@ public class CrossoverTester {
         // TODO: Figure out best best lower ma to start at
         for (int testMA1 = 12; testMA1<201; testMA1++){
             for (int testMA2 = 20; testMA2<201; testMA2++){
-                // TODO: if testMA1 is bigger than testMA2, this means that shorting is going one instead of buying, make this clear
-
+                if (testMA2 > testMA1) {
                     result = test(testMA1, testMA2, false);
                     float gain = result[0];
                     number_of_trades = (int) result[1];
 
                     // Comment this out to not log... TODO: Add a section in Preferences...
                     String log = type1 + "," + testMA1 + "," + type2 + "," + testMA2 + "," + gain + "," + number_of_trades + "\n";
-                    simulation_log.append(log); // TODO: Include in Criterion - FAR FAR FAR more effieicne then just String += log; less time and processing power
+                    simulation_log.append(log); // TODO: Include in Criterion - FAR FAR FAR more efficient then just String += log; less time and processing power
 
                     if (gain > highest_returns) {
                         highest_returns = gain;
@@ -222,6 +221,7 @@ public class CrossoverTester {
                         bestMA2 = testMA2;
                         number_of_trades_best = number_of_trades;
                     }
+                }
 
             }
         }

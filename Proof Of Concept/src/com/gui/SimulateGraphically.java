@@ -1,5 +1,6 @@
 package com.gui;
 
+import com.analyzer.backtesting.CrossoverTester;
 import com.analyzer.tools.EMA;
 import com.analyzer.tools.SMA;
 import com.api.RequestHandler;
@@ -219,7 +220,15 @@ public class SimulateGraphically extends JPanel {
         });
         add(autoTrade);
 
+        tradeslabel = new JLabel("Executed Trades");
+        tradeslabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
+        tradeslabel.setBounds(610, 140, 300, 50);
+        tradeslabel.setVisible(false);
+        add(tradeslabel);
 
+
+        CrossoverTester crossoverTester = new CrossoverTester(asset, type1, type2);
+        crossoverTester.test(ma1, ma2, true); // logging the trades: true
 
         // trades TODO: FORMAT THESE A BIT
         ArrayList<String> trades = FileHandler.readFromFile("data/stock/"+asset.ticker+"/ma-crossover-trades-"+asset.historicalDataTimeframe+"-"+maType1+"-"+ma1+"-"+maType2+"-"+ma2+".csv");
@@ -227,14 +236,6 @@ public class SimulateGraphically extends JPanel {
         for (String line: trades){
             tradesExecuted.append(line+"\n");
         }
-
-
-        tradeslabel = new JLabel("Executed Trades");
-        tradeslabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
-        tradeslabel.setBounds(610, 140, 300, 50);
-        tradeslabel.setVisible(false);
-        add(tradeslabel);
-
 
         tradesExec = new JTextArea();
         tradesExec.setText(tradesExecuted.toString());

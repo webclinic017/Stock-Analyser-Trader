@@ -22,7 +22,7 @@ public class FinnhubAPI {
         return make_request(request_url, true);
     }
 
-    public String[] constituents(String ticker) throws Exception {
+    public static String[] constituents(String ticker) {
         if (ticker.equals("NDX")){
             return new String[]{"CTSH","WDAY","AZN","COST","FISV","KHC","PCAR","MTCH","DXCM","TXN","ATVI","ZS","ORLY","DLTR","VRSN","ASML","KDP","SIRI","SPLK","CTAS","REGN","PEP","PAYX","ANSS","AMD","IDXX","ISRG","ALGN","CSX","DOCU","CSCO","PDD","FB","ADBE","GILD","CMCSA","MSFT","CHTR","XEL","SWKS","VRSK","AAPL","MNST","EBAY","ODFL","CEG","NVDA","AVGO","OKTA","LCID","BKNG","ADSK","ILMN","INTU","ROST","NXPI","PYPL","ADP","ADI","MAR","KLAC","NTES","ZM","ABNB","MU","JD","BIIB","MCHP","EXC","EA","AMZN","GOOG","CRWD","AMAT","TSLA","AEP","LRCX","GOOGL","WBA","SGEN","SBUX","QCOM","MDLZ","NFLX","AMGN","VRTX","FAST","BIDU","MRNA","TEAM","DDOG","PANW","INTC","SNPS","CPRT","HON","MELI","CDNS","TMUS","FTNT","MRVL","LULU"};
         }

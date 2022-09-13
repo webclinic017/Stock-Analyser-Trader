@@ -93,7 +93,7 @@ public class GUICaller {
     public static void Trader(Asset asset) throws Exception {
         System.out.println("SEQUENCE: Trader");
         JFrame frame = new JFrame("Trader");
-        Trader myGUI = new Trader(280, 150, asset);
+        MassSimulate myGUI = new MassSimulate(280, 150, asset);
         frame.add(myGUI);
         frame.pack();
         frame.setVisible(true);
