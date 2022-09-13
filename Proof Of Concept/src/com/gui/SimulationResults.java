@@ -334,6 +334,7 @@ public class SimulationResults extends JPanel {
                 sortResults(filename, 4);
             } catch (Exception e) {
                 System.out.println("Error while running simulation");
+                e.printStackTrace();
                 // TODO: SHOW ERROR IN THE GUI TOO, A POP UP WILL WORK
             }
         }
@@ -356,7 +357,7 @@ public class SimulationResults extends JPanel {
             String text = "<html>" + simulation_results[simulationResultsIndex][1] + ", " + simulation_results[simulationResultsIndex][3] + "," + paddGain(simulation_results[simulationResultsIndex][4]) + ",&nbsp;" + simulation_results[simulationResultsIndex][5] + "</html>";
             results[i].setText(text);
             results[i].setFont(new Font("Consolas", Font.BOLD,13));
-            results[i].setBounds(70,(i*35)+295, 200, 30);
+            results[i].setBounds(70,(i*35)+295, 210, 30);
             results[i].setHorizontalAlignment(SwingConstants.LEFT);
             results[i].setContentAreaFilled(false);
             int current = simulationResultsIndex;

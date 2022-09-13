@@ -5,6 +5,7 @@ import com.analyzer.tools.SMA;
 import com.asset.Asset;
 import com.utils.FileHandler;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -33,6 +34,11 @@ public class CrossoverTester {
 
     // TODO: SEPERATE THE ACTUAL CROSSOVER PART INTO A NEW CLASS TO MAKE IT NEATER, SO LIKE GIVE IT A INDEX OF DAY AND IT WILL RETURN BOOLEAN IF CROSSOVER OR NOT
     public float[] test(int ma1, int ma2, boolean log_trades) throws Exception {
+
+        String currentHoldingPositionType = ""; // to calculate daily profit
+        StringBuilder eachCloseProfit = new StringBuilder();
+        float totalCloseUnrealisedProfit = 1; // starting at 100% of the portfolio size
+
         float total_gain = 0;
         int numbers_of_trades = 0;
 
@@ -114,10 +120,14 @@ public class CrossoverTester {
         for (int i = 0; i < total_data_size; i++){
 
             if (buy_sell[i] != null) { // making sure the data exists as it won't for the last index due to i+1 used previously in buy_sell
-                if (buy_sell[i] == 1) {
-                    last_bought = (historicalData[i][5] + historicalData[i][1])/2; // average price of the day... 5 - close, 1 - open
+                if (buy_sell[i] == 1) { // BUY
+                    currentHoldingPositionType = "buy";
+
+
+                    float todayAveragePrice = (historicalData[i][5] + historicalData[i][1])/2; // average price of the day... 5 - close, 1 - open
+                    last_bought = todayAveragePrice;
                     float gain = (last_bought-last_sold)/last_sold;
-                    if (Double.isInfinite(gain)){
+                    if (Double.isInfinite(gain) || Double.isNaN(gain)){
                         gain = 0; // as it's because divided by zero, which means no trades were done before so profit is zero.
                     }
 
@@ -129,24 +139,52 @@ public class CrossoverTester {
                     }
                 }
 
-                if (buy_sell[i] == 0) {
+                if (buy_sell[i] == 0) { // SELL
+                    currentHoldingPositionType = "sell";
 
                     if (last_bought != 0) { // if the stock has been bought once before...
                         // TODO: When would you sell? At the next day's open or at that day's close? - Make the decision
-                        last_sold = (historicalData[i][5] + historicalData[i][1])/2; // average price of the day...
+                        float todayAveragePrice = (historicalData[i][5] + historicalData[i][1])/2; // average price of the day... 5 - close, 1 - open
+                        last_sold = todayAveragePrice;
                         float gain = (last_sold-last_bought)/last_bought;
+                        if (Double.isInfinite(gain) || Double.isNaN(gain)){
+                            gain = 0; // as it's because divided by zero, which means no trades were done before so profit is zero.
+                        }
+
                         total_gain = total_gain + gain;
                         if (log_trades) {
                             log = "SELL/SHORT," + last_sold + "," + gain*100 + "\n";
                             buy_sell_log.append(log);
                         }
                     }
+                } else {
+                    currentHoldingPositionType = "hold";
+                }
+            }
+
+            if (log_trades) {
+                // CALCULATING DAILY UNREALIZED EQUITY VALUE
+                if (i > 0) { // least one candle stick should pass by
+                    float lastDayClose = historicalData[i - 1][5];
+                    float todayClose = historicalData[i][5];
+                    float difference = 0;
+
+                    if (currentHoldingPositionType.equals("buy")) {
+                        difference = (todayClose - lastDayClose) / todayClose;
+                    }
+                    if (currentHoldingPositionType.equals("sell")) {
+                        difference = (lastDayClose - todayClose) / lastDayClose;
+                    }
+
+                    totalCloseUnrealisedProfit = totalCloseUnrealisedProfit + difference;
+                    eachCloseProfit.append(totalCloseUnrealisedProfit + "\n");
                 }
             }
         }
 
         if (log_trades) {
             fileHandler.writeToFile("data/stock/"+ticker+"/ma-crossover-trades-"+asset.historicalDataTimeframe+"-"+type1+"-"+ma1+"-"+type2+"-"+ma2+".csv", String.valueOf(buy_sell_log),false);
+            fileHandler.writeToFile("data/stock/"+ticker+"/ma-crossover-trades-"+asset.historicalDataTimeframe+"-"+type1+"-"+ma1+"-"+type2+"-"+ma2+"-equitycurve.csv", String.valueOf(eachCloseProfit),false);
         }
 
         return new float[]{(total_gain * 100), numbers_of_trades};

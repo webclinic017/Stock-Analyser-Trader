@@ -9,7 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="GUI improvement">
+    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="Added trade executed log for specific simulation in GUI">
       <change afterPath="$PROJECT_DIR$/.idea/artifacts/Source_Code_jar.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
@@ -17,9 +17,10 @@
       <change beforePath="$PROJECT_DIR$/Python/Trader.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/Trader.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/simulation-result.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/simulation-result.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/analyzer/backtesting/CrossoverTester.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/analyzer/backtesting/CrossoverTester.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/gui/GUICaller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/GUICaller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/gui/SimulateGraphically.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/SimulateGraphically.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/utils/Utils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/utils/Utils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gui/SimulationResults.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/SimulationResults.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/gui/GUICaller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/gui/GUICaller.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,20 +112,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1648929083891</updated>
-    </task>
-    <task id="LOCAL-00048" summary="Added a class to Execute real trades">
-      <created>1660137225508</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1660137225508</updated>
-    </task>
-    <task id="LOCAL-00049" summary="Improvements and added functionalities.">
-      <created>1660341236964</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1660341236964</updated>
     </task>
     <task id="LOCAL-00050" summary="Added few ideas">
       <created>1660341634543</created>
@@ -455,7 +442,21 @@
       <option name="project" value="LOCAL" />
       <updated>1663015847286</updated>
     </task>
-    <option name="localTasksCounter" value="97" />
+    <task id="LOCAL-00097" summary="Bug fix, BUY profits were not being calculated properly">
+      <created>1663069463524</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1663069463524</updated>
+    </task>
+    <task id="LOCAL-00098" summary="Added trade executed log for specific simulation in GUI">
+      <created>1663069535906</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1663069535906</updated>
+    </task>
+    <option name="localTasksCounter" value="99" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -477,8 +478,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/../.." />
     </ignored-roots>
-    <MESSAGE value="GUI Bug fixes/improvements, Added more info to Crypto" />
-    <MESSAGE value="Implemented expire to Cache URLs, auto-renew upon startup if expired, few bug fixes" />
     <MESSAGE value="Added a client_id which logs which timeframe the Trader executed the trade" />
     <MESSAGE value="Experimentation with the new Alpaca-py object-oriented module, Executing trades and getting historical intraday data for trade execution" />
     <MESSAGE value="Got min-to-min live data for Trader, Added logic ideas" />
@@ -502,7 +501,9 @@
     <MESSAGE value="Added Visual validator of time selection in SimulationResults GUI" />
     <MESSAGE value="Added Google Trends to AssetInfo" />
     <MESSAGE value="GUI improvement" />
-    <option name="LAST_COMMIT_MESSAGE" value="GUI improvement" />
+    <MESSAGE value="Bug fix, BUY profits were not being calculated properly" />
+    <MESSAGE value="Added trade executed log for specific simulation in GUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added trade executed log for specific simulation in GUI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
