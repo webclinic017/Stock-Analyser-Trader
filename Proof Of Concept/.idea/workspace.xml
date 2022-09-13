@@ -9,20 +9,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="Added Visual validator of time selection in SimulationResults GUI">
+    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="GUI improvement">
       <change afterPath="$PROJECT_DIR$/.idea/artifacts/Source_Code_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/default/googletrends.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Python/Trader.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/Trader.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/simulation-result.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/simulation-result.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/gui/AssetInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/AssetInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/gui/HomeScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/HomeScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/analyzer/backtesting/CrossoverTester.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/analyzer/backtesting/CrossoverTester.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gui/GUICaller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/GUICaller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/gui/SimulateGraphically.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/SimulateGraphically.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/utils/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/company/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/utils/Utils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/utils/Utils.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,20 +111,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1648929083891</updated>
-    </task>
-    <task id="LOCAL-00046" summary="Ideas for searching through the 3D array for ticker recommendation">
-      <created>1654765392174</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1654765392174</updated>
-    </task>
-    <task id="LOCAL-00047" summary="Idea to separate data into training and testing">
-      <created>1659864783239</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1659864783239</updated>
     </task>
     <task id="LOCAL-00048" summary="Added a class to Execute real trades">
       <created>1660137225508</created>
@@ -458,7 +441,21 @@
       <option name="project" value="LOCAL" />
       <updated>1662921041433</updated>
     </task>
-    <option name="localTasksCounter" value="95" />
+    <task id="LOCAL-00095" summary="Added Google Trends to AssetInfo">
+      <created>1662923931021</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1662923931021</updated>
+    </task>
+    <task id="LOCAL-00096" summary="GUI improvement">
+      <created>1663015847285</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1663015847286</updated>
+    </task>
+    <option name="localTasksCounter" value="97" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -480,8 +477,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/../.." />
     </ignored-roots>
-    <MESSAGE value="Implemented Caching at the RequestHandler level" />
-    <MESSAGE value="Bug fixes, added timeout urls" />
     <MESSAGE value="GUI Bug fixes/improvements, Added more info to Crypto" />
     <MESSAGE value="Implemented expire to Cache URLs, auto-renew upon startup if expired, few bug fixes" />
     <MESSAGE value="Added a client_id which logs which timeframe the Trader executed the trade" />
@@ -505,7 +500,9 @@
     <MESSAGE value="Bug Fix where Cache was unwantingly renewing data on every startup" />
     <MESSAGE value="Implemented sort functionality to SimulationResults by various methods" />
     <MESSAGE value="Added Visual validator of time selection in SimulationResults GUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Visual validator of time selection in SimulationResults GUI" />
+    <MESSAGE value="Added Google Trends to AssetInfo" />
+    <MESSAGE value="GUI improvement" />
+    <option name="LAST_COMMIT_MESSAGE" value="GUI improvement" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

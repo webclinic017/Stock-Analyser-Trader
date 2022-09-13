@@ -44,6 +44,9 @@ public class SimulateGraphically extends JPanel {
     Color ma1Color = Color.RED;
     Color ma2Color = Color.GREEN;
 
+    JTextArea tradesExec;
+    JLabel tradeslabel;
+
     // TODO: Add a iframe and embed tradingview
     public SimulateGraphically(int width, int height, Asset asset, int ma1, int ma2, String type1, String type2) throws Exception {
         this.width = width;
@@ -77,14 +80,14 @@ public class SimulateGraphically extends JPanel {
         name.setBounds(150, 115, 350, 50);
         add(name);
 
-        JLabel buy = new JLabel("Buy");
+        JLabel buy = new JLabel("Cover Short & Buy");
         buy.setIcon(new ImageIcon(new ImageIcon("data/default/profit.png").getImage().getScaledInstance(8, 8, Image.SCALE_DEFAULT))); // scaling the image properly so that there is no stretch
-        buy.setBounds(475, 550, 150, 15);
+        buy.setBounds(470, 550, 150, 15);
         add(buy);
 
         JLabel shortsell = new JLabel("Sell & Short");
         shortsell.setIcon(new ImageIcon(new ImageIcon("data/default/loss.png").getImage().getScaledInstance(8, 8, Image.SCALE_DEFAULT))); // scaling the image properly so that there is no stretch
-        shortsell.setBounds(475, 570, 150, 15);
+        shortsell.setBounds(470, 570, 150, 15);
         add(shortsell);
 
         JLabel ma1label = new JLabel(maType1.toUpperCase() + " (Short) --> " + ma1);
@@ -174,6 +177,9 @@ public class SimulateGraphically extends JPanel {
                         counter++;
                         repaint();
                     } catch (Exception error){
+                        tradeslabel.setVisible(true);
+                        tradesExec.setVisible(true);
+                        repaint();
                         System.out.println("Simulation finished");
                         timer.stop();
                     }
@@ -213,7 +219,29 @@ public class SimulateGraphically extends JPanel {
         });
         add(autoTrade);
 
-        // So when the animation is running for a few will be running on screen, it does the actual simulation
+
+
+        // trades TODO: FORMAT THESE A BIT
+        ArrayList<String> trades = FileHandler.readFromFile("data/stock/"+asset.ticker+"/ma-crossover-trades-"+asset.historicalDataTimeframe+"-"+maType1+"-"+ma1+"-"+maType2+"-"+ma2+".csv");
+        StringBuilder tradesExecuted = new StringBuilder();
+        for (String line: trades){
+            tradesExecuted.append(line+"\n");
+        }
+
+
+        tradeslabel = new JLabel("Executed Trades");
+        tradeslabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
+        tradeslabel.setBounds(610, 140, 300, 50);
+        tradeslabel.setVisible(false);
+        add(tradeslabel);
+
+
+        tradesExec = new JTextArea();
+        tradesExec.setText(tradesExecuted.toString());
+        tradesExec.setEditable(false);
+        tradesExec.setVisible(false);
+        tradesExec.setBounds(610, 180, 250, 400);
+        add(tradesExec);
 
     }
 
