@@ -87,11 +87,11 @@ public class CrossoverTester {
             if (previous != next){
                 if (previous == true & next == false){ // if small crosses the higher, sell
                     buy_sell[i] = 0; // 1 - buy & 0 - sell
-                    numbers_of_trades += 1;
+                    numbers_of_trades += 2; // because it's first sell the current position, then short the stock
 
                 } else if (previous == false & next == true){ // if small crosses the higher, buy
                     buy_sell[i] = 1;
-                    numbers_of_trades += 1;
+                    numbers_of_trades += 2; // because it's first cover the short position, then buy the stock
 
                 } else {
                     buy_sell[i] = -1; // if the same, nothing
@@ -116,8 +116,15 @@ public class CrossoverTester {
             if (buy_sell[i] != null) { // making sure the data exists as it won't for the last index due to i+1 used previously in buy_sell
                 if (buy_sell[i] == 1) {
                     last_bought = (historicalData[i][5] + historicalData[i][1])/2; // average price of the day... 5 - close, 1 - open
+                    float gain = (last_bought-last_sold)/last_sold;
+                    if (Double.isInfinite(gain)){
+                        gain = 0; // as it's because divided by zero, which means no trades were done before so profit is zero.
+                    }
+
+                    total_gain = total_gain + gain;
+
                     if (log_trades) {
-                        log = "buy,"+last_bought+"\n";
+                        log = "SHORT-COVER/BUY,"+last_bought+ "," + gain*100 + "\n";
                         buy_sell_log.append(log);
                     }
                 }
@@ -130,7 +137,7 @@ public class CrossoverTester {
                         float gain = (last_sold-last_bought)/last_bought;
                         total_gain = total_gain + gain;
                         if (log_trades) {
-                            log = "sell," + last_sold + "," + gain*100 + "\n";
+                            log = "SELL/SHORT," + last_sold + "," + gain*100 + "\n";
                             buy_sell_log.append(log);
                         }
                     }
@@ -139,7 +146,7 @@ public class CrossoverTester {
         }
 
         if (log_trades) {
-            fileHandler.writeToFile("data/stock/"+ticker+"/best-ma-crossover-simulation-trades.csv", String.valueOf(buy_sell_log),false);
+            fileHandler.writeToFile("data/stock/"+ticker+"/ma-crossover-trades-"+asset.historicalDataTimeframe+"-"+type1+"-"+ma1+"-"+type2+"-"+ma2+".csv", String.valueOf(buy_sell_log),false);
         }
 
         return new float[]{(total_gain * 100), numbers_of_trades};
