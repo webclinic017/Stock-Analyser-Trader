@@ -34,3 +34,10 @@ Projects while at BGS doing IB Computer Science
 |SMA-Crossover|BTC-USD|44  |39  |71.31765 |11           |short|
 |SMA-Crossover|ETH-USD|51  |27  |85.57481 |9            |short|
 
+
+## Future Goals
+Calculate the average hold period for different MAs<br>
+Calculate the average sucess rate<br>
+And average profit per trade<br>
+Results: Sucess rate, weigh by the profit or loss made, instead of simply by total profit
+
