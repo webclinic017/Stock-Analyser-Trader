@@ -457,7 +457,7 @@ public class SimulationResults extends JPanel {
 
         sortByMA1.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
-                sortResults(filename, 0);
+                sortResults(filename, 1);
                 displayResults(false);
             }
         });
@@ -470,7 +470,8 @@ public class SimulationResults extends JPanel {
 
         sortByMA2.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
-                sortResults(filename, 1);
+                sortResults(filename, 3
+                );
                 displayResults(false);
             }
         });

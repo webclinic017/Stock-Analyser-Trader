@@ -9,21 +9,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="Calculates Equity value curve for each close candle, exports to Excel">
+    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="Added MassSimulate GUI, able to simulate whole of an Index at once">
       <change afterPath="$PROJECT_DIR$/.idea/artifacts/Source_Code_jar.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/Trader.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/Trader.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/simulation-result.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/simulation-result.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/analyzer/backtesting/CrossoverTester.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/analyzer/backtesting/CrossoverTester.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/api/FinnhubAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/api/FinnhubAPI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/gui/GUICaller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/GUICaller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/gui/SimulateGraphically.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/SimulateGraphically.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/gui/Trader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/MassSimulate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/company/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/gui/GUICaller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/gui/GUICaller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gui/SimulationResults.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/SimulationResults.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,20 +108,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1648929083891</updated>
-    </task>
-    <task id="LOCAL-00051" summary="Analyzer class able to generate model based on categories, in progress">
-      <created>1660345200737</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1660345200737</updated>
-    </task>
-    <task id="LOCAL-00052" summary="Added new ideas to interface with python to execute trades and get some data">
-      <created>1660483972697</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1660483972697</updated>
     </task>
     <task id="LOCAL-00053" summary="Added new datasource for intraday historical data for aggressive trading">
       <created>1660494291663</created>
@@ -459,7 +438,21 @@
       <option name="project" value="LOCAL" />
       <updated>1663076042241</updated>
     </task>
-    <option name="localTasksCounter" value="100" />
+    <task id="LOCAL-00100" summary="Bug Fixes">
+      <created>1663078883525</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1663078883525</updated>
+    </task>
+    <task id="LOCAL-00101" summary="Added MassSimulate GUI, able to simulate whole of an Index at once">
+      <created>1663078921029</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1663078921029</updated>
+    </task>
+    <option name="localTasksCounter" value="102" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -481,8 +474,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/../.." />
     </ignored-roots>
-    <MESSAGE value="Experimentation with the new Alpaca-py object-oriented module, Executing trades and getting historical intraday data for trade execution" />
-    <MESSAGE value="Got min-to-min live data for Trader, Added logic ideas" />
     <MESSAGE value="Bug fixes in CustomSimulation" />
     <MESSAGE value="Allowing MA values to be lower as good data sources available" />
     <MESSAGE value="Added few methods, Added Server.py" />
@@ -506,7 +497,9 @@
     <MESSAGE value="Bug fix, BUY profits were not being calculated properly" />
     <MESSAGE value="Added trade executed log for specific simulation in GUI" />
     <MESSAGE value="Calculates Equity value curve for each close candle, exports to Excel" />
-    <option name="LAST_COMMIT_MESSAGE" value="Calculates Equity value curve for each close candle, exports to Excel" />
+    <MESSAGE value="Bug Fixes" />
+    <MESSAGE value="Added MassSimulate GUI, able to simulate whole of an Index at once" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added MassSimulate GUI, able to simulate whole of an Index at once" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

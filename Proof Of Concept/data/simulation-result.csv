@@ -1249,3 +1249,8 @@ MA-Crossover,FISV,ema,19,sma,20,19.111917,74,long
 MA-Crossover,MTCH,ema,13,sma,55,44.625843,26,long
 MA-Crossover,ROST,ema,82,sma,114,43.470165,6,long
 MA-Crossover,ADI,ema,21,sma,22,48.74305,70,long
+MA-Crossover,AAPL,ema,18,sma,24,172.4067,66,long
+MA-Crossover,AAPL,ema,18,sma,24,172.4067,66,long
+MA-Crossover,AAPL,ema,18,sma,24,172.4067,66,long
+MA-Crossover,AAPL,ema,129,sma,188,1994.8519,110,long
+MA-Crossover,BTCUSD,ema,12,sma,39,566.5585,62,long
