@@ -1,7 +1,14 @@
 # School
 Projects while at BGS doing IB Computer Science
 
+
 > Uses a self made wrapper for YahooFinance API to get historical data for any asset, then does a SMACrossover simulation for every single possible/reasonable smas to determine the most profit potential. Combined with another self made wrapper for AlpacaAPI to stream live asset data such as quotes and live news from a websocket.
+
+## Release
+<a href="https://github.com/LissanKoirala/Stock-Analyser-Trader/releases/tag/v0.7.0-alpha"><img src="https://user-images.githubusercontent.com/58141138/190860600-4b5d2191-a4d0-4c3a-89a7-f017e716a2fe.png" alt="drawing"/></a>
+
+
+
 
 # [IA] Stock trader project
 
