@@ -12,6 +12,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 import javax.swing.Timer;
 
@@ -82,7 +84,7 @@ public class SimulateGraphically extends JPanel {
         name.setBounds(120, 115, 350, 50);
         add(name);
 
-        JLabel buy = new JLabel("Buy");
+        JLabel buy = new JLabel("Long");
         buy.setIcon(new ImageIcon(new ImageIcon("data/default/profit.png").getImage().getScaledInstance(8, 8, Image.SCALE_DEFAULT))); // scaling the image properly so that there is no stretch
         buy.setBounds(470, 550, 150, 15);
         add(buy);
@@ -244,7 +246,13 @@ public class SimulateGraphically extends JPanel {
                 tradeType = tradeType.replace("SHORT-COVER/BUY", "BUY");
                 tradeType = tradeType.replace("SELL/SHORT", "SHORT");
 
-                String text = tradesExecuted[i][0] + ", " + tradeType + " @ " + tradesExecuted[i][2] + " " + Utils.paddGain(tradesExecuted[i][3]);
+                // rounding price
+                String price = tradesExecuted[i][2];
+                float percentage_gain = Float.parseFloat(price);
+                BigDecimal bd = new BigDecimal(percentage_gain);
+                float roundedPrice = bd.round(new MathContext(4)).floatValue();
+
+                String text = tradesExecuted[i][0] + ", " + tradeType + " @ " + roundedPrice + " " + Utils.paddGain(tradesExecuted[i][3]);
                 tradesExecutedString.append(text + "<br>");
             }  catch (Exception ignored){}
 
@@ -261,7 +269,7 @@ public class SimulateGraphically extends JPanel {
 
         scrollableTextArea = new JScrollPane(tradesExec);
         scrollableTextArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollableTextArea.setBounds(610, 180, 350, 400);
+        scrollableTextArea.setBounds(610, 180, 275, 400);
         scrollableTextArea.setVisible(false);
         add(scrollableTextArea);
 
@@ -341,7 +349,7 @@ public class SimulateGraphically extends JPanel {
 
                 if (ma_crossover_buy_state != previous_ma_crossover_buy_state){ // then crossover happened
                     if (ma_crossover_buy_state) { // if it changed to true, it means buy state
-                        System.out.println("BUY");
+                        System.out.println("LONG");
                         System.out.println(close_price);
                         g.setColor(Color.GREEN);
 //                        g.drawLine(day_counter,0, day_counter, height);

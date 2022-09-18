@@ -120,7 +120,7 @@ public class CrossoverTester {
 
             if (buy_sell[i] != null) { // making sure the data exists as it won't for the last index due to i+1 used previously in buy_sell
                 if (buy_sell[i] == 1) { // BUY
-                    currentHoldingPositionType = "buy";
+                    currentHoldingPositionType = "long";
 
 
                     float todayAveragePrice = (historicalData[i][5] + historicalData[i][1])/2; // average price of the day... 5 - close, 1 - open
@@ -133,13 +133,13 @@ public class CrossoverTester {
                     total_gain = total_gain + gain;
 
                     if (log_trades) {
-                        log = Utils.unixToDate(historicalData[i][0], asset.historicalDataTimeframe) + ", SHORT-COVER/BUY,"+last_bought+ "," + gain*100 + "\n";
+                        log = Utils.unixToDate(historicalData[i][0], asset.historicalDataTimeframe) + ", Long,"+last_bought+ "," + gain*100 + "\n";
                         buy_sell_log.append(log);
                     }
                 }
 
                 if (buy_sell[i] == 0) { // SELL
-                    currentHoldingPositionType = "sell";
+                    currentHoldingPositionType = "short";
 
                     if (last_bought != 0) { // if the stock has been bought once before...
                         // TODO: When would you sell? At the next day's open or at that day's close? - Make the decision
@@ -152,7 +152,7 @@ public class CrossoverTester {
 
                         total_gain = total_gain + gain;
                         if (log_trades) {
-                            log = Utils.unixToDate(historicalData[i][0], asset.historicalDataTimeframe) + ", SELL/SHORT," + last_sold + "," + gain*100 + "\n";
+                            log = Utils.unixToDate(historicalData[i][0], asset.historicalDataTimeframe) + ", Short," + last_sold + "," + gain*100 + "\n";
                             buy_sell_log.append(log);
                         }
                     }
@@ -168,10 +168,10 @@ public class CrossoverTester {
                     float todayClose = historicalData[i][5];
                     float difference = 0;
 
-                    if (currentHoldingPositionType.equals("buy")) {
+                    if (currentHoldingPositionType.equals("long")) {
                         difference = (todayClose - lastDayClose) / todayClose;
                     }
-                    if (currentHoldingPositionType.equals("sell")) {
+                    if (currentHoldingPositionType.equals("short")) {
                         difference = (lastDayClose - todayClose) / lastDayClose;
                     }
 
