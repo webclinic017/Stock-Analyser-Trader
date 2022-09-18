@@ -60,11 +60,11 @@ public class Utils {
             long unixTime = 0;
 
             if (timeframe.equals("1d")) {
-                DateFormat dateFormat = new SimpleDateFormat("dd-MM-yy");
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 Date date = dateFormat.parse(dateString);
                 unixTime = date.getTime() / 1000;
             } else {
-                DateFormat dateFormat = new SimpleDateFormat("dd-MM-yy hh:mm");
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                 Date date = dateFormat.parse(dateString);
                 unixTime = date.getTime() / 1000;
             }
@@ -83,7 +83,7 @@ public class Utils {
             SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
             return sdf.format(date);
         }
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd MMM yyyy");
         return sdf.format(date);
     }
 

@@ -9,15 +9,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="Showing executed trades per simulation in Results GUI with formatting">
+    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="GUI Improvements, Using abbreviations">
       <change afterPath="$PROJECT_DIR$/.idea/artifacts/Source_Code_jar.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/cache.db-journal" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/simulation-result.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/simulation-result.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/analyzer/backtesting/CrossoverTester.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/analyzer/backtesting/CrossoverTester.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/gui/GUICaller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/GUICaller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/gui/SimulateGraphically.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/SimulateGraphically.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/utils/Utils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/gui/GUICaller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/gui/GUICaller.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -110,13 +109,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1648929083891</updated>
-    </task>
-    <task id="LOCAL-00055" summary="Successfully integrated AlphaVantageAPI into the workflow to get historical intraday data">
-      <created>1660556104073</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1660556104073</updated>
     </task>
     <task id="LOCAL-00056" summary="Made Intraday simulation seamless via GUI">
       <created>1660563451721</created>
@@ -454,7 +446,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663515387455</updated>
     </task>
-    <option name="localTasksCounter" value="104" />
+    <task id="LOCAL-00104" summary="GUI Improvements, Using abbreviations">
+      <created>1663519356719</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1663519356720</updated>
+    </task>
+    <option name="localTasksCounter" value="105" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -476,7 +475,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/../.." />
     </ignored-roots>
-    <MESSAGE value="Added few methods, Added Server.py" />
     <MESSAGE value="Fixed a massive bug, Asset data from AlphaVantageAPI was in reverse order" />
     <MESSAGE value="Instantiating new asset class on each simulation to keep it separate, bug fixes" />
     <MESSAGE value="Trader.py works, updates its price and recalculates the MAs upon new data" />
@@ -501,7 +499,8 @@
     <MESSAGE value="Added MassSimulate GUI, able to simulate whole of an Index at once" />
     <MESSAGE value="Added UNIX date timestamp to asset's historical data" />
     <MESSAGE value="Showing executed trades per simulation in Results GUI with formatting" />
-    <option name="LAST_COMMIT_MESSAGE" value="Showing executed trades per simulation in Results GUI with formatting" />
+    <MESSAGE value="GUI Improvements, Using abbreviations" />
+    <option name="LAST_COMMIT_MESSAGE" value="GUI Improvements, Using abbreviations" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
