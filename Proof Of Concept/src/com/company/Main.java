@@ -61,7 +61,7 @@ public class Main {
 //        float average = Math.average(numbs);
 //        System.out.println(average);
 
-        Asset stock = Asset.create("TSLA");
+        Asset stock = Asset.create("AAPL");
 //        System.out.println(stock.info);
 //        System.out.println(stock.getNewsData());
 
@@ -75,7 +75,7 @@ public class Main {
 //        GUICaller.Login();
 //        GUICaller.startup();
 //        GUICaller.HomeScreen();
-//        GUICaller.AssetInfo(stock);
+        GUICaller.AssetInfo(stock);
 //        GUICaller.SimulationResults(stock);
 
 //        JsonArray data = AlpacaAPIHandler.getStockList();

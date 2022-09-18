@@ -2,16 +2,23 @@ package com.utils;
 
 import java.awt.*;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.InputStream;
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.StringTokenizer;
 
 public class Utils {
@@ -48,26 +55,37 @@ public class Utils {
     }
 
 
+    public float getUnix(String dateString, String timeframe){
+        try {
+            long unixTime = 0;
 
-    public Float[][] convertStringArrayToFloatArray(String[][] array){ // returns a float arraylist
-
-        Float[][] floatArray = new Float[array.length][array[0].length]; // figuring out how big the original array was
-
-        for (int x = 0; x < array.length; x++){
-            for (int y = 0; y < array[x].length; y++){
-                if (y == 0) { // if it's a date, convert to unix timestamp...
-                    floatArray[x][y] = new Float(0); // TODO: change this to actual time
-                } else {
-                    floatArray[x][y] = new Float(array[x][y]);
-                }
+            if (timeframe.equals("1d")) {
+                DateFormat dateFormat = new SimpleDateFormat("dd-MM-yy");
+                Date date = dateFormat.parse(dateString);
+                unixTime = date.getTime() / 1000;
+            } else {
+                DateFormat dateFormat = new SimpleDateFormat("dd-MM-yy hh:mm");
+                Date date = dateFormat.parse(dateString);
+                unixTime = date.getTime() / 1000;
             }
-        }
+            return (float) unixTime;
 
-        return floatArray;
+        } catch (Exception ignored){
+            return (float) 0;
+        }
     }
 
+    public static String unixToDate(float unix_time, String timeframe){
+        Date date = new Date();
+        date.setTime((long) unix_time*1000);
 
-
+        if (timeframe.equals("1d")) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
+            return sdf.format(date);
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        return sdf.format(date);
+    }
 
     // Bubble sort to sort either in ascending or descending
     public int[] sortArray(int[] array, boolean ascending){
@@ -245,6 +263,27 @@ public class Utils {
         }
         return false;
     }
+
+    public static String paddGain(String text){
+        // padding the results
+        float percentage_gain = Float.parseFloat(text);
+        BigDecimal bd = new BigDecimal(percentage_gain);
+
+        String gain;
+
+        if (percentage_gain > 0){
+            bd = bd.round(new MathContext(4));
+            float rounded = bd.floatValue();
+            gain = "&nbsp;<img src='" + new File("data/default/profit.png").toURI() + "' width='9' height='10'> " + rounded + "%";
+        } else {
+            bd = bd.round(new MathContext(3));
+            float rounded = bd.floatValue();
+            gain = "<img src='" + new File("data/default/loss.png").toURI() + "' width='9' height='9'>" + rounded + "%";
+        }
+        return gain;
+    }
+
+
 
 
 }

@@ -9,14 +9,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="Added MassSimulate GUI, able to simulate whole of an Index at once">
+    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="Added UNIX date timestamp to asset's historical data">
       <change afterPath="$PROJECT_DIR$/.idea/artifacts/Source_Code_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/META-INF/MANIFEST.MF" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/simulation-result.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/simulation-result.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/analyzer/backtesting/CrossoverTester.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/analyzer/backtesting/CrossoverTester.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gui/GUICaller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/GUICaller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gui/SimulateGraphically.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/SimulateGraphically.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/gui/SimulationResults.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/SimulationResults.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/utils/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/company/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/utils/Utils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/utils/Utils.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +69,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="TODO_SCOPE" value="All Places" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/data/default" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.24482758" />
@@ -108,13 +114,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1648929083891</updated>
-    </task>
-    <task id="LOCAL-00053" summary="Added new datasource for intraday historical data for aggressive trading">
-      <created>1660494291663</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1660494291663</updated>
     </task>
     <task id="LOCAL-00054" summary="Added more info for stocks, Added Intraday historical data for stocks Improved GUI">
       <created>1660516049319</created>
@@ -452,7 +451,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663078921029</updated>
     </task>
-    <option name="localTasksCounter" value="102" />
+    <task id="LOCAL-00102" summary="Added UNIX date timestamp to asset's historical data">
+      <created>1663515259084</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1663515259085</updated>
+    </task>
+    <option name="localTasksCounter" value="103" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -474,7 +480,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/../.." />
     </ignored-roots>
-    <MESSAGE value="Bug fixes in CustomSimulation" />
     <MESSAGE value="Allowing MA values to be lower as good data sources available" />
     <MESSAGE value="Added few methods, Added Server.py" />
     <MESSAGE value="Fixed a massive bug, Asset data from AlphaVantageAPI was in reverse order" />
@@ -499,7 +504,8 @@
     <MESSAGE value="Calculates Equity value curve for each close candle, exports to Excel" />
     <MESSAGE value="Bug Fixes" />
     <MESSAGE value="Added MassSimulate GUI, able to simulate whole of an Index at once" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added MassSimulate GUI, able to simulate whole of an Index at once" />
+    <MESSAGE value="Added UNIX date timestamp to asset's historical data" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added UNIX date timestamp to asset's historical data" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

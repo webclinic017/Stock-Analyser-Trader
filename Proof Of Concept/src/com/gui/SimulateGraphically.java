@@ -45,8 +45,9 @@ public class SimulateGraphically extends JPanel {
     Color ma1Color = Color.RED;
     Color ma2Color = Color.GREEN;
 
-    JTextArea tradesExec;
+    JLabel tradesExec;
     JLabel tradeslabel;
+    JScrollPane scrollableTextArea;
 
     // TODO: Add a iframe and embed tradingview
     public SimulateGraphically(int width, int height, Asset asset, int ma1, int ma2, String type1, String type2) throws Exception {
@@ -63,22 +64,22 @@ public class SimulateGraphically extends JPanel {
 
         JLabel label = new JLabel("MA Crossover");
         label.setFont(new Font("Verdana", Font.BOLD, 20));
-        label.setBounds(100, 50, 300, 50);
+        label.setBounds(70, 50, 300, 50);
         add(label);
 
         JLabel type = new JLabel("Backtesting");
         type.setFont(new Font("Verdana", Font.BOLD, 12));
-        type.setBounds(100, 75, 150, 50);
+        type.setBounds(70, 75, 150, 50);
         add(type);
 
         JLabel icon = new JLabel(asset.icon);
         icon.setIcon(new ImageIcon(asset.icon.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH))); // scaling the image properly so that there is no stretch
-        icon.setBounds(100,120, 40, 40);
+        icon.setBounds(70,120, 40, 40);
         add(icon);
 
         JLabel name = new JLabel(asset.name);
         name.setFont(new Font("Verdana", Font.BOLD, 15));
-        name.setBounds(150, 115, 350, 50);
+        name.setBounds(120, 115, 350, 50);
         add(name);
 
         JLabel buy = new JLabel("Buy");
@@ -179,7 +180,7 @@ public class SimulateGraphically extends JPanel {
                         repaint();
                     } catch (Exception error){
                         tradeslabel.setVisible(true);
-                        tradesExec.setVisible(true);
+                        scrollableTextArea.setVisible(true);
                         repaint();
                         System.out.println("Simulation finished");
                         timer.stop();
@@ -192,7 +193,7 @@ public class SimulateGraphically extends JPanel {
 
 
         JButton start = new JButton("Visualise");
-        start.setBounds(100,180,90,25);
+        start.setBounds(70,180,90,25);
 
         start.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
@@ -202,7 +203,7 @@ public class SimulateGraphically extends JPanel {
         add(start);
 
         JButton autoTrade = new JButton("Auto-Trade");
-        autoTrade.setBounds(200,180,100,25);
+        autoTrade.setBounds(170,180,100,25);
 
         autoTrade.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
@@ -231,18 +232,39 @@ public class SimulateGraphically extends JPanel {
         crossoverTester.test(ma1, ma2, true); // logging the trades: true
 
         // trades TODO: FORMAT THESE A BIT
-        ArrayList<String> trades = FileHandler.readFromFile("data/stock/"+asset.ticker+"/ma-crossover-trades-"+asset.historicalDataTimeframe+"-"+maType1+"-"+ma1+"-"+maType2+"-"+ma2+".csv");
-        StringBuilder tradesExecuted = new StringBuilder();
-        for (String line: trades){
-            tradesExecuted.append(line+"\n");
+        String filename = "data/stock/"+asset.ticker+"/ma-crossover-trades-"+asset.historicalDataTimeframe+"-"+maType1+"-"+ma1+"-"+maType2+"-"+ma2+".csv";
+
+        String[][] tradesExecuted = Utils.convertToMultiDArrayFromCSV(filename, 4);
+
+        StringBuilder tradesExecutedString = new StringBuilder();
+
+        for (int i = 0; i<tradesExecuted.length; i++){
+            String tradeType = tradesExecuted[i][1];
+            try {
+                tradeType = tradeType.replace("SHORT-COVER/BUY", "BUY");
+                tradeType = tradeType.replace("SELL/SHORT", "SHORT");
+
+                String text = tradesExecuted[i][0] + ", " + tradeType + " @ " + tradesExecuted[i][2] + " " + Utils.paddGain(tradesExecuted[i][3]);
+                tradesExecutedString.append(text + "<br>");
+            }  catch (Exception ignored){}
+
         }
 
-        tradesExec = new JTextArea();
-        tradesExec.setText(tradesExecuted.toString());
-        tradesExec.setEditable(false);
-        tradesExec.setVisible(false);
-        tradesExec.setBounds(610, 180, 250, 400);
-        add(tradesExec);
+        tradesExec = new JLabel();
+        tradesExec.setText("<html>" + tradesExecutedString + "</html>");
+//        tradesExec.setMargin(new Insets(5,5,5,5)); // padding the text
+//        tradesExec.setEditable(false);
+//        tradesExec.setBounds(610, 180, 250, 400);
+//        add(tradesExec);
+
+
+
+        scrollableTextArea = new JScrollPane(tradesExec);
+        scrollableTextArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollableTextArea.setBounds(610, 180, 350, 400);
+        scrollableTextArea.setVisible(false);
+        add(scrollableTextArea);
+
 
     }
 

@@ -75,7 +75,7 @@ public class GUICaller {
     public static void Simulate(Asset asset, int sma1, int sma2, String maType1, String maType2) throws Exception {
         System.out.println("SEQUENCE: Simulate");
         JFrame frame = new JFrame("Backdating");
-        SimulateGraphically myGUI = new SimulateGraphically(900, 630, asset, sma1, sma2, maType1, maType2);
+        SimulateGraphically myGUI = new SimulateGraphically(1000, 630, asset, sma1, sma2, maType1, maType2);
         frame.add(myGUI);
         frame.pack();
         frame.setVisible(true);

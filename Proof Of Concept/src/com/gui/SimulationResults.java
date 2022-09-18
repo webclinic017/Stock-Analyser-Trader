@@ -280,24 +280,6 @@ public class SimulationResults extends JPanel {
         });
     }
 
-    private String paddGain(String text){
-        // padding the results
-        float percentage_gain = Float.parseFloat(text);
-        BigDecimal bd = new BigDecimal(percentage_gain);
-
-        String gain;
-
-        if (percentage_gain > 0){
-            bd = bd.round(new MathContext(4));
-            float rounded = bd.floatValue();
-            gain = "&nbsp;<img src='" + new File("data/default/profit.png").toURI() + "' width='9' height='10'> " + rounded + "%";
-        } else {
-            bd = bd.round(new MathContext(3));
-            float rounded = bd.floatValue();
-            gain = "<img src='" + new File("data/default/loss.png").toURI() + "' width='9' height='9'>" + rounded + "%";
-        }
-        return gain;
-    }
 
     public void sortResults(String filename, int sortColumn){
         String[][] array = Utils.convertToMultiDArrayFromCSV(filename, 6);
@@ -354,7 +336,7 @@ public class SimulationResults extends JPanel {
         for (int i = 0; i<5; i++){
             int simulationResultsIndex = resultIndexStart + i;
 
-            String text = "<html>" + simulation_results[simulationResultsIndex][1] + ", " + simulation_results[simulationResultsIndex][3] + "," + paddGain(simulation_results[simulationResultsIndex][4]) + ",&nbsp;" + simulation_results[simulationResultsIndex][5] + "</html>";
+            String text = "<html>" + simulation_results[simulationResultsIndex][1] + ", " + simulation_results[simulationResultsIndex][3] + "," + Utils.paddGain(simulation_results[simulationResultsIndex][4]) + ",&nbsp;" + simulation_results[simulationResultsIndex][5] + "</html>";
             results[i].setText(text);
             results[i].setFont(new Font("Consolas", Font.BOLD,13));
             results[i].setBounds(70,(i*35)+295, 210, 30);

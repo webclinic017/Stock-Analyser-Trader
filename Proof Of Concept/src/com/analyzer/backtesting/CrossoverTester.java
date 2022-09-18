@@ -4,10 +4,9 @@ import com.analyzer.tools.EMA;
 import com.analyzer.tools.SMA;
 import com.asset.Asset;
 import com.utils.FileHandler;
+import com.utils.Utils;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Locale;
 
 // TODO: Might wanna log the calculations to a csv file so that it can be processed in exel if wanted to
 // TODO: save the things to be logged to a arraylist then pass it to a thread to save to a file...
@@ -134,7 +133,7 @@ public class CrossoverTester {
                     total_gain = total_gain + gain;
 
                     if (log_trades) {
-                        log = "SHORT-COVER/BUY,"+last_bought+ "," + gain*100 + "\n";
+                        log = Utils.unixToDate(historicalData[i][0], asset.historicalDataTimeframe) + ", SHORT-COVER/BUY,"+last_bought+ "," + gain*100 + "\n";
                         buy_sell_log.append(log);
                     }
                 }
@@ -153,7 +152,7 @@ public class CrossoverTester {
 
                         total_gain = total_gain + gain;
                         if (log_trades) {
-                            log = "SELL/SHORT," + last_sold + "," + gain*100 + "\n";
+                            log = Utils.unixToDate(historicalData[i][0], asset.historicalDataTimeframe) + ", SELL/SHORT," + last_sold + "," + gain*100 + "\n";
                             buy_sell_log.append(log);
                         }
                     }
