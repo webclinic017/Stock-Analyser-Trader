@@ -5,6 +5,8 @@ import com.api.YahooFinanceApi;
 import com.utils.FileHandler;
 import com.utils.Utils;
 
+import java.text.ParseException;
+
 public class HistoricalData {
     private YahooFinanceApi YFHandler = new YahooFinanceApi();
     private FileHandler fileHandler = new FileHandler();
@@ -48,11 +50,11 @@ public class HistoricalData {
         Float[][] final_data;
 
         try {
-            final_data = Utils.convertStringArrayToFloatArray(data);
+            final_data = convertStringArrayToFloatArray(data, timeframe);
 
         } catch (Exception e){ // catching points where this might be null in the data, ONLY executes if catches null value errors
             System.out.println("Null value found in the historical data");
-            System.out.println(e);
+            e.printStackTrace();
 
             // remove any lines with null data points -- repeat from Utils because of some changes...
             final_data = new Float[data.length][data[0].length]; // figuring out how big the original array was
@@ -65,7 +67,7 @@ public class HistoricalData {
                 for (int y = 0; y < data[x].length; y++){
 
                     if (y == 0) { // if it's a date, convert to unix timestamp...
-                        final_data[x][y] = Float.parseFloat("0"); // TODO: change this to actual time
+                        final_data[x][y] = Utils.getUnix(data[x][y], timeframe);
                     } else {
                         String value = data[x][y];
                         if (value == null){
@@ -102,5 +104,22 @@ public class HistoricalData {
 
     // TODO: https://finnhub.io/docs/api/stock-candles | https://finnhub.io/docs/api/crypto-candles - useful for smaller resolution, intra-day trades...
 
+
+    private Float[][] convertStringArrayToFloatArray(String[][] array, String timeframe) throws ParseException { // returns a float arraylist
+
+        Float[][] floatArray = new Float[array.length][array[0].length]; // figuring out how big the original array was
+
+        for (int x = 0; x < array.length; x++){
+            for (int y = 0; y < array[x].length; y++){
+                if (y == 0) { // converting date to unix timestamp...
+                    floatArray[x][y] = Utils.getUnix(array[x][y], timeframe);
+                } else {
+                    floatArray[x][y] = new Float(array[x][y]);
+                }
+            }
+        }
+
+        return floatArray;
+    }
 
 }
