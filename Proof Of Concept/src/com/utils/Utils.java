@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.math.RoundingMode;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -14,6 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -267,17 +269,16 @@ public class Utils {
     public static String paddGain(String text){
         // padding the results
         float percentage_gain = Float.parseFloat(text);
-        BigDecimal bd = new BigDecimal(percentage_gain);
+        DecimalFormat df = new DecimalFormat("#.##");
+        df.setRoundingMode(RoundingMode.CEILING);
 
         String gain;
 
         if (percentage_gain > 0){
-            bd = bd.round(new MathContext(3));
-            float rounded = bd.floatValue();
+            float rounded = Float.parseFloat(df.format(percentage_gain));
             gain = "&nbsp;<img src='" + new File("data/default/profit.png").toURI() + "' width='9' height='10'> " + rounded + "%";
         } else {
-            bd = bd.round(new MathContext(3));
-            float rounded = bd.floatValue();
+            float rounded = Float.parseFloat(df.format(percentage_gain));
             gain = "<img src='" + new File("data/default/loss.png").toURI() + "' width='9' height='9'>" + rounded + "%";
         }
         return gain;

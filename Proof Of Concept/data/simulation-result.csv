@@ -1340,3 +1340,10 @@ MA-Crossover,SHPH,ema,0,sma,0,0.0,0,long
 MA-Crossover,AAOI,ema,0,sma,0,0.0,0,long
 MA-Crossover,AAPL,ema,18,sma,24,172.4067,66,long
 MA-Crossover,AAPL,ema,18,sma,24,172.4067,66,long
+MA-Crossover,AAPL,ema,18,sma,24,172.4067,66,long
+MA-Crossover,AAPL,ema,18,sma,24,172.4067,66,long
+MA-Crossover,AAPL,ema,18,sma,24,172.4067,66,long
+MA-Crossover,AAPL,ema,18,sma,24,172.4067,66,long
+MA-Crossover,AAPL,ema,18,sma,24,172.4067,66,long
+MA-Crossover,BTCUSD,ema,12,sma,39,566.5585,62,long
+MA-Crossover,NVR,ema,20,sma,22,78.71484,114,long

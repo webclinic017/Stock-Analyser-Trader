@@ -49,7 +49,7 @@ public class SimulateGraphically extends JPanel {
     Color ma2Color = Color.GREEN;
 
     JLabel tradesExec;
-    JLabel tradeslabel;
+    JLabel tradeslabel, summaryLabel, summary;
     JScrollPane scrollableTextArea;
 
     // TODO: Add a iframe and embed tradingview
@@ -230,6 +230,7 @@ public class SimulateGraphically extends JPanel {
         tradeslabel.setVisible(false);
         add(tradeslabel);
 
+        float totalProfit = 0;
 
         CrossoverTester crossoverTester = new CrossoverTester(asset, type1, type2);
         crossoverTester.test(ma1, ma2, true); // logging the trades: true
@@ -255,6 +256,9 @@ public class SimulateGraphically extends JPanel {
 
                 String text = tradesExecuted[i][0] + ", " + tradeType + " @ " + roundedPrice + " " + Utils.paddGain(tradesExecuted[i][3]);
                 tradesExecutedString.append(text + "<br>");
+
+                totalProfit += Float.parseFloat(tradesExecuted[i][3]);
+
             }  catch (Exception ignored){}
 
         }
@@ -275,6 +279,20 @@ public class SimulateGraphically extends JPanel {
         scrollableTextArea.setBounds(610, 180, 280, 400);
         scrollableTextArea.setVisible(false);
         add(scrollableTextArea);
+
+
+        summaryLabel = new JLabel("Summary");
+        summaryLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
+        summaryLabel.setBounds(610, 75, 150, 50);
+        add(summaryLabel);
+
+        summary = new JLabel();
+        summary.setText("<html>Profit: " + Utils.paddGain(String.valueOf(totalProfit)) + "<br>" + "Total Trades: " + tradesExecuted.length*2 + "</html>");
+//        summary.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
+        summary.setBounds(610, 105, 150, 50);
+        add(summary);
+
+
 
 
     }
