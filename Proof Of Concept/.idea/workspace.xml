@@ -9,13 +9,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="Bug Fixes, GUI improvements">
+    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="Added a summary info in Simulation GUI and fixed rounding errors">
       <change afterPath="$PROJECT_DIR$/.idea/artifacts/Source_Code_jar.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/META-INF/MANIFEST.MF" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/simulation-result.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/simulation-result.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/analyzer/Analyze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/analyzer/Analyze.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/analyzer/backtesting/CrossoverTester.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/analyzer/backtesting/CrossoverTester.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/gui/SimulateGraphically.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/SimulateGraphically.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/utils/Math.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/utils/Utils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/utils/Utils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/utils/Utils.class" afterDir="false" />
     </list>
@@ -109,13 +112,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1648929083891</updated>
-    </task>
-    <task id="LOCAL-00058" summary="Added the ability to show executed trades in HomeScreen, Added logics to the Trader class">
-      <created>1660599505777</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1660599505777</updated>
     </task>
     <task id="LOCAL-00059" summary="Added Flask server to execute trades with requests from Java">
       <created>1660599727793</created>
@@ -453,7 +449,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663614108073</updated>
     </task>
-    <option name="localTasksCounter" value="107" />
+    <task id="LOCAL-00107" summary="Added a summary info in Simulation GUI and fixed rounding errors">
+      <created>1663615212533</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1663615212533</updated>
+    </task>
+    <option name="localTasksCounter" value="108" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -475,7 +478,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/../.." />
     </ignored-roots>
-    <MESSAGE value="Trader.py works, updates its price and recalculates the MAs upon new data" />
     <MESSAGE value="Implemented 2D-array selection sort by column to sort returns" />
     <MESSAGE value="Added close all position for a symbol" />
     <MESSAGE value="Created trade position size calculator and MA signal actors to execute trades" />
@@ -500,7 +502,8 @@
     <MESSAGE value="GUI Improvements, Using abbreviations" />
     <MESSAGE value="Bug Fixes, reading incorrect timedate format for unix timestamp" />
     <MESSAGE value="Bug Fixes, GUI improvements" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bug Fixes, GUI improvements" />
+    <MESSAGE value="Added a summary info in Simulation GUI and fixed rounding errors" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added a summary info in Simulation GUI and fixed rounding errors" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

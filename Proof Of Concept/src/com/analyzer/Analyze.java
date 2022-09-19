@@ -7,12 +7,10 @@ import com.api.AlpacaAPI;
 import com.asset.Asset;
 import com.google.gson.JsonArray;
 import com.utils.FileHandler;
-import com.utils.Math;
 
 import java.util.ArrayList;
 
 public class Analyze {
-    private Math Math = new Math();
     AlpacaAPI AlpacaAPIHandler = new AlpacaAPI();
     FileHandler FileHandler = new FileHandler();
 

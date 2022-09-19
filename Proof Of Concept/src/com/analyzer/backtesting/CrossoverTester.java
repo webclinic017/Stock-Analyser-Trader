@@ -133,7 +133,7 @@ public class CrossoverTester {
                     total_gain = total_gain + gain;
 
                     if (log_trades) {
-                        log = Utils.unixToDate(historicalData[i][0], asset.historicalDataTimeframe) + ", Long,"+last_bought+ "," + gain*100 + "\n";
+                        log = historicalData[i][0] + ", Long,"+last_bought+ "," + gain*100 + "\n";
                         buy_sell_log.append(log);
                     }
                 }
@@ -152,7 +152,7 @@ public class CrossoverTester {
 
                         total_gain = total_gain + gain;
                         if (log_trades) {
-                            log = Utils.unixToDate(historicalData[i][0], asset.historicalDataTimeframe) + ", Short," + last_sold + "," + gain*100 + "\n";
+                            log = historicalData[i][0] + ", Short," + last_sold + "," + gain*100 + "\n";
                             buy_sell_log.append(log);
                         }
                     }

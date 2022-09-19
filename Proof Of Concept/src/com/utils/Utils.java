@@ -5,8 +5,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.InputStream;
-import java.math.BigDecimal;
-import java.math.MathContext;
 import java.math.RoundingMode;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -17,9 +15,7 @@ import java.nio.file.StandardCopyOption;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.StringTokenizer;
 
@@ -266,22 +262,46 @@ public class Utils {
         return false;
     }
 
-    public static String paddGain(String text){
-        // padding the results
-        float percentage_gain = Float.parseFloat(text);
+    public static float round(float num){
         DecimalFormat df = new DecimalFormat("#.##");
         df.setRoundingMode(RoundingMode.CEILING);
+        return Float.parseFloat(df.format(num));
 
+    }
+
+    public static String paddGain(String text){
+        // padding the results
         String gain;
+        float percentage_gain = Float.parseFloat(text);
+        float rounded = round(percentage_gain);
+
 
         if (percentage_gain > 0){
-            float rounded = Float.parseFloat(df.format(percentage_gain));
             gain = "&nbsp;<img src='" + new File("data/default/profit.png").toURI() + "' width='9' height='10'> " + rounded + "%";
         } else {
-            float rounded = Float.parseFloat(df.format(percentage_gain));
             gain = "<img src='" + new File("data/default/loss.png").toURI() + "' width='9' height='9'>" + rounded + "%";
         }
         return gain;
+    }
+
+
+    public static float averageFromFloatArray(ArrayList<Float> array) {
+        float sum = sumFloatArrayValues(array);
+
+        //compute average
+        return (sum / array.size());
+    }
+
+    public static float sumFloatArrayValues(ArrayList<Float> array){
+        float sum = 0;
+
+        //compute sum
+        for(Float num:array) {
+            sum += num;
+        }
+
+        // compute sum
+        return sum;
     }
 
 

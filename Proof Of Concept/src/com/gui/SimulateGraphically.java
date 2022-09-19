@@ -12,6 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.ArrayList;
@@ -226,11 +227,10 @@ public class SimulateGraphically extends JPanel {
 
         tradeslabel = new JLabel("Executed Trades");
         tradeslabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
-        tradeslabel.setBounds(610, 140, 300, 50);
+        tradeslabel.setBounds(610, 150, 300, 50);
         tradeslabel.setVisible(false);
         add(tradeslabel);
 
-        float totalProfit = 0;
 
         CrossoverTester crossoverTester = new CrossoverTester(asset, type1, type2);
         crossoverTester.test(ma1, ma2, true); // logging the trades: true
@@ -242,11 +242,14 @@ public class SimulateGraphically extends JPanel {
 
         StringBuilder tradesExecutedString = new StringBuilder();
 
+
+        ArrayList<Float> gains = new ArrayList<>();
+
+        ArrayList<Float> tradeTicksInterval = new ArrayList<>();
+
         for (int i = 0; i<tradesExecuted.length; i++){
             String tradeType = tradesExecuted[i][1];
             try {
-                tradeType = tradeType.replace("SHORT-COVER/BUY", "BUY");
-                tradeType = tradeType.replace("SELL/SHORT", "SHORT");
 
                 // rounding price
                 String price = tradesExecuted[i][2];
@@ -254,10 +257,26 @@ public class SimulateGraphically extends JPanel {
                 BigDecimal bd = new BigDecimal(percentage_gain);
                 float roundedPrice = bd.round(new MathContext(4)).floatValue();
 
-                String text = tradesExecuted[i][0] + ", " + tradeType + " @ " + roundedPrice + " " + Utils.paddGain(tradesExecuted[i][3]);
+                String time = Utils.unixToDate(Float.parseFloat(tradesExecuted[i][0]), asset.historicalDataTimeframe);
+                String text = time + ", " + tradeType + " @ " + roundedPrice + " " + Utils.paddGain(tradesExecuted[i][3]);
                 tradesExecutedString.append(text + "<br>");
 
-                totalProfit += Float.parseFloat(tradesExecuted[i][3]);
+                // finding out summary data
+                gains.add(Float.parseFloat(tradesExecuted[i][3]));
+
+                try {
+                    float lastBuyTime = Float.parseFloat(tradesExecuted[i][0]);
+                    float nextTradeTime = Float.parseFloat(tradesExecuted[i + 1][0]);
+
+                    if (asset.historicalDataTimeframe.equals("1d")) {
+                        float diff = (nextTradeTime - lastBuyTime) / 3600 / 24;
+                        tradeTicksInterval.add(diff);
+                    } else {
+                        float diff = (nextTradeTime - lastBuyTime) / 60; // minutes
+                        tradeTicksInterval.add(diff);
+                    }
+                } catch (Exception ignored){}
+
 
             }  catch (Exception ignored){}
 
@@ -276,20 +295,27 @@ public class SimulateGraphically extends JPanel {
 
         scrollableTextArea = new JScrollPane(tradesExec);
         scrollableTextArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollableTextArea.setBounds(610, 180, 280, 400);
+        scrollableTextArea.setBounds(610, 190, 280, 400);
         scrollableTextArea.setVisible(false);
         add(scrollableTextArea);
 
 
         summaryLabel = new JLabel("Summary");
         summaryLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
-        summaryLabel.setBounds(610, 75, 150, 50);
+        summaryLabel.setBounds(610, 55, 150, 55);
         add(summaryLabel);
 
+        String averageTimeBetweenTrades = String.valueOf(Utils.round(Utils.averageFromFloatArray(tradeTicksInterval)));
+        if (asset.historicalDataTimeframe.equals("1d")){
+            averageTimeBetweenTrades += " days";
+        } else {
+            averageTimeBetweenTrades += " mins";
+        }
+
         summary = new JLabel();
-        summary.setText("<html>Profit: " + Utils.paddGain(String.valueOf(totalProfit)) + "<br>" + "Total Trades: " + tradesExecuted.length*2 + "</html>");
+        summary.setText("<html>Profit: " + Utils.paddGain(String.valueOf(Utils.sumFloatArrayValues(gains))) + "<br>Average Gain: " + Utils.paddGain(String.valueOf(Utils.averageFromFloatArray(gains))) + "<br>Total Trades: " + tradesExecuted.length*2 + "<br>Avg. trade time: " + averageTimeBetweenTrades + "</html>");
 //        summary.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
-        summary.setBounds(610, 105, 150, 50);
+        summary.setBounds(610, 95, 200, 60);
         add(summary);
 
 
