@@ -272,7 +272,7 @@ public class Utils {
         String gain;
 
         if (percentage_gain > 0){
-            bd = bd.round(new MathContext(4));
+            bd = bd.round(new MathContext(3));
             float rounded = bd.floatValue();
             gain = "&nbsp;<img src='" + new File("data/default/profit.png").toURI() + "' width='9' height='10'> " + rounded + "%";
         } else {

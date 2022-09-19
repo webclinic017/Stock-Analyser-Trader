@@ -73,7 +73,7 @@ public class Main {
 //        System.out.println(smaCrossover.check(stock, 50, 180)); // returns true or false, over or under.
         GUICaller GUICaller = new GUICaller();
 //        GUICaller.Login();
-//        GUICaller.startup();
+        GUICaller.startup();
 //        GUICaller.HomeScreen();
         GUICaller.AssetInfo(stock);
 //        GUICaller.SimulationResults(stock);

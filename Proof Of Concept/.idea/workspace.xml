@@ -9,15 +9,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="GUI Improvements, Using abbreviations">
+    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="Bug Fixes, reading incorrect timedate format for unix timestamp">
       <change afterPath="$PROJECT_DIR$/.idea/artifacts/Source_Code_jar.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/META-INF/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/cache.db-journal" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/simulation-result.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/simulation-result.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gui/GUICaller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/GUICaller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gui/SimulateGraphically.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/SimulateGraphically.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gui/SimulationResults.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/SimulationResults.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/utils/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/company/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/gui/GUICaller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/gui/GUICaller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/utils/Utils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/utils/Utils.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,13 +114,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1648929083891</updated>
-    </task>
-    <task id="LOCAL-00056" summary="Made Intraday simulation seamless via GUI">
-      <created>1660563451721</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1660563451721</updated>
     </task>
     <task id="LOCAL-00057" summary="Added more features in the Simulation GUI and showing more data">
       <created>1660581792656</created>
@@ -453,7 +451,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663519356720</updated>
     </task>
-    <option name="localTasksCounter" value="105" />
+    <task id="LOCAL-00105" summary="Bug Fixes, reading incorrect timedate format for unix timestamp">
+      <created>1663533215333</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1663533215333</updated>
+    </task>
+    <option name="localTasksCounter" value="106" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -475,7 +480,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/../.." />
     </ignored-roots>
-    <MESSAGE value="Fixed a massive bug, Asset data from AlphaVantageAPI was in reverse order" />
     <MESSAGE value="Instantiating new asset class on each simulation to keep it separate, bug fixes" />
     <MESSAGE value="Trader.py works, updates its price and recalculates the MAs upon new data" />
     <MESSAGE value="Implemented 2D-array selection sort by column to sort returns" />
@@ -500,7 +504,8 @@
     <MESSAGE value="Added UNIX date timestamp to asset's historical data" />
     <MESSAGE value="Showing executed trades per simulation in Results GUI with formatting" />
     <MESSAGE value="GUI Improvements, Using abbreviations" />
-    <option name="LAST_COMMIT_MESSAGE" value="GUI Improvements, Using abbreviations" />
+    <MESSAGE value="Bug Fixes, reading incorrect timedate format for unix timestamp" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bug Fixes, reading incorrect timedate format for unix timestamp" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

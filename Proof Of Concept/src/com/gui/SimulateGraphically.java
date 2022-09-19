@@ -16,6 +16,7 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.ArrayList;
 import javax.swing.Timer;
+import javax.swing.border.EmptyBorder;
 
 public class SimulateGraphically extends JPanel {
     // canvas for other GUI widgets
@@ -69,7 +70,7 @@ public class SimulateGraphically extends JPanel {
         label.setBounds(70, 50, 300, 50);
         add(label);
 
-        JLabel type = new JLabel("Backtesting");
+        JLabel type = new JLabel("Backtesting (" + asset.historicalDataTimeframe + ")");
         type.setFont(new Font("Verdana", Font.BOLD, 12));
         type.setBounds(70, 75, 150, 50);
         add(type);
@@ -260,6 +261,8 @@ public class SimulateGraphically extends JPanel {
 
         tradesExec = new JLabel();
         tradesExec.setText("<html>" + tradesExecutedString + "</html>");
+        tradesExec.setBorder(new EmptyBorder(5,5,5,5));//top,left,bottom,right
+
 //        tradesExec.setMargin(new Insets(5,5,5,5)); // padding the text
 //        tradesExec.setEditable(false);
 //        tradesExec.setBounds(610, 180, 250, 400);
@@ -269,7 +272,7 @@ public class SimulateGraphically extends JPanel {
 
         scrollableTextArea = new JScrollPane(tradesExec);
         scrollableTextArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollableTextArea.setBounds(610, 180, 275, 400);
+        scrollableTextArea.setBounds(610, 180, 280, 400);
         scrollableTextArea.setVisible(false);
         add(scrollableTextArea);
 

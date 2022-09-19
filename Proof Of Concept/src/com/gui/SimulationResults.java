@@ -271,7 +271,7 @@ public class SimulationResults extends JPanel {
         custom.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
                 try {
-                    GUICaller.CustomizeSimluation(asset);
+                    GUICaller.CustomizeSimluation(Asset.create(asset.ticker)); // creating a asset class to historical data is seperated
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
