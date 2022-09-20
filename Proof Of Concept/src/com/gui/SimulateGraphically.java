@@ -16,8 +16,11 @@ import java.io.File;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.ArrayList;
+import java.util.Stack;
 import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
+
+import static com.utils.Utils.round;
 
 public class SimulateGraphically extends JPanel {
     // canvas for other GUI widgets
@@ -227,7 +230,7 @@ public class SimulateGraphically extends JPanel {
 
         tradeslabel = new JLabel("Executed Trades");
         tradeslabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
-        tradeslabel.setBounds(610, 150, 300, 50);
+        tradeslabel.setBounds(610, 195, 300, 50);
         tradeslabel.setVisible(false);
         add(tradeslabel);
 
@@ -240,12 +243,14 @@ public class SimulateGraphically extends JPanel {
 
         String[][] tradesExecuted = Utils.convertToMultiDArrayFromCSV(filename, 4);
 
-        StringBuilder tradesExecutedString = new StringBuilder();
-
+        Stack<String> tradesExecutedString = new Stack<>(); // TODO: Criterion making it a stack because we want Last in First out to get recent trades first
+        // todo: and we are simply not reverting the array because then the time hold would be negative
 
         ArrayList<Float> gains = new ArrayList<>();
-
         ArrayList<Float> tradeTicksInterval = new ArrayList<>();
+
+        float maxProfit = 0;
+        float maxLoss = 0;
 
         for (int i = 0; i<tradesExecuted.length; i++){
             String tradeType = tradesExecuted[i][1];
@@ -257,9 +262,11 @@ public class SimulateGraphically extends JPanel {
                 BigDecimal bd = new BigDecimal(percentage_gain);
                 float roundedPrice = bd.round(new MathContext(4)).floatValue();
 
+                String gain = tradesExecuted[i][3];
+
                 String time = Utils.unixToDate(Float.parseFloat(tradesExecuted[i][0]), asset.historicalDataTimeframe);
-                String text = time + ", " + tradeType + " @ " + roundedPrice + " " + Utils.paddGain(tradesExecuted[i][3]);
-                tradesExecutedString.append(text + "<br>");
+                String text = time + ", " + tradeType + " @ " + roundedPrice + " " + Utils.paddGain(gain);
+                tradesExecutedString.push(text + "<br>");
 
                 // finding out summary data
                 gains.add(Float.parseFloat(tradesExecuted[i][3]));
@@ -277,13 +284,18 @@ public class SimulateGraphically extends JPanel {
                     }
                 } catch (Exception ignored){}
 
+                // Max draw down/gain
+                float gainAmount = round(Float.parseFloat(gain));
+                if (gainAmount > maxProfit){maxProfit = gainAmount;}
+                if (gainAmount < maxLoss){maxLoss = gainAmount;}
+
 
             }  catch (Exception ignored){}
 
         }
 
         tradesExec = new JLabel();
-        tradesExec.setText("<html>" + tradesExecutedString + "</html>");
+        tradesExec.setText("<html>" + Utils.stackToString(tradesExecutedString) + "</html>");
         tradesExec.setBorder(new EmptyBorder(5,5,5,5));//top,left,bottom,right
 
 //        tradesExec.setMargin(new Insets(5,5,5,5)); // padding the text
@@ -295,17 +307,17 @@ public class SimulateGraphically extends JPanel {
 
         scrollableTextArea = new JScrollPane(tradesExec);
         scrollableTextArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollableTextArea.setBounds(610, 190, 280, 400);
+        scrollableTextArea.setBounds(610, 235, 280, 350);
         scrollableTextArea.setVisible(false);
         add(scrollableTextArea);
 
 
         summaryLabel = new JLabel("Summary");
-        summaryLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
-        summaryLabel.setBounds(610, 55, 150, 55);
+        summaryLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+        summaryLabel.setBounds(610, 50, 150, 55);
         add(summaryLabel);
 
-        String averageTimeBetweenTrades = String.valueOf(Utils.round(Utils.averageFromFloatArray(tradeTicksInterval)));
+        String averageTimeBetweenTrades = String.valueOf(round(Utils.averageFromFloatArray(tradeTicksInterval)));
         if (asset.historicalDataTimeframe.equals("1d")){
             averageTimeBetweenTrades += " days";
         } else {
@@ -313,14 +325,10 @@ public class SimulateGraphically extends JPanel {
         }
 
         summary = new JLabel();
-        summary.setText("<html>Profit: " + Utils.paddGain(String.valueOf(Utils.sumFloatArrayValues(gains))) + "<br>Average Gain: " + Utils.paddGain(String.valueOf(Utils.averageFromFloatArray(gains))) + "<br>Total Trades: " + tradesExecuted.length*2 + "<br>Avg. trade time: " + averageTimeBetweenTrades + "</html>");
+        summary.setText("<html>Profit: " + Utils.paddGain(String.valueOf(Utils.sumFloatArrayValues(gains))) + "<br>&nbsp;&nbsp;Average Gain: " + Utils.paddGain(String.valueOf(Utils.averageFromFloatArray(gains))) + "<br>&nbsp;&nbsp;Max Loss: " + maxLoss + "%<br>&nbsp;&nbsp;Max Profit: " + maxProfit + "%<hr>Total Trades: " + tradesExecuted.length*2 + "<br>Avg. trade time: " + averageTimeBetweenTrades + "</html>");
 //        summary.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
-        summary.setBounds(610, 95, 200, 60);
+        summary.setBounds(610, 95, 200, 110);
         add(summary);
-
-
-
-
     }
 
     // Basically calculates the sma crossover over and shows the results on screen as it does it...

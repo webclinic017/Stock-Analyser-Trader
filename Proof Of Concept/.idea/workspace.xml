@@ -9,18 +9,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="Added a summary info in Simulation GUI and fixed rounding errors">
+    <list default="true" id="cd2ade17-5ccd-4425-a36d-a464e655ad91" name="Changes" comment="Added average trade holding time in summary for GUI">
       <change afterPath="$PROJECT_DIR$/.idea/artifacts/Source_Code_jar.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/META-INF/MANIFEST.MF" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/simulation-result.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/simulation-result.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/analyzer/Analyze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/analyzer/Analyze.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/analyzer/backtesting/CrossoverTester.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/analyzer/backtesting/CrossoverTester.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/gui/SimulateGraphically.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gui/SimulateGraphically.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/utils/Math.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/utils/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/utils/Utils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/utils/Utils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/analyzer/Analyze.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/analyzer/Analyze.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/utils/Math.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,13 +110,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1648929083891</updated>
-    </task>
-    <task id="LOCAL-00059" summary="Added Flask server to execute trades with requests from Java">
-      <created>1660599727793</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1660599727794</updated>
     </task>
     <task id="LOCAL-00060" summary="Bug Fixes and GUI improvements">
       <created>1660649713643</created>
@@ -456,7 +447,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663615212533</updated>
     </task>
-    <option name="localTasksCounter" value="108" />
+    <task id="LOCAL-00108" summary="Added average trade holding time in summary for GUI">
+      <created>1663618418847</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1663618418847</updated>
+    </task>
+    <option name="localTasksCounter" value="109" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -478,7 +476,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/../.." />
     </ignored-roots>
-    <MESSAGE value="Implemented 2D-array selection sort by column to sort returns" />
     <MESSAGE value="Added close all position for a symbol" />
     <MESSAGE value="Created trade position size calculator and MA signal actors to execute trades" />
     <MESSAGE value="Added a button to schedule Trader for auto-trading MA crossovers live" />
@@ -503,7 +500,8 @@
     <MESSAGE value="Bug Fixes, reading incorrect timedate format for unix timestamp" />
     <MESSAGE value="Bug Fixes, GUI improvements" />
     <MESSAGE value="Added a summary info in Simulation GUI and fixed rounding errors" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added a summary info in Simulation GUI and fixed rounding errors" />
+    <MESSAGE value="Added average trade holding time in summary for GUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added average trade holding time in summary for GUI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

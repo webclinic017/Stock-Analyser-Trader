@@ -17,6 +17,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Stack;
 import java.util.StringTokenizer;
 
 public class Utils {
@@ -50,6 +51,15 @@ public class Utils {
         }
 
         return array;
+    }
+
+    public static String stackToString(Stack<String> tradesExecutedString) {
+        StringBuilder finalString = new StringBuilder();
+
+        while (!tradesExecutedString.isEmpty()){
+            finalString.append(tradesExecutedString.pop());
+        }
+        return finalString.toString();
     }
 
 
