@@ -7,7 +7,7 @@ from datetime import datetime
 
 
 
-api = REST(key_id='PKBRQ877H23MLZ6A5A44', secret_key='kYASo3caUfQ6yRdgMLC72aFkaXo7T7K9mCIK9pRa', base_url="https://paper-api.alpaca.markets", api_version='v2')
+api = REST(key_id='PK0CZXV9I1FG1TRUDQC1', secret_key='VcqjOOZpNv83uHS1G4bXmOOkq6HcePvwXnNByH40', base_url="https://paper-api.alpaca.markets", api_version='v2')
 
 data = {}
 
