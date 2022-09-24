@@ -3,28 +3,32 @@ from alpaca_trade_api.rest import REST
 import requests
 import pandas as pd
 import sys
-from datetime import datetime
+import time
+from datetime import datetime, timezone
 
 
-
-api = REST(key_id='PK0CZXV9I1FG1TRUDQC1', secret_key='VcqjOOZpNv83uHS1G4bXmOOkq6HcePvwXnNByH40', base_url="https://paper-api.alpaca.markets", api_version='v2')
+api = REST(key_id='PKR3LHQUY8KGVTUC13IG',
+           secret_key='s6tShfYsPn00xDq9fhZWKXf9RQir3DxAihJGhueK',
+           base_url="https://paper-api.alpaca.markets",
+           api_version='v2')
 
 data = {}
 
-
 # symbols = sys.argv[1].split(",")
 
-def getHistoricalData(symbol, period="1Min"): # PROBABLY THE PERIOD CAN ONLY BE 1min, YEAH! LET'S DO THIS FOR NOW!
+log = ""
+
+
+def getHistoricalData(symbol, period="1Min"):  
+    # PROBABLY THE PERIOD CAN ONLY BE 1min, YEAH! LET'S DO THIS FOR NOW!
     # TODO: DO WE WANT TO GET IT FROM ALPHAVANTAGE? OR FROM ALPACA? WHICH ONE GIVES UP UNTIL THE MOST RECENT?
     # TODO: ALSO: MAINLY, IF WE RUN THE SOFTWARE ONLY BEFORE THE MARKET OPEN, WE'LL GET THE MOST RECENT DATA WITHOUT ANY MISSES,
-    # TODO: SO THIS IS A REQUIREMENT! TRADER CAN ONLY BE RAN BEFORE THE MARKET OPEN! SO NO DATA IS LOST! 
+    # TODO: SO THIS IS A REQUIREMENT! TRADER CAN ONLY BE RAN BEFORE THE MARKET OPEN! SO NO DATA IS LOST!
     # THIS WAY WE CAN HAVE THE MINUTE DATA EASILY FROM ALPACA AS 15MIN IS WAY PAST GONE!
 
-    bars = api.get_bars(symbol, period, "2022-08-28", adjustment='all').df["close"].values.tolist()
+    bars = api.get_bars(symbol, period, "2022-08-28",
+                        adjustment='all').df["close"].values.tolist()
     data["TSLA"] = bars
-
-
-
 
 
 # With checks, we can just pass the symbols list and it will filter it out itself, so pass the symbols list to both functions
@@ -33,6 +37,8 @@ def getHistoricalData(symbol, period="1Min"): # PROBABLY THE PERIOD CAN ONLY BE 
 
 # returns 0 hold, -1 for sell and 1 for buy
 previousEMAHigherThanSMA = None
+
+
 def checkSignal(symbol, data):
 
     lastEMA = data["TSLA-EMA"][-2]
@@ -41,92 +47,104 @@ def checkSignal(symbol, data):
     lastSMA = data["TSLA-SMA"][-2]
     currentSMA = data["TSLA-SMA"][-1]
 
-
     if lastEMA > lastSMA:
         previousEMAHigherThanSMA = True
-    
+
     if lastEMA < lastSMA:
         previousEMAHigherThanSMA = False
 
-
     if currentEMA > currentSMA:
         currentEMAHigherThanSMA = True
-    
+
     if currentEMA < currentSMA:
         currentEMAHigherThanSMA = False
 
-
-    if currentEMAHigherThanSMA != previousEMAHigherThanSMA: # crossover happened
+    if currentEMAHigherThanSMA != previousEMAHigherThanSMA:  # crossover happened
         if currentEMAHigherThanSMA:
             # buy
             print("BUY SIGNAL")
             return 1
-        
+
         if not currentEMAHigherThanSMA:
             # sell
             print("SELL SIGNAL")
             return -1
-    
+
     print("HOLD SIGNAL")
     return 0
 
 
-def calculateTradeSizeAllocation(symbol):
+def calculateTradeSizeAllocation(symbol, tradeType):
+    
+    # TODO: do more checking like time of the day etc, if it's towards the end of the day, we don't want to hold more positions overnight
+    # less position sizes towards the end of the day
+    if tradeType == "buy":
+        risk = 0.80
+    if tradeType == "sell":
+        risk = 0.50
+    
+    
     buying_power = api.get_account().buying_power
 
-    quote = api.get_latest_quote(symbol).bp # TODO: NOT THE EXACT PRICE, BUT CLOSE ENOUGH
-
+    quote = api.get_latest_quote(symbol).bp  # TODO: NOT THE EXACT PRICE, BUT CLOSE ENOUGH
 
     try:
         position = api.get_position(symbol)
-
         cost_basis = position.cost_basis
-        if float(cost_basis) > float(buying_power)*0.40: # if already have more than 40% of the buying power in this asset, don't buy more
-            return 0
+        # TODO: CHECK IF WE HAVE A POSITION OR SOMETHING ELSE, like some limitations
 
     except: # no position
         pass
 
-
-    return int((float(buying_power) * 0.20) / float(quote)) # BUY/SELL 20% OF BUYING POWER, WANT A INT SO QTY SO WE BUY 1 SHARE, NOT 0.5
-    
-
+    return int((float(buying_power) * risk) / float(quote))  # BUY/SELL risk OF BUYING POWER, WANT A INT SO QTY SO WE BUY 1 SHARE, NOT 0.5
 
 
 def actOnSignal(symbol, signal):
-    if signal == 1: # buy
+    # if api.get_clock().is_open:
+        global log
+        
+        now = datetime.now()
+        date = now.strftime("%d/%m/%Y %H:%M:%S")
+        
+        if signal == 1:  # buy
 
-        # TODO: CHECK IF WE HAVE A POSITION OR SOMETHING ELSE
-        # close all positions first, then buy more
-        closePosition(symbol)
+            # TODO: CHECK IF WE HAVE A POSITION OR SOMETHING ELSE
+            # close all positions first, then buy more
+            closePosition(symbol)
 
+            qty = calculateTradeSizeAllocation(symbol)
 
-        qty = calculateTradeSizeAllocation(symbol)
-        print("BUYING " + str(qty) + " SHARES OF " + symbol)
-        executeTrade(symbol, qty, "buy", "1min")
-    if signal == -1: # sell
+            print(date + " - BUYING: " + str(qty) + " SHARES OF " + symbol)
+            log += date + " - BUYING: " + str(qty) + " SHARES OF " + symbol + "<br>"
+            executeTrade(symbol, qty, "buy", "1min")
+            
+        if signal == -1:  # sell
 
-        # TODO: CHECK IF WE HAVE A POSITION OR SOMETHING ELSE
-        # close all positions first, then short more
-        closePosition(symbol)
+            # TODO: CHECK IF WE HAVE A POSITION OR SOMETHING ELSE
+            # close all positions first, then short more
+            closePosition(symbol)
 
+            qty = calculateTradeSizeAllocation(symbol)
 
-        qty = calculateTradeSizeAllocation(symbol)
-        print("SELLING " + str(qty) + " SHARES OF " + symbol)
-        executeTrade(symbol, qty, "sell", "1min")
-    if signal == 0:
-        print("HOLD")
+            print(date + " SELLING: " + str(qty) + " SHARES OF " + symbol)
+            log += date + " SELLING: " + str(qty) + " SHARES OF " + symbol + "<br>"
+            
+            executeTrade(symbol, qty, "sell", "1min")
+        if signal == 0:
 
+            print(date + " - HOLD")
+            log += date + " - HOLD<br>"
 
 
 ## SO I CAN JUST USE THE BELOW FOR THE MINUTE TRADE, JUST ADD THE CLOSE PRICE TO THE ARRAYLIST AND CALCULATE THE MAs, THEN CALL
 ## THE checkSignal()
 
-## FOR OTHER TIMEFRAMES, KNOW WHEN THE NEW CANDLE IS, LIKE IT'S AT 30 MINUTES PAST FOR THE STOCKS LIKE THAT, 
+## FOR OTHER TIMEFRAMES, KNOW WHEN THE NEW CANDLE IS, LIKE IT'S AT 30 MINUTES PAST FOR THE STOCKS LIKE THAT,
 ## THEN QUERY THE PRICE AT THAT POINT, THEN DO THE SAME AS DESCRIBED ABOVE.
 
 ema = 10
 sma = 12
+
 
 def calculateEMA(symbol, period=ema):
     global data
@@ -157,8 +175,6 @@ def calculateSMA(symbol, period=sma):
     data[str("TSLA") + "-SMA"] = sma
 
 
-
-
 # TODO: ADD THE NEW PRICE TO THE PRICE LIST AND THEN RECALCULATE THE MAs THEN CALL THE checkSignal()
 def newPriceData(symbol, price):
 
@@ -179,8 +195,7 @@ def newPriceData(symbol, price):
 
     calculateSMA(data)
     calculateEMA(data)
-    
-    
+
     # print(data)
     print("EMA: " + str(data[str("TSLA") + "-EMA"][-1]))
     print("SMA: " + str(data[str("TSLA") + "-SMA"][-1]))
@@ -190,18 +205,20 @@ def newPriceData(symbol, price):
 
 # TODO: HAVE A REASONING ON WHY IT'S NOT USING THE LOCAL API TO EXECUTE TRADES, LIKE STANDALONE SOFTWARE, OR SOMETHING LIKE THAT
 def executeTrade(symbol, qty, side, onTraderCandleType):
-    data = requests.get("http://localhost:5000/trade?symbol=" + symbol + "&qty=" + str(qty) + "&side=" + side + "&onTraderCandleType=" + onTraderCandleType)
-    return data.text # maybe return True/False
+    data = requests.get("http://176.58.126.191:8000/trade?symbol=" + symbol +
+                        "&qty=" + str(qty) + "&side=" + side +
+                        "&onTraderCandleType=" + onTraderCandleType)
+    return data.text  # maybe return True/False
 
 
 def closePosition(symbol):
-    data = requests.get("http://localhost:5000/close-position?symbol=" + symbol)
-    return data.text # maybe return True/False
+    data = requests.get("http://176.58.126.191:8000/close-position?symbol=" +
+                        symbol)
+    return data.text  # maybe return True/False
 
 
 # TODO: GET THE HISTORICAL DATA AND HAVE THEM ALL STORED IN A SINGLE DATA FRAME
 # TODO: ADD LOGIC PERHAPS THAT COUNTS THE NUMBER OF 1 MIN CANDLES, WHEN REACHES 1H, CALLS THE FUNCTION TO TRADE 1H TIMEFRAME
-
 
 api_key = "PKBRQ877H23MLZ6A5A44"
 api_secret = "kYASo3caUfQ6yRdgMLC72aFkaXo7T7K9mCIK9pRa"
@@ -212,23 +229,19 @@ base_url = 'https://paper-api.alpaca.markets'
 async def print_trade(t):
     print('Trade ', t)
 
+
 async def print_quote(q):
     print('Quote ', q)
 
 
-
 def main():
-    feed = 'iex' 
+    feed = 'iex'
 
-    stream = Stream(api_key,
-                api_secret,
-                base_url=base_url,
-                data_feed='iex') 
-    
+    stream = Stream(api_key, api_secret, base_url=base_url, data_feed='iex')
+
     # stream.subscribe_quotes(print_quote, 'AAPL')
     # stream.subscribe_trades(print_trade, 'AAPL')
     # stream.subscribe_crypto_trades(print_trade, 'BTCUSD')
-    
 
     ## UPON TESTING, THIS RETURNS 3 PRICES FROM THREE DIFFERENT EXCHANGES: ERSX, CBSE, FTXU
     # i'VE NOW GOT TO CHOOSE ONE OF THEM, PROBABLY JUST WHICH HISTORICAL DATA I HAVE THE MAs BASED ON
@@ -240,15 +253,31 @@ def main():
     # retruns price every minute at 00 seconds
     @stream.on_bar(symbol)
     async def _(bar):
-        print('BAR STOCK\n', bar)  
+        print('BAR STOCK\n', bar)
         newPriceData(bar.symbol, bar.close)
-        
+
     stream.run()
 
 
+
+# def marketOpen():
+#     isOpen = api.get_clock().is_open
+#     if not isOpen:
+#         clock = api.get_clock()
+#         openingTime = clock.next_open.replace(
+#             tzinfo=datetime.timezone.utc).timestamp()
+#         currTime = clock.timestamp.replace(
+#             tzinfo=datetime.timezone.utc).timestamp()
+#         timeToOpen = int((openingTime - currTime) / 60)
+#         return str(timeToOpen) + " minutes til market open"
+#     return True
+
+
+
 if __name__ == "__main__":
+
     # GETTING DATA
     symbol = "TSLA"
     getHistoricalData(symbol)
-    
+
     main()
