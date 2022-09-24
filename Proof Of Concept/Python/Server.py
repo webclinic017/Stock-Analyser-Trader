@@ -3,8 +3,8 @@ import alpaca_trade_api as tradeapi
 import random
 
 
-api_key = "PKBRQ877H23MLZ6A5A44"
-api_secret = "kYASo3caUfQ6yRdgMLC72aFkaXo7T7K9mCIK9pRa"
+api_key = "PKR3LHQUY8KGVTUC13IG"
+api_secret = "s6tShfYsPn00xDq9fhZWKXf9RQir3DxAihJGhueK"
 base_url = 'https://paper-api.alpaca.markets'
 
 
@@ -37,6 +37,8 @@ def closePosition():
     symbol = request.args.get('symbol')
     try:
         answer = api.close_position(symbol)
+        print(symbol + " positions closed")
+
         return "Success"
     except Exception as e:
         return str(e)    
