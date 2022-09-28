@@ -2,6 +2,7 @@ from flask import Flask, request
 import alpaca_trade_api as tradeapi
 import random
 
+// TODO: Add alert if you held position is opposite to market long/short
 
 api_key = "PKR3LHQUY8KGVTUC13IG"
 api_secret = "s6tShfYsPn00xDq9fhZWKXf9RQir3DxAihJGhueK"
